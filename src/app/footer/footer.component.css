@@ -1,0 +1,15 @@
+.footer{
+  display: flex;
+  justify-content: space-around;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ebf1f5;
+
+}
+
+.footer ul{
+  list-style-type: none;
+  text-decoration: none;
+  color: black;
+
+}
