@@ -5,6 +5,8 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AllsubjectsComponent} from "./allsubjects/allsubjects.component";
 import {AuthGuardService} from "./services/auth-guard.service";
+import {NavbarComponent} from "./navbar/navbar.component";
+import { MathimaComponent } from './mathima/mathima.component';
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +23,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent,
+    AllsubjectsComponent,
+    MathimaComponent
   ],
   imports: [
     BrowserModule,

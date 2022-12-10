@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data))
           this.auth.setDataInLocalStorage('token', res.token)
           this.router.navigate(['allsubjects']);
-          console.log('here');
         }
       }
     ) //url pou exoume orisei sto backend kai ta credentials pou periexoun ta stoixeia gia to login
