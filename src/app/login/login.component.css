@@ -2,7 +2,7 @@
   width: 100%;
   height: 100vh;
   background: #ecf0f3;
-
+  overflow: auto;
 }
 
 .eisodos {
@@ -25,12 +25,12 @@ h1 {
 }
 
 input{
-  width: 60%;
-  height: 20px;
+  width: 65%;
+  height: 40px;
   background: #e0dede;
   justify-content: center;
   display: flex;
-  margin: 10px auto;
+  margin: 8px auto;
   padding: 10px;
   border: none;
   outline: none;

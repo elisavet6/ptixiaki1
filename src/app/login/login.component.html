@@ -1,28 +1,26 @@
 <div class="login">
- <div class="eisodos">
-  <div class="logo">
-    <img src="../../assets/ihu_logo.png__200x200_q75_background-fff_subsampling-2.png" alt="diethnes panepisthmio" height="80px" width="90">
-  </div>
+  <div class="eisodos">
+    <div class="logo">
+      <img alt="diethnes panepisthmio" height="80px"
+           src="../../assets/ihu_logo.png__200x200_q75_background-fff_subsampling-2.png" width="90">
+    </div>
 
-  <h1>Είσοδος</h1>
-  <br>
-  <div class="username">
-    <label for="username"></label>
-    <input type="text" placeholder="Username " name="username" id="username" required>
-  </div>
-  <div class="password">
-    <label for="psw"></label>
+    <h1>Είσοδος</h1>
+    <br>
+    <form (submit)="login()" role="form">
+    <div class="username">
+      <label for="username"></label>
+      <input [(ngModel)]="credentials.username" id="username" name="username" placeholder="Username " required type="text">
+    </div>
+    <div class="password">
+      <label for="psw"></label>
 
-    <input type="password" placeholder="Password" name="psw" id="psw" required >
-  </div>
-  <div>
-    <button type="submit" id="submit">Log in</button>
-  </div>
+      <input [(ngModel)]="credentials.password" id="psw" name="psw" placeholder="Password" required type="password">
+    </div>
+    <div>
+      <button id="submit" type="submit">Log in</button>
+    </div>
+    </form>
 
-  <div class="check">
-    <label for="remember"><span> Remember me</span></label>
-    <input type="checkbox" id="remember" name="check" value="rememberme"> <br>
   </div>
-
- </div>
 </div>
