@@ -4,7 +4,7 @@
   </div >
   <ul class="menuItems">
     <li>
-      <a href='#' data-item='home' class="home">Αρχική</a>
+      <a [routerLink]="['/allsubjects']" data-item='home' class="home">Αρχική</a>
     </li>
     <li>
       <a href='#' data-item='mathimataMou' class="mathimataMou">Τα Μαθήματά μου</a>
@@ -13,7 +13,7 @@
       <a href='#' data-item='olaTaMathimata' class="olaTaMathimata">Όλα τα Μαθήματα</a>
     </li>
     <li>
-      <a href='#' data-item='myProfile' class="myProfile">Το προφίλ μου</a>
+      <a [routerLink]="['/myprofile']" data-item='myProfile' class="myProfile">Το προφίλ μου</a>
     </li>
     <li>
       <a href='#' data-item='contact' class="contact">Επικοινωνία</a>

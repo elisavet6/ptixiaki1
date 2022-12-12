@@ -9,22 +9,44 @@ const con = mysql.createConnection({
   password: "toor",
   database: "mydb"
 });
-router.post('/login', async function (req, res, next) {  try {
-  let { username, password } = req.body;
+
+router.post('/login', async function (req, res, next) {
+  try {
+    let { username, password } = req.body;
+    const hashed_password = md5(password.toString())
+    const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
+    con.query(
+      sql, [username, hashed_password],
+      function(err, result){
+        if(result.length === 0){
+          res.send({ status: 0, data: err });
+        }else{
+          let token =jwt.sign({ data: result }, 'secret')
+          res.send({ status: 1, data: result, token: token });
+        }
+
+      })
+  } catch (error) {
+    res.send({ status: 0, error: error });
+  }
+});
+
+router.post('/update', async function (req, res, next) {  try {
+  let { id,username,password,fullName,role } = req.body;
   const hashed_password = md5(password.toString())
-  const sql = `SELECT * FROM users WHERE username = ? AND  password = ?`
+  const sql = `UPDATE users SET fullName = ? password = ? WHERE username = ?`
   con.query(
-    sql, [username, hashed_password],
+    sql, [fullName, hashed_password,username],
     function(err, result, fields){
       if(result.length===0){
         res.send({ status: 0, data: err });
       }else{
-        let token = jwt.sign({ data: result }, 'secret')
-        res.send({ status: 1, data: result, token: token  });
+        res.send({ status: 1, data: [req.body]}); //stelnoume pisw ta anavathmismena stoixeia
       }
     })
 } catch (error) {
   res.send({ status: 0, error: error });
 }
 });
+
 module.exports = router

@@ -8,6 +8,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import {NavbarComponent} from "./navbar/navbar.component";
 import { MathimaComponent } from './mathima/mathima.component';
 import {FooterComponent} from "./footer/footer.component";
+import { MyprofileComponent } from './myprofile/myprofile.component';
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +26,12 @@ const routes: Routes = [
     component: MathimaComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'myprofile',
+    component: MyprofileComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }
 ];
 @NgModule({
@@ -34,7 +41,8 @@ const routes: Routes = [
     NavbarComponent,
     AllsubjectsComponent,
     MathimaComponent,
-    FooterComponent
+    FooterComponent,
+    MyprofileComponent
   ],
   imports: [
     BrowserModule,

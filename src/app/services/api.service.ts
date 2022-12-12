@@ -8,8 +8,7 @@ export class ApiService {
   baseUrl = 'http://localhost:4000/';
   constructor(private http: HttpClient) {
   }
-  postTypeRequest(url: string, payload: { password: string;
-    username: string }) {
+  postTypeRequest(url: string, payload: any) {
     return this.http.post(`${this.baseUrl}${url}`,
       payload).pipe(map(res => {
       return res;
