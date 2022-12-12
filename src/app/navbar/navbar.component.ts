@@ -14,8 +14,8 @@ export class NavbarComponent implements OnInit{
   ngOnInit() {
   }
   logout(){
-    this.auth.clearStorage();
-    this.router.navigate(['']);
+    this.auth.clearStorage(); //svhnetai to token
+    this.router.navigate(['']); //gurname sth selida login
   }
 }
 

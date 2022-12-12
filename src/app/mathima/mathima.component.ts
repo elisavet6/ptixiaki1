@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./mathima.component.css']
 })
 export class MathimaComponent {
-
+  title='first';
 }

@@ -7,6 +7,7 @@ import {AllsubjectsComponent} from "./allsubjects/allsubjects.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {NavbarComponent} from "./navbar/navbar.component";
 import { MathimaComponent } from './mathima/mathima.component';
+import {FooterComponent} from "./footer/footer.component";
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,12 @@ const routes: Routes = [
     component: AllsubjectsComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'mathima/:url',
+    component: MathimaComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }
 ];
 @NgModule({
@@ -26,7 +33,8 @@ const routes: Routes = [
     LoginComponent,
     NavbarComponent,
     AllsubjectsComponent,
-    MathimaComponent
+    MathimaComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
