@@ -34,7 +34,7 @@ router.post('/login', async function (req, res, next) {
 router.post('/update', async function (req, res, next) {  try {
   let { id,username,password,fullName,role } = req.body;
   const hashed_password = md5(password.toString())
-  const sql = `UPDATE users SET fullName = ? password = ? WHERE username = ?`
+  const sql = `UPDATE users SET fullName = ?, password = ? WHERE username = ?`
   con.query(
     sql, [fullName, hashed_password,username],
     function(err, result, fields){

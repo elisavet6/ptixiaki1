@@ -1,0 +1,54 @@
+<div class="context-section">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Λογαριασμοί χρηστών</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+<!--      <button [routerLink]="['/createaccount']">-->
+<!--        Create Account-->
+<!--      </button>-->
+    </mat-card-actions>
+    <mat-card-content class="mat-card-container">
+      <div class="mat-elevation-z1">
+        <table [dataSource]="users" mat-table>
+
+          <ng-container matColumnDef="username">
+            <th *matHeaderCellDef mat-header-cell> Username</th>
+            <td *matCellDef="let element" mat-cell>
+              <a (click)="viewDetails(element)"> {{ element.username }} </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fullName">
+            <th *matHeaderCellDef mat-header-cell>Full Name</th>
+            <td *matCellDef="let element" mat-cell>
+              {{ element.fullName }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="role">
+            <th *matHeaderCellDef mat-header-cell>Role</th>
+            <td *matCellDef="let element" mat-cell>
+              {{ element.role }}
+            </td>
+          </ng-container>
+
+<!--          <ng-container matColumnDef="delete">-->
+<!--            <th *matHeaderCellDef mat-header-cell>Delete Account</th>-->
+<!--            <td *matCellDef="let element" mat-cell>-->
+<!--              <button (click)="delete(element)">Delete</button>-->
+<!--            </td>-->
+<!--          </ng-container>-->
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr> //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+
+
+      </div>
+    </mat-card-content>
+
+
+  </mat-card>
+</div>

@@ -39,10 +39,9 @@ input {
   box-shadow: #adb5bd;
 }
 
-button [disabled] {
+button[disabled] {
   background-color: #ecf0f3;
   color: black;
-  transform: none;
 }
 
 button {
@@ -66,6 +65,11 @@ button:hover {
   background-color: #3091be;
   border-color: #3091be;
   transform: translateY(-0.25em);
+}
+button[disabled]:hover {
+  background-color: #ecf0f3;
+  color: black;
+  transform: none;
 }
 
 .logo {

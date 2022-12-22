@@ -10,6 +10,7 @@ import { MathimaComponent } from './mathima/mathima.component';
 import {FooterComponent} from "./footer/footer.component";
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { NavmathimatosComponent } from './navmathimatos/navmathimatos.component';
+import { AccountComponent } from './account/account.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,8 +34,15 @@ const routes: Routes = [
     component: MyprofileComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +52,8 @@ const routes: Routes = [
     MathimaComponent,
     FooterComponent,
     MyprofileComponent,
-    NavmathimatosComponent
+    NavmathimatosComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +62,11 @@ const routes: Routes = [
     RouterOutlet,
     RouterModule,
     RouterLink,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+// @ts-ignore
 export class AppModule { }
