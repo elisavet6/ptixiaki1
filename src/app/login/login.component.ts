@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../services/api.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-login',
@@ -27,8 +28,10 @@ export class LoginComponent implements OnInit {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data))
           this.auth.setDataInLocalStorage('token', res.token)
           this.router.navigate(['allsubjects']);
+
         }
       }
     ) //url pou exoume orisei sto backend kai ta credentials pou periexoun ta stoixeia gia to login
   }
+
 }

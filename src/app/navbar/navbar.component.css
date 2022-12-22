@@ -3,10 +3,10 @@
   justify-content: space-around;
   align-items: center;
   min-height: 8%;
-  background-color: #405862 ;
-  font-family:Arial, Helvetica, sans-serif;
+  background-color: #405862;
+  font-family: Arial, Helvetica, sans-serif;
   box-shadow: 5px 5px 18px black;
-  margin-bottom: 35px;
+  position: relative;
 }
 
 .menuItems {
@@ -17,7 +17,7 @@
 }
 
 
-.menuItems a{
+.menuItems a {
   text-decoration: none;
   color: #e6e4e4;
   letter-spacing: 2px;
@@ -25,18 +25,20 @@
   font-size: 13px;
   text-decoration: none;
 }
-.menuItems li{
+
+.menuItems li {
   list-style: none;
 }
 
-.lines div{
+.lines div {
   width: 20px;
   height: 2px;
   background-color: #e6e4e4;
   margin: 5px;
   border-radius: 3px;
 }
-.lines{
+
+.lines {
   display: none;
   cursor: pointer;
- }
+}

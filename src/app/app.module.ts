@@ -9,6 +9,7 @@ import {NavbarComponent} from "./navbar/navbar.component";
 import { MathimaComponent } from './mathima/mathima.component';
 import {FooterComponent} from "./footer/footer.component";
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { NavmathimatosComponent } from './navmathimatos/navmathimatos.component';
 const routes: Routes = [
   {
     path: '',
@@ -42,7 +43,8 @@ const routes: Routes = [
     AllsubjectsComponent,
     MathimaComponent,
     FooterComponent,
-    MyprofileComponent
+    MyprofileComponent,
+    NavmathimatosComponent
   ],
   imports: [
     BrowserModule,

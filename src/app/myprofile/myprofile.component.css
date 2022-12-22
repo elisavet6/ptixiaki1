@@ -1,4 +1,4 @@
-.login{
+.login {
   width: 100%;
   height: 100vh;
   background: #ecf0f3;
@@ -16,26 +16,33 @@
   box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 
 }
+
 h1 {
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   height: 10%;
   font-family: Arial, Helvetica, sans-serif;
-  text-shadow:#e6e9e3
+  text-shadow: #e6e9e3
 }
 
-input{
+input {
   width: 65%;
-  height: 40px;
+  height: 35px;
   background: #e0dede;
   justify-content: center;
   display: flex;
-  margin: 8px auto;
+  margin: 6px auto;
   padding: 10px;
   border: none;
   outline: none;
   border-radius: 20px;
   box-shadow: #adb5bd;
+}
+
+button [disabled] {
+  background-color: #ecf0f3;
+  color: black;
+  transform: none;
 }
 
 button {
@@ -48,31 +55,29 @@ button {
   border-radius: 25px;
   letter-spacing: 1px;
   position: relative;
-  top: 32px; left: 65px;
+  top: 32px;
+  left: 65px;
   transition: all 0.3s;
+  justify-content: center;
+
 }
-button:hover
-{
+
+button:hover {
   background-color: #3091be;
   border-color: #3091be;
   transform: translateY(-0.25em);
 }
 
-.logo
-{
+.logo {
   object-fit: cover;
   border-radius: 50%;
   width: 40%;
   margin: auto 80px auto auto;
 }
 
-.check{
+.check {
   align-items: center;
   width: auto;
   margin: 10px;
 }
-button [disabled] {
-  background-color: #ecf0f3;
-  color: black;
-  transform: none;
-}
+

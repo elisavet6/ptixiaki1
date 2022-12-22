@@ -8,19 +8,16 @@
     <h1>Είσοδος</h1>
     <br>
     <form (submit)="login()" role="form">
-    <div class="username">
-      <label for="username"></label>
-      <input [(ngModel)]="credentials.username" id="username" name="username" placeholder="Username " required type="text">
-    </div>
-    <div class="password">
-      <label for="psw"></label>
-
-      <input [(ngModel)]="credentials.password" id="psw" name="psw" placeholder="Password" required type="password">
-    </div>
-    <div>
+      <div class="username">
+        <label for="username"></label>
+        <input [(ngModel)]="credentials.username" id="username" name="username" placeholder="Username " required
+               type="text">
+      </div>
+      <div class="password">
+        <label for="psw"></label>
+        <input [(ngModel)]="credentials.password" id="psw" name="psw" placeholder="Password" required type="password">
+      </div>
       <button id="submit" type="submit">Log in</button>
-    </div>
     </form>
-
   </div>
 </div>

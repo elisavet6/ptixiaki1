@@ -26,7 +26,7 @@ export class MyprofileComponent implements OnInit {
     let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth
 // @ts-ignore
     let user_string = temp_user_string.substring(1, temp_user_string.length - 1); //aferoume tis aggiles, dhladh ton prwto kai ton teleutaio xarakthra
-    let jsnon_user_string = JSON.parse(user_string); //to metatrepoume se JSON
+    let jsnon_user_string = JSON.parse(user_string); //to metatrepoume se JSON wste na exoume ta stoixeia se morfh pinaka
 
     this.user.username = jsnon_user_string['username'];
     this.user.fullName = jsnon_user_string['fullName'];
@@ -34,7 +34,7 @@ export class MyprofileComponent implements OnInit {
 
   update() {
     this.user.password = this.newPassword;
-    this.api.postTypeRequest('user/login', this.user).subscribe((res: any) => {
+    this.api.postTypeRequest('user/update', this.user).subscribe((res: any) => {
         if (res.status === 1) {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data))
           this.router.navigate(['allsubjects']);

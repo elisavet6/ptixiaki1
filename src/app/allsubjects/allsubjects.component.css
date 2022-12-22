@@ -1,13 +1,30 @@
+.allsubs {
+  background: #ecf0f3;
+  overflow: auto;
+}
 .mathimata
 {
-  width: 450px;
+  width: 300px;
   margin: auto;
   color: rgb(0, 0, 0);
-  object-position: 80% 50%;
-
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 450px;
+  min-height: 450px;
+  margin: 60px auto;
+  padding: 40px 60px ;
+  background-color: #ecf0f3;
+  border-radius: 15px;
+  box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #cbced1;
+  box-sizing: content-box;
+}
+h1{
+  margin: 30px;
+  text-align: center;
 }
 h2{
   font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 a:link{
   text-decoration: none;
