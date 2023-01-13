@@ -59,6 +59,5 @@ export class MyprofileComponent implements OnInit {
     } else {
       return false;
     }
-
   }
 }

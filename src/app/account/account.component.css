@@ -1,0 +1,28 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+mat-card {
+  background-color: whitesmoke;
+  overflow: auto;
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}
+
+mat-table {
+  align-items: center;
+}
+
+
+mat-raised-button a{
+  text-decoration: #ecf0f3;
+}
+mat-paginator{
+  background-color: whitesmoke;
+}
+snack-bar-container{
+  background: whitesmoke;
+}
+

@@ -1,10 +1,10 @@
 .allsubs {
-  background: #ecf0f3;
-  overflow: auto;
+  background: whitesmoke;
+ overflow: auto;
 }
 .mathimata
 {
-  width: 300px;
+  width: 600px;
   margin: auto;
   color: rgb(0, 0, 0);
   font-family: Arial, Helvetica, sans-serif;
@@ -16,15 +16,20 @@
   border-radius: 15px;
   box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #cbced1;
   box-sizing: content-box;
+
+
 }
 h1{
   margin: 30px;
+  margin-top: 50px;
   text-align: center;
+  font-size: 40px;
 }
 h2{
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  margin: 15px;
 }
 a:link{
   text-decoration: none;
@@ -35,3 +40,12 @@ a:visited{
   text-decoration: none;
   color: black;
 }
+.eksamhno, .alfavhtika{
+  border-radius: 5px;
+  shape-outside: polygon(10% 0%, 0% 100%, 95% 100%, 100% 50%, 95% 0%);
+  background-color: #ecf0f3;
+  border-color: #ecf0f3;
+  padding: 8px;
+  box-shadow: 5px 5px 20px #cbced1, -5px -5px 20px #cbced1;;
+}
+

@@ -12,7 +12,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 export class LoginComponent implements OnInit {
   title = 'first';
   credentials = {username: '', password: ''};
-
+  showError: boolean = false;
 
   constructor(private api: ApiService, private auth: AuthService, private router: Router) {
   }
@@ -29,8 +29,11 @@ export class LoginComponent implements OnInit {
           this.auth.setDataInLocalStorage('token', res.token)
           this.router.navigate(['allsubjects']);
 
+        } else {
+          this.showError =true;
         }
       }
+
     ) //url pou exoume orisei sto backend kai ta credentials pou periexoun ta stoixeia gia to login
   }
 

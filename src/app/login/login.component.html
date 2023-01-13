@@ -8,6 +8,7 @@
     <h1>Είσοδος</h1>
     <br>
     <form (submit)="login()" role="form">
+      <div class="error" *ngIf="showError">Username or Password are incorrect</div>
       <div class="username">
         <label for="username"></label>
         <input [(ngModel)]="credentials.username" id="username" name="username" placeholder="Username " required
@@ -19,5 +20,6 @@
       </div>
       <button id="submit" type="submit">Log in</button>
     </form>
+
   </div>
 </div>

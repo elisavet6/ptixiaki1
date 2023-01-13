@@ -1,8 +1,11 @@
 <div class="nav">
   <div class="dipae">
-    <img src="(../../assets/ihu_white.png" width="35%" height="35%">
+    <img src="../../assets/ihu_white.png" width="35%" height="35%">
   </div >
   <ul class="menuItems">
+    <li>
+    <a *ngIf="isSecretariat" [routerLink]="['/account']" data-item='account' class="account">Χρήστες</a>
+  </li>
     <li>
       <a [routerLink]="['/allsubjects']" data-item='home' class="home">Αρχική</a>
     </li>
@@ -15,12 +18,7 @@
     <li>
       <a [routerLink]="['/myprofile']" data-item='myProfile' class="myProfile">Το προφίλ μου</a>
     </li>
-    <li>
-      <a [routerLink]="['/account']" data-item='account' class="account">Χρήστες</a>
-    </li>
-    <li>
-      <a href='#' data-item='contact' class="contact">Επικοινωνία</a>
-    </li>
+
     <li>
       <a (click)="logout()" data-item='logout' class="logout">Αποσύνδεση</a>
     </li>

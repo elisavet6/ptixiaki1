@@ -1,161 +1,184 @@
 <app-navmathimatos></app-navmathimatos>
 <div class="allsubs">
+  <img src="../../assets/assets/overhead_portrait_young_people_with_laptops_smartphones_sitting_together_floor_students_writing_lectures_holding_textbooks_their_knees.jpg" width="50%" height="50%">
 <h1>ΜΑΘΗΜΑΤΑ</h1>
 <div class="mathimata">
   <div class="prwto">
     <h2>1ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li><a [routerLink]="['/mathima/agglikh-orologia.html']" >ΑΓΓΛΙΚΗ ΟΡΟΛΟΓΙΑ</a></li>
-      <li><a [routerLink]="['/mathima/eisagwgh-episthmh-yh.html']">ΕΙΣΑΓΩΓΗ ΣΤΗΝ ΕΠΙΣΤΗΜΗ ΤΩΝ Η/Υ</a></li>
-      <li><a [routerLink]="['/mathima/grammikh-algeura-thewria-migadikwn.html']">ΓΡΑΜΜΙΚΗ ΑΛΓΕΥΡΑ ΚΑΙ ΘΕΩΡΙΑ ΜΙΓΑΔΙΚΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/mathimatikos-logismos.html']">ΜΑΘΗΜΑΤΙΚΟΣ ΛΟΓΙΣΜΟΣ</a> </li>
-      <li><a [routerLink]="['/mathima/statikh.html']">ΣΤΑΤΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathima/texnikh-sxediash.html']">ΤΕΧΝΙΚΗ ΣΧΕΔΙΑΣΗ</a> </li>
-      <li><a [routerLink]="['/mathima/fusikh.html']">ΦΥΣΙΚΗ</a> </li>
+    <ul style="list_style_type:none;">
+      <li>
+        <mat-checkbox (change)="changed('agglikh_orologia',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/agglikh_orologia.html']" >ΑΓΓΛΙΚΗ ΟΡΟΛΟΓΙΑ</a></li>
+      <li>
+        <mat-checkbox (change)="changed('eisagwgh_episthmh_yh',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/eisagwgh_episthmh_yh.html']">ΕΙΣΑΓΩΓΗ ΣΤΗΝ ΕΠΙΣΤΗΜΗ ΤΩΝ Η/Υ</a></li>
+      <li>
+        <mat-checkbox (change)="changed('grammikh_algeura_thewria_migadikwn',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/grammikh_algeura_thewria_migadikwn.html']">ΓΡΑΜΜΙΚΗ ΑΛΓΕΥΡΑ ΚΑΙ ΘΕΩΡΙΑ ΜΙΓΑΔΙΚΩΝ</a> </li>
+      <li>
+        <mat-checkbox (change)="changed('mathimatikos_logismos',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/mathimatikos_logismos.html']">ΜΑΘΗΜΑΤΙΚΟΣ ΛΟΓΙΣΜΟΣ</a> </li>
+      <li>
+        <mat-checkbox (change)="changed('statikh',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/statikh.html']">ΣΤΑΤΙΚΗ</a> </li>
+      <li>
+        <mat-checkbox (change)="changed('texnikh_sxediash',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/texnikh_sxediash.html']">ΤΕΧΝΙΚΗ ΣΧΕΔΙΑΣΗ</a> </li>
+      <li>
+        <mat-checkbox (change)="changed('fusikh',$event)">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/fusikh.html']">ΦΥΣΙΚΗ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="deutero">
     <h2>2ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li><a [routerLink]="['/mathima/dunamikh.html']">ΔΥΝΑΜΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathima/efarm-thermodunamikh.html']">ΕΦΑΡΜΟΣΜΕΝΗ ΘΕΡΜΟΔΥΝΑΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathimaa/hlektrika-kuklwmata.html']">ΗΛΕΚΤΡΙΚΑ ΚΥΚΛΩΜΑΤΑ</a></li>
-      <li><a [routerLink]="['/mathima/hlektrotexnika-ulika.html']">ΗΛΕΚΤΡΟΤΕΧΝΙΚΑ ΥΛΙΚΑ</a> </li>
-      <li><a [routerLink]="['/mathima/istoria-politismou-texnologias.html']">ΙΣΤΟΡΙΑ ΠΟΛΙΤΙΣΜΟΥ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
-      <li><a [routerLink]="['/mathima/programmatismos-gia-mhxanikous.html']">ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
-      <li><a [routerLink]="['/mathima/sunarthseis-pollwn-metavlhtwn.html']">ΣΥΝΑΡΤΗΣΕΙΣ ΠΟΛΛΩΝ ΜΕΤΑΒΛΗΤΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/texnologia-ulikwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΥΛΙΚΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/filosofia-texnologias.html']">ΦΙΛΟΣΟΦΙΑ ΤΗΣ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
+    <ul style="list_style_type:none;">
+      <li>
+        <a [routerLink]="['/mathima/dunamikh.html']">ΔΥΝΑΜΙΚΗ</a> </li>
+      <li><a [routerLink]="['/mathima/efarm_thermodunamikh.html']">ΕΦΑΡΜΟΣΜΕΝΗ ΘΕΡΜΟΔΥΝΑΙΚΗ</a> </li>
+      <li><a [routerLink]="['/mathimaa/hlektrika_kuklwmata.html']">ΗΛΕΚΤΡΙΚΑ ΚΥΚΛΩΜΑΤΑ</a></li>
+      <li><a [routerLink]="['/mathima/hlektrotexnika_ulika.html']">ΗΛΕΚΤΡΟΤΕΧΝΙΚΑ ΥΛΙΚΑ</a> </li>
+      <li><a [routerLink]="['/mathima/istoria_politismou_texnologias.html']">ΙΣΤΟΡΙΑ ΠΟΛΙΤΙΣΜΟΥ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
+      <li><a [routerLink]="['/mathima/programmatismos_gia_mhxanikous.html']">ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
+      <li><a [routerLink]="['/mathima/sunarthseis_pollwn_metavlhtwn.html']">ΣΥΝΑΡΤΗΣΕΙΣ ΠΟΛΛΩΝ ΜΕΤΑΒΛΗΤΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/texnologia_ulikwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΥΛΙΚΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/filosofia_texnologias.html']">ΦΙΛΟΣΟΦΙΑ ΤΗΣ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
     </ul>
     <br/>
   </div>
   <div class="trito">
     <h2>3ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li><a [routerLink]="['/mathima/antoxh-ulikwn.html']">ΑΝΤΟΧΗ ΤΩΝ ΥΛΙΚΩΝ</a> </li>
-      <li><a [routerLink]="['/mathimaarithmhtikh-analush.html']">ΑΡΙΘΜΗΤΙΚΗ ΑΝΑΛΥΣΗ</a> </li>
-      <li><a [routerLink]="['/mathima/viomhxanikh-ugieinh-asfaleia.html']">ΒΙΟΜΗΧΑΝΙΚΗ ΥΓΙΕΙΝΗ ΚΑΙ ΑΣΦΑΛΕΙΑ</a> </li>
-      <li><a [routerLink]="['/mathima/eidika-themata-fusikhs.html']">ΕΙΔΙΚΑ ΘΕΜΑΤΑ ΦΥΣΙΚΗΣ</a> </li>
-      <li><a [routerLink]="['/mathima/ulektronika-sust.html']">ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li><a [routerLink]="['/mathima/thewria-pithan-statistikhs.html']">ΘΕΩΡΙΑ ΠΙΘΑΝΟΤΗΤΩΝ ΚΑΙ ΣΤΑΤΙΣΤΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathima/koinwnia-plhrof-4h-viomhx-epan.html']">ΚΟΙΝΩΝΙΑ ΠΛΗΡΟΦΟΡΙΑΣ ΚΑΙ 4Η ΒΙΟΜΗΧΑΝΙΚΗ ΕΠΑΝΑΣΤΑΣΗ</a> </li>
-      <li><a [routerLink]="['/mathima/mhxanourgikh-texn.html']">ΜΗΧΑΝΟΥΡΓΙΚΗ ΤΕΧΝΟΛΟΓΙΑ</a> </li>
+    <ul style="list_style_type:square;">
+      <li><a [routerLink]="['/mathima/antoxh_ulikwn.html']">ΑΝΤΟΧΗ ΤΩΝ ΥΛΙΚΩΝ</a> </li>
+      <li><a [routerLink]="['/mathimaarithmhtikh_analush.html']">ΑΡΙΘΜΗΤΙΚΗ ΑΝΑΛΥΣΗ</a> </li>
+      <li><a [routerLink]="['/mathima/viomhxanikh_ugieinh_asfaleia.html']">ΒΙΟΜΗΧΑΝΙΚΗ ΥΓΙΕΙΝΗ ΚΑΙ ΑΣΦΑΛΕΙΑ</a> </li>
+      <li><a [routerLink]="['/mathima/eidika_themata_fusikhs.html']">ΕΙΔΙΚΑ ΘΕΜΑΤΑ ΦΥΣΙΚΗΣ</a> </li>
+      <li><a [routerLink]="['/mathima/ulektronika_sust.html']">ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
+      <li><a [routerLink]="['/mathima/thewria_pithan_statistikhs.html']">ΘΕΩΡΙΑ ΠΙΘΑΝΟΤΗΤΩΝ ΚΑΙ ΣΤΑΤΙΣΤΙΚΗ</a> </li>
+      <li><a [routerLink]="['/mathima/koinwnia_plhrof_4h_viomhx_epan.html']">ΚΟΙΝΩΝΙΑ ΠΛΗΡΟΦΟΡΙΑΣ ΚΑΙ 4Η ΒΙΟΜΗΧΑΝΙΚΗ ΕΠΑΝΑΣΤΑΣΗ</a> </li>
+      <li><a [routerLink]="['/mathima/mhxanourgikh_texn.html']">ΜΗΧΑΝΟΥΡΓΙΚΗ ΤΕΧΝΟΛΟΓΙΑ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="tetarto">
     <h2>4ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li><a [routerLink]="['/mathima/antikeimenostrefhs-programmatismos.html']">ΑΝΤΙΚΕΙΜΕΝΟΣΤΡΕΦΗΣ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ</a> </li>
-      <li><a [routerLink]="['/mathima/aksiopistia-sunthrhsh.html']">ΑΞΙΟΠΙΣΤΙΑ ΚΑΙ ΣΥΝΤΗΡΗΣΗ</a> </li>
-      <li><a [routerLink]="['/mathima/diax-aksiopistias-diadiktuo-twn-pragm.html']">ΔΙΑΧΕΙΡΗΣΗ ΑΞΙΠΙΣΤΙΑΣ ΣΤΟ ΔΙΑΔΙΚΤΥΟ ΤΩΝ ΠΡΑΓΜΑΤΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/thewria-metasxhmatismwn.html']">ΘΕΩΡΙΑ ΜΕΤΑΣΧΗΜΑΤΙΣΜΩΝ & ΣΥΣΤΗΜΑΤΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/metrologia.html']">ΜΕΤΡΟΛΟΓΙΑ-ΕΛΕΓΧΟΣ ΠΟΙΟΤΗΤΑΣ</a> </li>
-      <li><a [routerLink]="['/mathima/mikrohlektromhxanologika-sust']">ΜΙΚΡΟΗΛΕΚΤΡΟΜΗΧΑΝΟΛΟΓΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li><a [routerLink]="['/mathima/prohgmena-pshfiaka-sust.html']">ΠΡΟΗΓΜΕΝΑ ΨΗΦΙΑΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
+    <ul style="list_style_type:square;">
+      <li><a [routerLink]="['/mathima/antikeimenostrefhs_programmatismos.html']">ΑΝΤΙΚΕΙΜΕΝΟΣΤΡΕΦΗΣ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ</a> </li>
+      <li><a [routerLink]="['/mathima/aksiopistia_sunthrhsh.html']">ΑΞΙΟΠΙΣΤΙΑ ΚΑΙ ΣΥΝΤΗΡΗΣΗ</a> </li>
+      <li><a [routerLink]="['/mathima/diax_aksiopistias_diadiktuo_twn_pragm.html']">ΔΙΑΧΕΙΡΗΣΗ ΑΞΙΠΙΣΤΙΑΣ ΣΤΟ ΔΙΑΔΙΚΤΥΟ ΤΩΝ ΠΡΑΓΜΑΤΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/thewria_metasxhmatismwn.html']">ΘΕΩΡΙΑ ΜΕΤΑΣΧΗΜΑΤΙΣΜΩΝ & ΣΥΣΤΗΜΑΤΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/metrologia.html']">ΜΕΤΡΟΛΟΓΙΑ_ΕΛΕΓΧΟΣ ΠΟΙΟΤΗΤΑΣ</a> </li>
+      <li><a [routerLink]="['/mathima/mikrohlektromhxanologika_sust']">ΜΙΚΡΟΗΛΕΚΤΡΟΜΗΧΑΝΟΛΟΓΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
+      <li><a [routerLink]="['/mathima/prohgmena_pshfiaka_sust.html']">ΠΡΟΗΓΜΕΝΑ ΨΗΦΙΑΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
       <li><a [routerLink]="['/mathima/reustomhxanikh.html']">ΡΕΥΣΤΟΜΗΧΑΝΙΚΗ</a></li>
-      <li><a [routerLink]="['/mathima/stoixeia-mhxanwn-1.html']">ΣΤΟΙΧΕΙΑ ΜΗΧΑΝΩΝ Ι</a> </li>
-      <li><a [routerLink]="['/mathima/sust-paragwghs.html']">ΣΥΣΤΗΜΑΤΑ ΠΑΡΑΓΩΓΗΣ</a> </li>
+      <li><a [routerLink]="['/mathima/stoixeia_mhxanwn_1.html']">ΣΤΟΙΧΕΙΑ ΜΗΧΑΝΩΝ Ι</a> </li>
+      <li><a [routerLink]="['/mathima/sust_paragwghs.html']">ΣΥΣΤΗΜΑΤΑ ΠΑΡΑΓΩΓΗΣ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="pempto">
     <h2>5ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
+    <ul style="list_style_type:square;">
       <li><a [routerLink]="['/mathima/aerodunamikh.html']">ΑΕΡΟΔΥΝΑΜΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathima/vaseis-domes-dedomenwn.html']">ΒΑΣΕΙΣ ΚΑΙ ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/genikeumenh-thewr-susthmatwn.html']">ΓΕΝΙΚΕΥΜΕΝΗ ΘΕΩΡΙΑ ΣΥΣΤΗΜΑΤΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/diaxeirish-sust-asfaleias-ploiwn.html']">ΔΙΑΧΕΙΡΙΣΗ ΣΥΣΤΗΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΠΛΟΙΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/enswmatwmena-sust.html']">ΕΝΣΩΜΑΤΩΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li><a [routerLink]="['/mathima/hlektr-mhxanes1.html']">ΗΛΕΚΤΡΙΚΕΣ ΜΗΧΑΝΕΣ & ΣΥΣΤΗΜΑΤΑ ΟΔΗΓΗΣΗΣ ΚΙΝΗΤΗΡΩΝ Ι</a> </li>
-      <li><a [routerLink]="['/mathima/logismika-gia-mhxan.html']">ΛΟΓΙΣΜΙΚΑ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
-      <li><a [routerLink]="['/mathima/mh-katastrof-elegxoi.html']">ΜΗ ΚΑΤΑΣΤΡΟΦΙΚΟΙ ΕΛΕΓΧΟΙ</a> </li>
-      <li><a [routerLink]="['/mathima/mhxan-diamorfwseis.html']">ΜΗΧΑΝΙΚΕΣ ΔΙΑΜΟΡΦΩΣΗΣ</a> </li>
-      <li><a [routerLink]="['/mathima/stoixeia-mhxanwn2.html']">ΣΤΟΙΧΕΙΑ ΜΗΧΑΝΩΝ ΙΙ</a> </li>
+      <li><a [routerLink]="['/mathima/vaseis_domes_dedomenwn.html']">ΒΑΣΕΙΣ ΚΑΙ ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/genikeumenh_thewr_susthmatwn.html']">ΓΕΝΙΚΕΥΜΕΝΗ ΘΕΩΡΙΑ ΣΥΣΤΗΜΑΤΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/diaxeirish_sust_asfaleias_ploiwn.html']">ΔΙΑΧΕΙΡΙΣΗ ΣΥΣΤΗΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΠΛΟΙΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/enswmatwmena_sust.html']">ΕΝΣΩΜΑΤΩΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
+      <li><a [routerLink]="['/mathima/hlektr_mhxanes1.html']">ΗΛΕΚΤΡΙΚΕΣ ΜΗΧΑΝΕΣ & ΣΥΣΤΗΜΑΤΑ ΟΔΗΓΗΣΗΣ ΚΙΝΗΤΗΡΩΝ Ι</a> </li>
+      <li><a [routerLink]="['/mathima/logismika_gia_mhxan.html']">ΛΟΓΙΣΜΙΚΑ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
+      <li><a [routerLink]="['/mathima/mh_katastrof_elegxoi.html']">ΜΗ ΚΑΤΑΣΤΡΟΦΙΚΟΙ ΕΛΕΓΧΟΙ</a> </li>
+      <li><a [routerLink]="['/mathima/mhxan_diamorfwseis.html']">ΜΗΧΑΝΙΚΕΣ ΔΙΑΜΟΡΦΩΣΗΣ</a> </li>
+      <li><a [routerLink]="['/mathima/stoixeia_mhxanwn2.html']">ΣΤΟΙΧΕΙΑ ΜΗΧΑΝΩΝ ΙΙ</a> </li>
       <li><a [routerLink]="['/mathima/sae1.html']">ΣΥΣΤΥΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ Ι</a> </li>
-      <li><a [routerLink]="['/mathima/sust-uposthrikshs-apofasewn.html']">ΣΥΣΤΗΜΑΤΑ ΥΠΟΣΤΗΡΙΞΗΣ ΑΠΟΦΑΣΕΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/sust_uposthrikshs_apofasewn.html']">ΣΥΣΤΗΜΑΤΑ ΥΠΟΣΤΗΡΙΞΗΣ ΑΠΟΦΑΣΕΩΝ</a> </li>
       <li><a [routerLink]="['/mathima/udraulika.html']">ΥΔΡΑΥΛΙΚΑ ΠΝΕΥΜΑΤΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li><a [routerLink]="['/mathima/ypolog-reustomhxan.html']">ΥΠΟΛΟΓΙΣΤΙΚΗ ΡΕΥΣΤΟΜΗΧΑΝΙΚΗ</a> </li>
+      <li><a [routerLink]="['/mathima/ypolog_reustomhxan.html']">ΥΠΟΛΟΓΙΣΤΙΚΗ ΡΕΥΣΤΟΜΗΧΑΝΙΚΗ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="ekto">
     <h2>6ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;;">
-      <li><a [routerLink]="['/mathima/viomhxanika-diktua-dedomenwn.html']">ΒΙΟΜΗΧΑΝΙΚΑ ΔΙΚΤΥΑ ΔΕΔΟΜΕΝΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/viomhxanikh-plhroforikh.html']">ΒΙΟΜΗΧΑΝΙΚΗ ΠΛΗΡΟΦΟΡΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathima/epixeirhsiakh-ereuna.html']">ΕΠΙΧΕΙΡΗΣΙΑΚΗ ΕΡΕΥΝΑ</a> </li>
-      <li><a [routerLink]="['/mathima/hlektrikes-mhxanes2.html']">ΗΛΕΚΤΡΙΚΕΣ ΜΗΧΑΝΕΣ & ΣΥΣΤΗΜΑΤΑ ΟΔΗΓΗΣΗΣ ΚΙΝΗΤΗΡΩΝ ΙΙ</a> </li>
-      <li><a [routerLink]="['/mathima/hlektrika-sust-oxhmatwn.html']">ΗΛΕΚΤΡΙΚΑ ΣΥΣΤΥΜΑΤΑ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/cad-cam-cae.html']"> ΜΕΘΟΔΟΣ ΤΕΧΝΟΛΟΓΙΚΟΥ ΣΧΕΔΙΑΣΜΟΥ ΚΑΙ CAD-CAM-CAE</a></li>
-      <li><a [routerLink]="['/mathima/metadosh-thermothtas.html']">ΜΕΤΑΔΟΣΗ ΘΕΡΜΟΤΗΤΑΣ</a> </li>
-      <li><a [routerLink]="['/mathima/programmat-elegktes-kai-epoptika.html']">ΠΡΟΓΡΑΜΜΑΤΙΖΟΜΕΝΟΙ ΕΛΕΓΚΤΕΣ ΚΑΙ ΕΠΟΠΤΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li><a [routerLink]="['/mathima/shmata-plhroforia-epikoinwnia.html']">ΣΗΜΑΤΑ ΠΛΗΡΟΦΟΡΙΑ ΚΑΙ ΕΠΙΚΟΙΝΩΝΙΑ</a> </li>
+    <ul style="list_style_type:square;;">
+      <li><a [routerLink]="['/mathima/viomhxanika_diktua_dedomenwn.html']">ΒΙΟΜΗΧΑΝΙΚΑ ΔΙΚΤΥΑ ΔΕΔΟΜΕΝΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/viomhxanikh_plhroforikh.html']">ΒΙΟΜΗΧΑΝΙΚΗ ΠΛΗΡΟΦΟΡΙΚΗ</a> </li>
+      <li><a [routerLink]="['/mathima/epixeirhsiakh_ereuna.html']">ΕΠΙΧΕΙΡΗΣΙΑΚΗ ΕΡΕΥΝΑ</a> </li>
+      <li><a [routerLink]="['/mathima/hlektrikes_mhxanes2.html']">ΗΛΕΚΤΡΙΚΕΣ ΜΗΧΑΝΕΣ & ΣΥΣΤΗΜΑΤΑ ΟΔΗΓΗΣΗΣ ΚΙΝΗΤΗΡΩΝ ΙΙ</a> </li>
+      <li><a [routerLink]="['/mathima/hlektrika_sust_oxhmatwn.html']">ΗΛΕΚΤΡΙΚΑ ΣΥΣΤΥΜΑΤΑ ΟΧΗΜΑΤΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/cad_cam_cae.html']"> ΜΕΘΟΔΟΣ ΤΕΧΝΟΛΟΓΙΚΟΥ ΣΧΕΔΙΑΣΜΟΥ ΚΑΙ CAD_CAM_CAE</a></li>
+      <li><a [routerLink]="['/mathima/metadosh_thermothtas.html']">ΜΕΤΑΔΟΣΗ ΘΕΡΜΟΤΗΤΑΣ</a> </li>
+      <li><a [routerLink]="['/mathima/programmat_elegktes_kai_epoptika.html']">ΠΡΟΓΡΑΜΜΑΤΙΖΟΜΕΝΟΙ ΕΛΕΓΚΤΕΣ ΚΑΙ ΕΠΟΠΤΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
+      <li><a [routerLink]="['/mathima/shmata_plhroforia_epikoinwnia.html']">ΣΗΜΑΤΑ ΠΛΗΡΟΦΟΡΙΑ ΚΑΙ ΕΠΙΚΟΙΝΩΝΙΑ</a> </li>
       <li><a [routerLink]="['/mathima/sae2.html']">ΣΥΣΤΗΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ ΙΙ</a> </li>
-      <li><a [routerLink]="['/mathima/texn-neurwnika-diktua.html']">ΤΕΧΝΗΤΑ ΝΕΥΡΩΝΙΚΑ ΔΙΚΤΥΑ ΚΑΙ ΕΦΑΡΜΟΓΕΣ</a></li>
-      <li><a [routerLink]="['/mathima/texn-sugkollhsewn.html']">ΤΕΧΝΟΛΟΓΙΑ ΣΥΓΚΟΛΛΗΣΕΩΝ</a> </li>
+      <li><a [routerLink]="['/mathima/texn_neurwnika_diktua.html']">ΤΕΧΝΗΤΑ ΝΕΥΡΩΝΙΚΑ ΔΙΚΤΥΑ ΚΑΙ ΕΦΑΡΜΟΓΕΣ</a></li>
+      <li><a [routerLink]="['/mathima/texn_sugkollhsewn.html']">ΤΕΧΝΟΛΟΓΙΑ ΣΥΓΚΟΛΛΗΣΕΩΝ</a> </li>
       <li><a [routerLink]="['/mathima/trivologia.html']">ΤΡΙΒΟΛΟΓΙΑ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="evdomo">
     <h2>7ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li> <a [routerLink]="['/mathima/mikro-makro-oikonomia.html']">ΑΡΧΕΣ ΟΙΚΟΝΟΜΙΚΗΣ ΘΕΩΡΙΑΣ: ΜΙΚΡΟ-ΜΑΚΡΟ ΟΙΚΟΝΟΜΙΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/diax-efodiastikhs-alusidas.html']">ΔΙΑΧΕΙΡΙΣΗ ΕΦΟΔΙΑΣΤΙΚΗΣ ΑΛΥΣΙΔΑΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/energeiaka-hlektr-sust-eksoikonomhsh-energeias.html']">ΕΝΕΡΓΕΙΑΚΑ ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΗΜΑΤΑ & ΕΞΟΙΚΟΝΟΜΗΣΗ ΕΝΕΡΓΕΙΑΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/hlektronika-sust-oxhmatwn.html']">ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΥΜΑΤΑ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/thermikes-mhxanes.html']">ΘΕΡΜΙΚΕΣ ΜΗΧΑΝΕΣ</a> </li>
+    <ul style="list_style_type:square;">
+      <li> <a [routerLink]="['/mathima/mikro_makro_oikonomia.html']">ΑΡΧΕΣ ΟΙΚΟΝΟΜΙΚΗΣ ΘΕΩΡΙΑΣ: ΜΙΚΡΟ_ΜΑΚΡΟ ΟΙΚΟΝΟΜΙΑ</a> </li>
+      <li> <a [routerLink]="['/mathima/diax_efodiastikhs_alusidas.html']">ΔΙΑΧΕΙΡΙΣΗ ΕΦΟΔΙΑΣΤΙΚΗΣ ΑΛΥΣΙΔΑΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/energeiaka_hlektr_sust_eksoikonomhsh_energeias.html']">ΕΝΕΡΓΕΙΑΚΑ ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΗΜΑΤΑ & ΕΞΟΙΚΟΝΟΜΗΣΗ ΕΝΕΡΓΕΙΑΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/hlektronika_sust_oxhmatwn.html']">ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΥΜΑΤΑ ΟΧΗΜΑΤΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/thermikes_mhxanes.html']">ΘΕΡΜΙΚΕΣ ΜΗΧΑΝΕΣ</a> </li>
       <li> <a [routerLink]="['/mathima/nanaotexnologia.html']">ΝΑΝΟΤΕΧΝΟΛΟΓΙΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/plhroforiaka-susthmata.htm']">ΠΛΗΡΟΦΟΡΙΑΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/prohgmenos-elegxos-hlektr-mhxanwn.html']">ΠΡΟΗΓΜΕΝΟΣ ΕΛΕΓΧΟΣ ΗΛΕΚΤΡΙΚΩΝ ΜΗΧΑΝΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/plhroforiaka_susthmata.htm']">ΠΛΗΡΟΦΟΡΙΑΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
+      <li> <a [routerLink]="['/mathima/prohgmenos_elegxos_hlektr_mhxanwn.html']">ΠΡΟΗΓΜΕΝΟΣ ΕΛΕΓΧΟΣ ΗΛΕΚΤΡΙΚΩΝ ΜΗΧΑΝΩΝ</a> </li>
       <li> <a [routerLink]="['/mathima/sae3.html']">ΣΥΣΤΗΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ ΙΙΙ</a> </li>
-      <li> <a [routerLink]="['/mathima/texnikes-veltistopoihshs.html']">ΤΕΧΝΙΚΕΣ ΒΕΛΤΙΣΤΟΠΟΙΗΣΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/texn-oxhmatwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/fusikoxhmikes-diergasies.html']">ΦΥΣΙΚΟΧΗΜΙΚΕΣ ΔΙΕΡΓΑΣΙΕΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/texnikes_veltistopoihshs.html']">ΤΕΧΝΙΚΕΣ ΒΕΛΤΙΣΤΟΠΟΙΗΣΗΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/texn_oxhmatwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΟΧΗΜΑΤΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/fusikoxhmikes_diergasies.html']">ΦΥΣΙΚΟΧΗΜΙΚΕΣ ΔΙΕΡΓΑΣΙΕΣ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="ogdoo">
     <h2>8ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li> <a [routerLink]="['/mathima/ananewsimes-phges-energeias.html']">ΑΝΑΝΕΩΣΙΜΕΣ ΠΗΓΕΣ ΕΝΕΡΓΕΙΑΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/asurmata-sust-diktua.html']">ΑΣΥΡΜΑΤΑ ΣΥΣΤΗΜΑΤΑ ΚΑΙ ΔΙΚΤΥΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/autodhgoumena-sust.html']">ΑΥΤΟΔΗΓΟΥΜΕΝΑ ΣΥΣΤΥΜΑΤΑ</a></li>
-      <li> <a [routerLink]="['/mathima/dunamikh-oxhmatwn.html']">ΔΥΝΑΜΙΚΗ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/elegxos-diergasiwn.html']">ΕΛΕΓΧΟΣ ΔΙΕΡΓΑΣΙΩΝ</a> </li>
+    <ul style="list_style_type:square;">
+      <li> <a [routerLink]="['/mathima/ananewsimes_phges_energeias.html']">ΑΝΑΝΕΩΣΙΜΕΣ ΠΗΓΕΣ ΕΝΕΡΓΕΙΑΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/asurmata_sust_diktua.html']">ΑΣΥΡΜΑΤΑ ΣΥΣΤΗΜΑΤΑ ΚΑΙ ΔΙΚΤΥΑ</a> </li>
+      <li> <a [routerLink]="['/mathima/autodhgoumena_sust.html']">ΑΥΤΟΔΗΓΟΥΜΕΝΑ ΣΥΣΤΥΜΑΤΑ</a></li>
+      <li> <a [routerLink]="['/mathima/dunamikh_oxhmatwn.html']">ΔΥΝΑΜΙΚΗ ΟΧΗΜΑΤΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/elegxos_diergasiwn.html']">ΕΛΕΓΧΟΣ ΔΙΕΡΓΑΣΙΩΝ</a> </li>
       <li> <a [routerLink]="['/mathima/epixeirhmatikothta.html']">ΕΠΙΧΕΙΡΗΜΑΤΙΚΟΤΗΤΑ</a> </li>
       <li> <a [routerLink]="['/mathima/cnc.html']">ΕΡΓΑΛΕΙΟΜΗΧΑΝΕΣ CNC</a> </li>
-      <li> <a [routerLink]="['/mathima/hlektr-egkatastaseis.html']">ΗΛΕΚΤΡΙΚΕΣ ΕΓΚΑΤΑΣΤΑΣΕΙΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/methodos-peperasmenwn-stoixeiwn.html']">ΜΕΘΟΔΟΣ ΠΕΠΕΡΑΣΜΕΝΩΝ ΣΤΟΙΧΕΙΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/hlektr_egkatastaseis.html']">ΗΛΕΚΤΡΙΚΕΣ ΕΓΚΑΤΑΣΤΑΣΕΙΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/methodos_peperasmenwn_stoixeiwn.html']">ΜΕΘΟΔΟΣ ΠΕΠΕΡΑΣΜΕΝΩΝ ΣΤΟΙΧΕΙΩΝ</a> </li>
       <li> <a [routerLink]="['/mathima/mhxanotronikh.html']">ΜΗΧΑΤΡΟΝΙΚΗ</a> </li>
       <li> <a [routerLink]="['/mathima/mikroupologistes.html']">ΜΙΚΡΟΫΠΟΛΟΓΙΣΤΕΣ ΣΤΗΝ ΠΑΡΑΓΩΓΗ</a> </li>
       <li> <a [routerLink]="['/mathima/montelopoihsh.html']">ΜΟΝΤΕΛΟΠΟΗΣΗ ΚΑΙ ΠΡΟΣΟΜΟΙΩΣΗ ΣΥΣΤΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/oxhmata-ektos-dromou.html']">ΟΧΗΜΑΤΑ ΕΚΤΟΣ ΔΡΟΜΟΥ</a> </li>
-      <li> <a [routerLink]="['/mathima/susthmata-epixeir-porwn.html']">ΣΥΣΤΥΜΑΤΑ ΕΠΙΧΕΙΡΗΣΙΑΚΩΝ ΠΟΡΩΝ (ERP)</a> </li>
-      <li> <a [routerLink]="['/mathima/sust-diaxeirhshs-gnwshs.html']">ΣΥΣΤΥΜΑΤΑ ΔΙΑΧΕΙΡΙΣΗΣ ΓΝΩΣΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/sust-metadoshs-kinhshs.html']">ΣΥΣΤΥΜΑΤΑ ΜΕΤΑΔΟΣΗΣ ΚΙΝΗΣΗΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/oxhmata_ektos_dromou.html']">ΟΧΗΜΑΤΑ ΕΚΤΟΣ ΔΡΟΜΟΥ</a> </li>
+      <li> <a [routerLink]="['/mathima/susthmata_epixeir_porwn.html']">ΣΥΣΤΥΜΑΤΑ ΕΠΙΧΕΙΡΗΣΙΑΚΩΝ ΠΟΡΩΝ (ERP)</a> </li>
+      <li> <a [routerLink]="['/mathima/sust_diaxeirhshs_gnwshs.html']">ΣΥΣΤΥΜΑΤΑ ΔΙΑΧΕΙΡΙΣΗΣ ΓΝΩΣΗΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/sust_metadoshs_kinhshs.html']">ΣΥΣΤΥΜΑΤΑ ΜΕΤΑΔΟΣΗΣ ΚΙΝΗΣΗΣ</a> </li>
       <li> <a [routerLink]="['/mathima/psae.html']">ΨΗΦΙΑΚΑ ΣΥΣΤΗΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ</a> </li>
-      <li> <a [routerLink]="['/mathima/logistics-kai-metafores.html']">LOGISTICS ΚΑΙ ΜΕΤΑΦΟΡΕΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/logistics_kai_metafores.html']">LOGISTICS ΚΑΙ ΜΕΤΑΦΟΡΕΣ</a> </li>
     </ul>
   </div>
   <br/>
   <div class="enato">
     <h2>9ο Εξάμηνο</h2>
-    <ul style="list-style-type:square;">
-      <li> <a [routerLink]="['/mathima/allhlepidrash-anthrwpou-me-sust-mhxanotronikhs.html']">ΑΛΛΗΛΕΠΙΔΡΑΣΗ ΑΝΘΡΩΠΟΥ ΜΕ ΣΥΣΤΗΜΑΤΑ ΜΗΧΑΝΟΤΡΟΝΙΚΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/diergasies-enallaghs-aerivn-thermikwn-mhxanwn.html']">ΔΙΕΡΓΑΣΙΕΣ ΕΝΑΛΛΑΓΉΣ ΑΕΡΙΩΝ ΘΕΡΜΙΚΩΝ ΜΗΧΑΝΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/dioikhsh-ergwn.html']">ΔΙΟΙΚΗΣΗ ΕΡΓΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/eidika-kefalaia-hlektrikwn-mhxanwn.html']">ΕΙΔΙΚΑ ΚΕΦΑΛΑΙΑ ΗΛΕΚΤΡΙΚΩΝ ΜΗΧΑΝΩΝ </a></li>
-      <li> <a [routerLink]="['/mathima/eufuh-susthmata.html']">ΕΥΦΥΗ ΣΥΣΤΗΜΑΤΑ</a> </li>
+    <ul style="list_style_type:square;">
+      <li> <a [routerLink]="['/mathima/allhlepidrash_anthrwpou_me_sust_mhxanotronikhs.html']">ΑΛΛΗΛΕΠΙΔΡΑΣΗ ΑΝΘΡΩΠΟΥ ΜΕ ΣΥΣΤΗΜΑΤΑ ΜΗΧΑΝΟΤΡΟΝΙΚΗΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/diergasies_enallaghs_aerivn_thermikwn_mhxanwn.html']">ΔΙΕΡΓΑΣΙΕΣ ΕΝΑΛΛΑΓΉΣ ΑΕΡΙΩΝ ΘΕΡΜΙΚΩΝ ΜΗΧΑΝΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/dioikhsh_ergwn.html']">ΔΙΟΙΚΗΣΗ ΕΡΓΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/eidika_kefalaia_hlektrikwn_mhxanwn.html']">ΕΙΔΙΚΑ ΚΕΦΑΛΑΙΑ ΗΛΕΚΤΡΙΚΩΝ ΜΗΧΑΝΩΝ </a></li>
+      <li> <a [routerLink]="['/mathima/eufuh_susthmata.html']">ΕΥΦΥΗ ΣΥΣΤΗΜΑΤΑ</a> </li>
       <li> <a [routerLink]="['/mathima/hlektrokinhsh.html']">ΗΛΕΚΤΡΟΚΙΝΗΣΗ</a></li>
-      <li> <a [routerLink]="['/mathima/klasikoi-viomhxanikoi-automatismoi.html']">ΚΛΑΣΙΚΟΙ ΒΙΟΜΗΧΑΝΙΚΟΙ ΑΥΤΟΜΑΤΙΣΜΟΙ</a> </li>
-      <li> <a [routerLink]="['/mathima/mhxanhmata-ergwn.html']">ΜΗΧΑΝΗΜΑΤΑ ΕΡΓΩΝ</a> </li>
+      <li> <a [routerLink]="['/mathima/klasikoi_viomhxanikoi_automatismoi.html']">ΚΛΑΣΙΚΟΙ ΒΙΟΜΗΧΑΝΙΚΟΙ ΑΥΤΟΜΑΤΙΣΜΟΙ</a> </li>
+      <li> <a [routerLink]="['/mathima/mhxanhmata_ergwn.html']">ΜΗΧΑΝΗΜΑΤΑ ΕΡΓΩΝ</a> </li>
       <li> <a [routerLink]="['/mathima/mikroelegktes.html']">ΜΙΚΡΟΕΛΕΓΚΤΕΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/perivallontikh-mhxanikh.html']">ΠΕΡΙΒΑΛΛΟΝΤΙΚΗ ΜΗΧΑΝΙΚΗ </a></li>
+      <li> <a [routerLink]="['/mathima/perivallontikh_mhxanikh.html']">ΠΕΡΙΒΑΛΛΟΝΤΙΚΗ ΜΗΧΑΝΙΚΗ </a></li>
       <li> <a [routerLink]="['/mathima/rompotikh.html']">ΡΟΜΠΟΤΙΚΉ</a> </li>
-      <li> <a [routerLink]="['/mathima/stoxastikes-diadikasies.html']">ΣΤΟΧΑΣΤΙΚΕΣ ΔΙΑΔΙΚΑΣΙΕΣ</a> </li>
+      <li> <a [routerLink]="['/mathima/stoxastikes_diadikasies.html']">ΣΤΟΧΑΣΤΙΚΕΣ ΔΙΑΔΙΚΑΣΙΕΣ</a> </li>
       <li> <a [routerLink]="['/mathimaa/cim.html']">CIM </a> </li>
     </ul>
   </div>
