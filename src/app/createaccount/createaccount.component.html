@@ -1,0 +1,46 @@
+
+<div class="login">
+  <div class="eisodos">
+
+    <h1>Δημιουργία Νέου Χρήστη</h1>
+    <br>
+    <form (submit)="create()" role="form">
+      <div class="username">
+        <label for="username"></label>
+        <input [(ngModel)]="user.username"  id="username" name="username" placeholder="Username " required
+               type="text">
+      </div>
+      <div>
+        <label for="fullName"></label>
+        <input [(ngModel)]="user.fullName" id="fullName" name="fullName" placeholder="Full Name " required type="text">
+      </div>
+
+      <div>
+        <label for="newPassword"></label>
+
+        <input [(ngModel)]="newPassword" id="newPassword" name="newPassword" placeholder="New Password" required
+               type="text">
+      </div>
+
+      <div>
+        <label for="confirmPassword"></label>
+
+        <input [(ngModel)]="confirmPassword" id="confirmPassword" name="confirmPassword"
+               placeholder="Confirm Password" required type="text">
+      </div>
+
+        <select [(ngModel)]="user.role" id="role" name="role" required>
+          <option value="student">student</option>
+          <option value="teacher">teacher</option>
+          <option value="sectretariat">secretariat</option>
+        </select>
+
+      <div>
+        <button id="submit" type="submit" [disabled]="isDisabled()" >Create</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+

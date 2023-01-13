@@ -1,0 +1,44 @@
+<div class="edit">
+  <div class="edituser">
+
+    <h1>Επεξεργασία Προφίλ</h1>
+    <br>
+    <form (submit)="update()" role="form">
+      <div class="username">
+        <label for="username"></label>
+        <input [(ngModel)]="user.username" disabled id="username" name="username" placeholder="Username " required
+               type="text">
+      </div>
+      <div>
+        <label for="fullName"></label>
+        <input [(ngModel)]="user.fullName" id="fullName" name="fullName" placeholder="Full Name " required type="text">
+      </div>
+
+      <div>
+        <label for="newPassword"></label>
+
+        <input [(ngModel)]="newPassword" id="newPassword" name="newPassword" placeholder="New Password" required
+               type="password">
+      </div>
+
+      <div>
+        <label for="confirmPassword"></label>
+
+        <input [(ngModel)]="confirmPassword" id="confirmPassword" name="confirmPassword"
+               placeholder="Confirm Password" required type="password">
+      </div>
+      <div>
+        <label for="role"></label>
+
+        <input [(ngModel)]="user.role" disabled id="role" name="role"
+               placeholder="Role" required type="text">
+      </div>
+      <div>
+        <button id="submit" type="submit" [disabled]="isDisabled()" >Update</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+

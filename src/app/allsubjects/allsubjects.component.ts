@@ -21,7 +21,7 @@ export class AllsubjectsComponent implements OnInit{
               private router: Router) {
   }
 ngOnInit() {
-    this.user_id=this.get_user_id()
+
 
   this.api.postTypeRequest('user/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
       if (res.status === 1) {
@@ -32,6 +32,8 @@ ngOnInit() {
 
     }
   );
+
+  this.user_id=this.get_user_id()
 
   this.api.postTypeRequest('mathima/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
       if (res.status === 1) {
@@ -66,7 +68,7 @@ get_mathima_id(url:string){
       }
     }
 }
-get_user_id(): string{
+get_user_id(){
   let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth
 // @ts-ignore
   let user_string = temp_user_string.substring(1, temp_user_string.length - 1); //aferoume tis aggiles, dhladh ton prwto kai ton teleutaio xarakthra
@@ -75,11 +77,11 @@ get_user_id(): string{
 
   for(const user of this.users){
     if (username ===user.username){
-      return user.id=this.user_id;
+      return user.id;
 
     }
   }
-return this.user_id;
+
 }
 
 }
