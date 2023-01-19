@@ -1,0 +1,30 @@
+<div class="mat-elevation-z1">
+  <table [dataSource]="anakoinwseis" mat-table>
+
+    <ng-container matColumnDef="to_mathima">
+      <th *matHeaderCellDef mat-header-cell> Μάθημα</th>
+      <td *matCellDef="let element" mat-cell>
+        {{ element.to_mathima }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="content">
+      <th *matHeaderCellDef mat-header-cell>Ανακοίνωση</th>
+      <td *matCellDef="let element" mat-cell>
+        {{ element.content }}
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="created_by">
+      <th *matHeaderCellDef mat-header-cell>Δημιουργός</th>
+      <td *matCellDef="let element" mat-cell>
+        {{ element.created_by }}
+      </td>
+    </ng-container>
+
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr> //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+</div>

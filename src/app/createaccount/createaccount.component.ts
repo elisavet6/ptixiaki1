@@ -3,6 +3,7 @@ import {User} from "../myprofile/domain/user";
 import {ApiService} from "../services/api.service";
 import {Router} from "@angular/router";
 import {SnackbarService} from "../services/snackbar.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-createaccount',
@@ -13,14 +14,28 @@ export class CreateaccountComponent implements OnInit {
   user: User;
   newPassword: string;
   confirmPassword: string;
+  check: boolean;
+  users: any;
 
   constructor(private api: ApiService,
               private router: Router,
-              private snackbar: SnackbarService) {
+              private snackbar: SnackbarService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
     this.user = new User(); //arxikopoihsh metavlhths
+    this.check = false;
+    this.api.postTypeRequest('user/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+        if (res.status === 1) {
+          this.users = res.data;
+          console.log(this.users[2].username);
+        } else {
+          console.log('Something went wrong with getall');
+        }
+
+      }
+    );
   }
 
   create() {
@@ -46,11 +61,22 @@ export class CreateaccountComponent implements OnInit {
   }
 
   isDisabled() {
+
     if (this.passwordsDoNotMatch() || this.newPassword === '' ||
-      this.user.fullName === '' || this.newPassword === undefined || this.user.role ==='') {
+      this.user.fullName === '' || this.newPassword === undefined || this.user.role === '' || this.checkUser()||this.user.role=== undefined) {
       return true;
     } else {
       return false;
     }
+  }
+
+  checkUser(): boolean {
+    for (const puser of this.users) {
+      if (this.user.username === puser.username) {
+        return true;
+
+      }
+    }
+    return false;
   }
 }

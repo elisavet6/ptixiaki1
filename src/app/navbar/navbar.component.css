@@ -8,6 +8,7 @@
   box-shadow: 5px 5px 18px black;
   position: relative;
   z-index: +1;
+  font-family: Bahnschrift;
 }
 
 .menuItems {

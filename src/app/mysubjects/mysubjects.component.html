@@ -1,0 +1,31 @@
+<h1>ΤΑ ΜΑΘΗΜΑΤΑ ΜΟΥ</h1>
+<mat-sidenav-container autosize="true" class="sidenav-container" style="margin-top: 80px">
+  <mat-sidenav mode="side" opened>
+
+    <mat-list>
+      <mat-list-item >
+        <div class="padding-left-1">
+          <button (click)="select('all')" mat-button>Προβολή όλων των ανακοινώσεων</button>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngFor="let mathima of enrolledmathimata">
+        <div class="padding-left-1">
+          <button (click)="select(mathima.id)" mat-button>
+            {{ mathima.name }} ({{ mathima.examino }} Εξάμηνο)
+          </button>
+          <button>
+            <mat-icon>input</mat-icon>
+          </button>
+
+
+
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content >
+    <div class="padding-1">
+      <ng-template #placeholder></ng-template>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

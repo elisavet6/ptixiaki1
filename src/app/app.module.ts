@@ -26,6 +26,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatDialog, matDialogAnimations, MatDialogModule} from "@angular/material/dialog";
 import { DialogComponent } from './dialog/dialog.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MysubjectsComponent } from './mysubjects/mysubjects.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import { AnakoinwseisComponent } from './anakoinwseis/anakoinwseis.component';
+import {MatLegacyTabsModule} from "@angular/material/legacy-tabs";
 
 
 
@@ -70,6 +75,12 @@ const routes: Routes = [
     component: EdituserComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'mysubjects',
+    component: MysubjectsComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }
 
 ];
@@ -88,29 +99,34 @@ const routes: Routes = [
     AccountComponent,
     CreateaccountComponent,
     EdituserComponent,
-    DialogComponent
+    DialogComponent,
+    MysubjectsComponent,
+    AnakoinwseisComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        RouterOutlet,
-        RouterModule,
-        RouterLink,
-        RouterModule.forRoot(routes),
-        MatTableModule,
-        MatCardModule,
-        MatSnackBarModule,
-        BrowserAnimationsModule,
-        MatLegacyFormFieldModule,
-        MatSelectModule,
-        FontAwesomeModule,
-        MatButtonModule,
-        MatIconModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatCheckboxModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterOutlet,
+    RouterModule,
+    RouterLink,
+    RouterModule.forRoot(routes),
+    MatTableModule,
+    MatCardModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    MatLegacyFormFieldModule,
+    MatSelectModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatListModule,
+    MatLegacyTabsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,6 @@
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+
 mat-card {
   background-color: whitesmoke;
   overflow: auto;
@@ -24,5 +26,9 @@ mat-paginator{
 }
 snack-bar-container{
   background: whitesmoke;
+}
+mat-icon{
+border-color: white;
+background-color: white;
 }
 

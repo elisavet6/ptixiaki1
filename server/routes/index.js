@@ -11,5 +11,9 @@ router.use('/mathima', mathima);
 const enrollements = require('./enrollements'); //dhmiourgia url
 router.use('/enrollements', enrollements);
 
+const anakoinwseis = require('./anakoinwseis'); //dhmiourgia url
+router.use('/anakoinwseis', anakoinwseis);
+
+
 
 module.exports = router; //fix
