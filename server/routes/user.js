@@ -74,7 +74,7 @@ router.post('/delete', async function (req, res, next) {
     con.query(
       sql, [username],
       function (err, result) {
-        if (err === 0) {
+        if (err) {
           res.send({status: 0, data: err});
         } else {
           res.send({status: 1, data:req.body}); //stelnoume pisw ta anavathmismena stoixeia
