@@ -28,7 +28,10 @@ snack-bar-container{
   background: whitesmoke;
 }
 mat-icon{
-border-color: white;
-background-color: white;
+size: 25px;
+color: #8db4ce;
+}
+mat-header-cell{
+  font-weight: bold;
 }
 

@@ -105,4 +105,58 @@ router.post('/create', async function (req, res, next) {
   }
 });
 
+router.post('/getstudents', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let { role }=req.body;
+    const sql = `SELECT * FROM users WHERE role='student'`
+    con.query(
+      sql, [role],
+      function (err, result) {
+        if (result.length === 0) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
+router.post('/getteachers', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let { role }=req.body;
+    const sql = `SELECT * FROM users WHERE role='teacher'`
+    con.query(
+      sql, [role],
+      function (err, result) {
+        if (result.length === 0) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
+router.post('/getsecretary', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let { role }=req.body;
+    const sql = `SELECT * FROM users WHERE role='secretary'`
+    con.query(
+      sql, [role],
+      function (err, result) {
+        if (result.length === 0) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
 module.exports = router

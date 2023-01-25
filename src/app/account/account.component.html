@@ -4,60 +4,160 @@
       <mat-card-title>Λογαριασμοί χρηστών</mat-card-title>
     </mat-card-header>
     <mat-card-actions align="end">
-      <a mat-raised-button [routerLink]="['/createaccount']">+Create Account</a>
+      <a [routerLink]="['/createaccount']" mat-raised-button>+Create Account</a>
     </mat-card-actions>
+
     <mat-tab-group>
-      <mat-tab label="First"> Content 1 </mat-tab>
-      <mat-tab label="Second"> Content 2 </mat-tab>
-      <mat-tab label="Third"> Content 3 </mat-tab>
-    </mat-tab-group>
-    <mat-card-content class="mat-card-container">
-      <div class="mat-elevation-z1">
-        <table [dataSource]="users" mat-table>
+      <mat-tab label="Φοιτητές">
+        <mat-card-content  class="mat-card-container">
+          <div  class="mat-elevation-z1">
+            <table [dataSource]="students" mat-table>
+
+              <ng-container matColumnDef="username">
+                <th *matHeaderCellDef mat-header-cell> Username</th>
+                <td *matCellDef="let element" mat-cell>
+                  <a (click)="viewDetails(element)"> {{ element.username }} </a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fullName">
+                <th *matHeaderCellDef mat-header-cell>Full Name</th>
+                <td *matCellDef="let element" mat-cell>
+                  {{ element.fullName }}
+                </td>
+              </ng-container>
 
 
+              <ng-container matColumnDef="role">
+                <th *matHeaderCellDef mat-header-cell>Role</th>
+                <td *matCellDef="let element" mat-cell>
+                  {{ element.role}}
+                </td>
+              </ng-container>
 
-          <ng-container matColumnDef="username">
-            <th *matHeaderCellDef mat-header-cell> Username</th>
-            <td *matCellDef="let element" mat-cell>
-              <a (click)="viewDetails(element)" > {{ element.username }} </a>
-            </td>
-          </ng-container>
+              <ng-container matColumnDef="delete">
+                <th *matHeaderCellDef mat-header-cell>Delete Account</th>
+                <td *matCellDef="let element" mat-cell>
+                  <button (click)="delete(element)" mat-button>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+              <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+              //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+              <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+            </table>
+          </div>
+        </mat-card-content>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                       [pageSize]="10"
+                       aria-label="Select page of periodic elements"
+                       showFirstLastButtons>
+        </mat-paginator>
+</mat-tab>
 
-          <ng-container matColumnDef="fullName">
-            <th *matHeaderCellDef mat-header-cell>Full Name</th>
-            <td *matCellDef="let element" mat-cell>
-              {{ element.fullName }}
-            </td>
-          </ng-container>
+
+<mat-tab label="Καθηγητές">
+  <mat-card-content class="mat-card-container">
+    <div class="mat-elevation-z1">
+      <table [dataSource]="teachers" mat-table>
 
 
-          <ng-container matColumnDef="role">
-            <th *matHeaderCellDef mat-header-cell>Role</th>
-            <td *matCellDef="let element" mat-cell>
-              {{ element.role }}
-            </td>
-          </ng-container>
+        <ng-container matColumnDef="username">
+          <th *matHeaderCellDef mat-header-cell> Username</th>
+          <td *matCellDef="let element" mat-cell>
+            <a (click)="viewDetails(element)"> {{ element.username }} </a>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="delete">
-            <th *matHeaderCellDef mat-header-cell>Delete Account</th>
-            <td *matCellDef="let element" mat-cell>
-              <button (click)="delete(element)">
-                <mat-icon >delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr> //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
-          <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-        </table>
-      </div>
-    </mat-card-content>
-  </mat-card>
+        <ng-container matColumnDef="fullName">
+          <th *matHeaderCellDef mat-header-cell>Full Name</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.fullName }}
+          </td>
+        </ng-container>
 
+
+        <ng-container matColumnDef="role">
+          <th *matHeaderCellDef mat-header-cell>Role</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.role }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th *matHeaderCellDef mat-header-cell>Delete Account</th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="delete(element)" mat-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+  </mat-card-content>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
+                 [pageSize]="10"
+                 aria-label="Select page of periodic elements"
+                 showFirstLastButtons>
   </mat-paginator>
+</mat-tab>
+
+
+<mat-tab label="Γραμματεία">
+  <mat-card-content class="mat-card-container">
+    <div class="mat-elevation-z1">
+      <table [dataSource]="secretary" mat-table>
+
+
+        <ng-container matColumnDef="username">
+          <th *matHeaderCellDef mat-header-cell> Username</th>
+          <td *matCellDef="let element" mat-cell>
+            <a (click)="viewDetails(element)"> {{ element.username }} </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fullName">
+          <th *matHeaderCellDef mat-header-cell>Full Name</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.fullName }}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="role">
+          <th *matHeaderCellDef mat-header-cell>Role</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.role }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th *matHeaderCellDef mat-header-cell>Delete Account</th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="delete(element)" mat-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 [pageSize]="10"
+                 aria-label="Select page of periodic elements"
+                 showFirstLastButtons>
+  </mat-paginator>
+</mat-tab>
+</mat-tab-group>
+
+</mat-card>
+
 </div>
 

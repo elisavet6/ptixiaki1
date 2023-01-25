@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit{
 
   user: User;
   role: string;
-  isSecretariat : boolean= false;
+  isSecretary : boolean= false;
   constructor(private auth: AuthService,
              private router: Router){
   }
@@ -26,10 +26,10 @@ export class NavbarComponent implements OnInit{
 
     this.user.role = jsnon_user_string['role'];
 
-      if (this.user.role === 'secretariat'){
-        this.isSecretariat=true;
+      if (this.user.role === 'secretary'){
+        this.isSecretary=true;
       } else {
-        this.isSecretariat=false;
+        this.isSecretary=false;
       }
 
   }

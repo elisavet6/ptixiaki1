@@ -31,6 +31,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import { AnakoinwseisComponent } from './anakoinwseis/anakoinwseis.component';
 import {MatLegacyTabsModule} from "@angular/material/legacy-tabs";
+import {MatSortModule} from "@angular/material/sort";
 
 
 
@@ -103,30 +104,31 @@ const routes: Routes = [
     MysubjectsComponent,
     AnakoinwseisComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RouterOutlet,
-    RouterModule,
-    RouterLink,
-    RouterModule.forRoot(routes),
-    MatTableModule,
-    MatCardModule,
-    MatSnackBarModule,
-    BrowserAnimationsModule,
-    MatLegacyFormFieldModule,
-    MatSelectModule,
-    FontAwesomeModule,
-    MatButtonModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatSidenavModule,
-    MatListModule,
-    MatLegacyTabsModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterOutlet,
+        RouterModule,
+        RouterLink,
+        RouterModule.forRoot(routes),
+        MatTableModule,
+        MatCardModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
+        MatLegacyFormFieldModule,
+        MatSelectModule,
+        FontAwesomeModule,
+        MatButtonModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatListModule,
+        MatLegacyTabsModule,
+        MatSortModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

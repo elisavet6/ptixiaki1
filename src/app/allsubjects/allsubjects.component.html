@@ -10,11 +10,8 @@
   <div class="prwto">
     <h2>1ο Εξάμηνο</h2>
     <ul>
-      <li>
-        <mat-checkbox (change)="changed('agglikh_orologia',$event)"
-                      [checked]="calculate('agglikh_orologia')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/agglikh_orologia.html']" >ΑΓΓΛΙΚΗ ΟΡΟΛΟΓΙΑ</a></li>
+
+      <h3>Υποχρεωτικά</h3>
       <li>
         <mat-checkbox (change)="changed('eisagwgh_episthmh_yh',$event)"
                       [checked]="calculate('eisagwgh_episthmh_yh')">
@@ -45,12 +42,19 @@
                       [checked]="calculate('fusikh')">
         </mat-checkbox>
         <a [routerLink]="['/mathima/fusikh.html']">ΦΥΣΙΚΗ</a> </li>
+      <h3>Επιλογής</h3>
+      <li>
+      <mat-checkbox (change)="changed('agglikh_orologia',$event)"
+                    [checked]="calculate('agglikh_orologia')">
+      </mat-checkbox>
+      <a [routerLink]="['/mathima/agglikh_orologia.html']" >ΑΓΓΛΙΚΗ ΟΡΟΛΟΓΙΑ</a></li>
     </ul>
   </div>
   <br/>
   <div class="deutero">
     <h2>2ο Εξάμηνο</h2>
     <ul>
+      <h3>Υποχρεωτικά</h3>
       <li>
         <mat-checkbox (change)="changed('dunamikh',$event)"
                       [checked]="calculate('dunamikh')">
@@ -66,6 +70,21 @@
                       [checked]="calculate('hlektrika_kuklwmata')">
         </mat-checkbox>
         <a [routerLink]="['/mathimaa/hlektrika_kuklwmata.html']">ΗΛΕΚΤΡΙΚΑ ΚΥΚΛΩΜΑΤΑ</a></li>
+
+      <li>
+        <mat-checkbox (change)="changed('programmatismos_gia_mhxanikous',$event)"
+                      [checked]="calculate('programmatismos_gia_mhxanikous')">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/programmatismos_gia_mhxanikous.html']">ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
+
+      <li>
+        <mat-checkbox (change)="changed('texnologia_ulikwn',$event)"
+                      [checked]="calculate('texnologia_ulikwn')">
+        </mat-checkbox>
+        <a [routerLink]="['/mathima/texnologia_ulikwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΥΛΙΚΩΝ</a> </li>
+
+      <h3>Επιλογής</h3>
+
       <li>
         <mat-checkbox (change)="changed('hlektrotexnika_ulika',$event)"
                       [checked]="calculate('hlektrotexnika_ulika')">
@@ -77,25 +96,15 @@
         </mat-checkbox>
         <a [routerLink]="['/mathima/istoria_politismou_texnologias.html']">ΙΣΤΟΡΙΑ ΠΟΛΙΤΙΣΜΟΥ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
       <li>
-        <mat-checkbox (change)="changed('programmatismos_gia_mhxanikous',$event)"
-                      [checked]="calculate('programmatismos_gia_mhxanikous')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/programmatismos_gia_mhxanikous.html']">ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
-      <li>
         <mat-checkbox (change)="changed('sunarthseis_pollwn_metavlhtwn',$event)"
                       [checked]="calculate('sunarthseis_pollwn_metavlhtwn')">
         </mat-checkbox>
         <a [routerLink]="['/mathima/sunarthseis_pollwn_metavlhtwn.html']">ΣΥΝΑΡΤΗΣΕΙΣ ΠΟΛΛΩΝ ΜΕΤΑΒΛΗΤΩΝ</a> </li>
       <li>
-        <mat-checkbox (change)="changed('texnologia_ulikwn',$event)"
-                      [checked]="calculate('texnologia_ulikwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/texnologia_ulikwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΥΛΙΚΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('filosofia_texnologias',$event)"
-                      [checked]="calculate('filosofia_texnologias')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/filosofia_texnologias.html']">ΦΙΛΟΣΟΦΙΑ ΤΗΣ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
+      <mat-checkbox (change)="changed('filosofia_texnologias',$event)"
+                    [checked]="calculate('filosofia_texnologias')">
+      </mat-checkbox>
+      <a [routerLink]="['/mathima/filosofia_texnologias.html']">ΦΙΛΟΣΟΦΙΑ ΤΗΣ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
     </ul>
     <br/>
   </div>

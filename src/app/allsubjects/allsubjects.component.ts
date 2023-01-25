@@ -81,7 +81,7 @@ export class AllsubjectsComponent implements OnInit {
       dialogResult.afterClosed().subscribe((confirm) => {
 
         if (!confirm) {
-
+          event.source.checked= true;
           return;
         } else {
           const payload_string = '{"user_id":"' + this.user_id + '", "mathima_id":"' + mathima_id + '"}';  //pedio json pou stelnoume pisw sto backend
@@ -115,7 +115,7 @@ export class AllsubjectsComponent implements OnInit {
       dialogResult.afterClosed().subscribe((confirm) => {
 
         if (!confirm) {
-           event.checked= false;
+           event.source.checked= false;
           return;
         } else {
           const payload_string = '{"user_id":"' + this.user_id + '", "mathima_id":"' + mathima_id + '"}';  //pedio json pou stelnoume pisw sto backend

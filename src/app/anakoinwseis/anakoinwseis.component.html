@@ -1,10 +1,10 @@
 <div class="mat-elevation-z1">
-  <table [dataSource]="anakoinwseis" mat-table>
+  <table [dataSource]="anakoinwseis" mat-table matSort>
 
     <ng-container matColumnDef="to_mathima">
       <th *matHeaderCellDef mat-header-cell> Μάθημα</th>
       <td *matCellDef="let element" mat-cell>
-        {{ element.to_mathima }}
+        {{ element.mathima.name }}
       </td>
     </ng-container>
 
@@ -17,9 +17,16 @@
 
 
     <ng-container matColumnDef="created_by">
-      <th *matHeaderCellDef mat-header-cell>Δημιουργός</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Δημιουργός</th>
       <td *matCellDef="let element" mat-cell>
-        {{ element.created_by }}
+        {{ element.user.fullName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="creation_timestamp">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header>Ημερομηνία Δημιουργίας</th>
+      <td *matCellDef="let element" mat-cell>
+        {{ element.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
       </td>
     </ng-container>
 
