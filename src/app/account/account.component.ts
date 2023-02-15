@@ -19,7 +19,6 @@ export class AccountComponent implements OnInit {
   students = new MatTableDataSource<User>();
   teachers = new MatTableDataSource<User>();
   secretary = new MatTableDataSource<User>();
-  deleteUser: boolean = false;
   displayedColumns: string[] = ['username', 'fullName', 'role', 'delete'];
   userList: any;
   studentList: any;

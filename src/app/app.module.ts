@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'; import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component'; import {RouterLink, RouterModule, RouterOutlet, Routes} from  "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AllsubjectsComponent} from "./allsubjects/allsubjects.component";
 import {AuthGuardService} from "./services/auth-guard.service";
@@ -32,7 +32,13 @@ import {MatListModule} from "@angular/material/list";
 import { AnakoinwseisComponent } from './anakoinwseis/anakoinwseis.component';
 import {MatLegacyTabsModule} from "@angular/material/legacy-tabs";
 import {MatSortModule} from "@angular/material/sort";
-
+import { VideostreamingComponent } from './videostreaming/videostreaming.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatInputModule} from "@angular/material/input";
+import {YouTubePlayerModule} from "@angular/youtube-player";
+import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
+import {MatChipsModule} from '@angular/material/chips';
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 
 const routes: Routes = [
@@ -82,6 +88,12 @@ const routes: Routes = [
     component: MysubjectsComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'videostreaming',
+    component: VideostreamingComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }
 
 ];
@@ -102,33 +114,40 @@ const routes: Routes = [
     EdituserComponent,
     DialogComponent,
     MysubjectsComponent,
-    AnakoinwseisComponent
+    AnakoinwseisComponent,
+    VideostreamingComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        RouterOutlet,
-        RouterModule,
-        RouterLink,
-        RouterModule.forRoot(routes),
-        MatTableModule,
-        MatCardModule,
-        MatSnackBarModule,
-        BrowserAnimationsModule,
-        MatLegacyFormFieldModule,
-        MatSelectModule,
-        FontAwesomeModule,
-        MatButtonModule,
-        MatIconModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatSidenavModule,
-        MatListModule,
-        MatLegacyTabsModule,
-        MatSortModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterOutlet,
+    RouterModule,
+    RouterLink,
+    RouterModule.forRoot(routes),
+    MatTableModule,
+    MatCardModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatListModule,
+    MatLegacyTabsModule,
+    MatSortModule,
+    MatInputModule,
+    MatGridListModule,
+    YouTubePlayerModule,
+    NgbRating,
+    MatChipsModule,
+    NgxMatSelectSearchModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

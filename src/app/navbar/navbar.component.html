@@ -7,7 +7,7 @@
     <a *ngIf="isSecretary" [routerLink]="['/account']" data-item='account' class="account">Χρήστες</a>
   </li>
     <li>
-      <a href='#' data-item='home' class="home">Αρχική</a>
+      <a [routerLink]="['/videostreaming']"  data-item='home' class="home">Αρχική</a>
     </li>
     <li>
       <a [routerLink]="['/mysubjects']" data-item='mathimataMou' class="mathimataMou">Τα Μαθήματά μου</a>

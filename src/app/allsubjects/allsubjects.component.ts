@@ -5,6 +5,10 @@ import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
+import {User} from "../myprofile/domain/user";
+import {SnackbarService} from "../services/snackbar.service";
+import {Mathima} from "../mathima/domain/mathima";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-allsubjects',
@@ -14,16 +18,25 @@ import {DialogComponent} from "../dialog/dialog.component";
 export class AllsubjectsComponent implements OnInit {
 
   isLoaded: boolean;
-  private mathimata: any;
+  mathimata: any;
+
   private users: any;
+  displayedColumns: string[] = ['name', 'upoxrewtiko'];
   private user_id: string;
   private username: string;
   private enrolledMathimata: any;
+  filtered: Mathima[];
+  first: Mathima[];
+  second: Mathima[];
+  prwto= new MatTableDataSource<Mathima>();
+  deutero= new MatTableDataSource<Mathima>();
+
 
   constructor(private api: ApiService,
               private auth: AuthService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackbar: SnackbarService) {
   }
 
   ngOnInit() {
@@ -59,11 +72,25 @@ export class AllsubjectsComponent implements OnInit {
 
 
     this.api.postTypeRequest('mathima/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-        if (res.status === 1) {
-          this.mathimata = res.data;
-        } else {
-          console.log('Something went wrong with getall');
+
+      if (res.status === 1) {
+        this.mathimata = res.data;
+        this.filtered = res.data;
+
+        for (const mathima of this.mathimata) {
+          if (mathima.eksamhno === '1') {
+            this.first = this.filtered.filter(
+              (mathima) => mathima.eksamhno === '1');
+            this.prwto = new MatTableDataSource<Mathima>(this.first);
+          } else if (mathima.eksamhno === '2') {
+            this.second = this.filtered.filter(mathima => mathima.eksamhno === '2');
+            this.deutero = new MatTableDataSource(res.data);
+          }
+
         }
+      } else {
+        console.log('Something went wrong with getall');
+      }
 
       }
     );
@@ -73,7 +100,7 @@ export class AllsubjectsComponent implements OnInit {
 
   changed(url: string, event: MatCheckboxChange) {
     const mathima_id = this.get_mathima_id(url);
-    if (event.checked === false) {
+    if (!event.checked) {
       //apeggrafh
       const dialogResult = this.dialog.open(DialogComponent,
         {data: {message: 'Are you sure you want to dismiss this class?', button: 'Confirm'}}
@@ -81,7 +108,7 @@ export class AllsubjectsComponent implements OnInit {
       dialogResult.afterClosed().subscribe((confirm) => {
 
         if (!confirm) {
-          event.source.checked= true;
+          event.source.checked = true;
           return;
         } else {
           const payload_string = '{"user_id":"' + this.user_id + '", "mathima_id":"' + mathima_id + '"}';  //pedio json pou stelnoume pisw sto backend
@@ -115,7 +142,7 @@ export class AllsubjectsComponent implements OnInit {
       dialogResult.afterClosed().subscribe((confirm) => {
 
         if (!confirm) {
-           event.source.checked= false;
+          event.source.checked = false;
           return;
         } else {
           const payload_string = '{"user_id":"' + this.user_id + '", "mathima_id":"' + mathima_id + '"}';  //pedio json pou stelnoume pisw sto backend
@@ -145,7 +172,7 @@ export class AllsubjectsComponent implements OnInit {
   get_mathima_id(url: string) {
     for (const mathima of this.mathimata) {
       if (url === mathima.url) {
-        return mathima.id
+        return mathima.id;
       }
     }
   }
@@ -174,5 +201,35 @@ export class AllsubjectsComponent implements OnInit {
     }
     return false;
   }
-}
 
+  delete(element: User) {
+    const dialogResult = this.dialog.open(DialogComponent,
+      {data: {message: 'Are you sure you want to delete this user?', button: 'Confirm'}}
+    );
+    dialogResult.afterClosed().subscribe((confirm) => {
+
+        if (!confirm) {
+          return;
+        } else
+
+          this.api.postTypeRequest('user/delete', element).subscribe((res: any) => {
+            if (res.status === 1) {
+              this.snackbar.success('User ' + res.data.username + ' successfully deleted')
+              this.api.postTypeRequest('user/getstudents', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+                  if (res.status === 1) {
+                    this.mathimata = res.data;
+                  } else {
+                    console.log('Something went wrong with getall');
+                  }
+                }
+              );
+            } else {
+              this.snackbar.failure('Cannot be deleted');
+            }
+          })
+      }
+    )
+  }
+
+
+}

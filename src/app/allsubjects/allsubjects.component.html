@@ -1,369 +1,52 @@
 <div class="allsubs">
-    <img src="../../assets/newphoto.jpg" width="100%" height="90%">
-    <div class="text">
-      <h1>Τμήμα Μηχανικών Παραγωγής και Διοίκησης</h1>
-      <p>Καλώς ήρθατε στην ιστοσελίδα ασύγχρονης εκμάθησης του τμήματος </p>
-    </div>
+
 
 <h1>ΜΑΘΗΜΑΤΑ</h1>
-  <div *ngIf="isLoaded" class="mathimata">
-  <div class="prwto">
-    <h2>1ο Εξάμηνο</h2>
-    <ul>
+  <mat-tab-group>
+    <mat-tab label="1ο Εξάμηνο">
+      <mat-card-content  class="mat-card-container">
+        <div  class="mat-elevation-z1">
+          <table [dataSource]="prwto" mat-table>
 
-      <h3>Υποχρεωτικά</h3>
-      <li>
-        <mat-checkbox (change)="changed('eisagwgh_episthmh_yh',$event)"
-                      [checked]="calculate('eisagwgh_episthmh_yh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/eisagwgh_episthmh_yh.html']" >ΕΙΣΑΓΩΓΗ ΣΤΗΝ ΕΠΙΣΤΗΜΗ ΤΩΝ Η/Υ</a></li>
-      <li>
-        <mat-checkbox (change)="changed('grammikh_algeura_thewria_migadikwn',$event)"
-                      [checked]="calculate('grammikh_algeura_thewria_migadikwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/grammikh_algeura_thewria_migadikwn.html']">ΓΡΑΜΜΙΚΗ ΑΛΓΕΥΡΑ ΚΑΙ ΘΕΩΡΙΑ ΜΙΓΑΔΙΚΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('mathimatikos_logismos',$event)"
-                      [checked]="calculate('mathimatikos_logismos')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/mathimatikos_logismos.html']">ΜΑΘΗΜΑΤΙΚΟΣ ΛΟΓΙΣΜΟΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('statikh',$event)"
-                      [checked]="calculate('statikh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/statikh.html']">ΣΤΑΤΙΚΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('texnikh_sxediash',$event)"
-                      [checked]="calculate('texnikh_sxediash')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/texnikh_sxediash.html']">ΤΕΧΝΙΚΗ ΣΧΕΔΙΑΣΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('fusikh',$event)"
-                      [checked]="calculate('fusikh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/fusikh.html']">ΦΥΣΙΚΗ</a> </li>
-      <h3>Επιλογής</h3>
-      <li>
-      <mat-checkbox (change)="changed('agglikh_orologia',$event)"
-                    [checked]="calculate('agglikh_orologia')">
-      </mat-checkbox>
-      <a [routerLink]="['/mathima/agglikh_orologia.html']" >ΑΓΓΛΙΚΗ ΟΡΟΛΟΓΙΑ</a></li>
-    </ul>
-  </div>
-  <br/>
-  <div class="deutero">
-    <h2>2ο Εξάμηνο</h2>
-    <ul>
-      <h3>Υποχρεωτικά</h3>
-      <li>
-        <mat-checkbox (change)="changed('dunamikh',$event)"
-                      [checked]="calculate('dunamikh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/dunamikh.html']">ΔΥΝΑΜΙΚΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('efarm_thermodunamikh',$event)"
-                      [checked]="calculate('efarm_thermodunamikh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/efarm_thermodunamikh.html']">ΕΦΑΡΜΟΣΜΕΝΗ ΘΕΡΜΟΔΥΝΑΙΚΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('hlektrika_kuklwmata',$event)"
-                      [checked]="calculate('hlektrika_kuklwmata')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathimaa/hlektrika_kuklwmata.html']">ΗΛΕΚΤΡΙΚΑ ΚΥΚΛΩΜΑΤΑ</a></li>
+            <ng-container matColumnDef="username">
+              <th *matHeaderCellDef mat-header-cell> Username</th>
+              <td *matCellDef="let element" mat-cell>
+                <a> {{ element.name }} </a>
+              </td>
+            </ng-container>
 
-      <li>
-        <mat-checkbox (change)="changed('programmatismos_gia_mhxanikous',$event)"
-                      [checked]="calculate('programmatismos_gia_mhxanikous')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/programmatismos_gia_mhxanikous.html']">ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
+            <ng-container matColumnDef="fullName">
+              <th *matHeaderCellDef mat-header-cell>Full Name</th>
+              <td *matCellDef="let element" mat-cell>
+                {{ element.upoxrewtiko }}
+              </td>
+            </ng-container>
 
-      <li>
-        <mat-checkbox (change)="changed('texnologia_ulikwn',$event)"
-                      [checked]="calculate('texnologia_ulikwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/texnologia_ulikwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΥΛΙΚΩΝ</a> </li>
 
-      <h3>Επιλογής</h3>
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+          </table>
+        </div>
+      </mat-card-content>
 
-      <li>
-        <mat-checkbox (change)="changed('hlektrotexnika_ulika',$event)"
-                      [checked]="calculate('hlektrotexnika_ulika')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/hlektrotexnika_ulika.html']">ΗΛΕΚΤΡΟΤΕΧΝΙΚΑ ΥΛΙΚΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('istoria_politismou_texnologias',$event)"
-                      [checked]="calculate('istoria_politismou_texnologias')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/istoria_politismou_texnologias.html']">ΙΣΤΟΡΙΑ ΠΟΛΙΤΙΣΜΟΥ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('sunarthseis_pollwn_metavlhtwn',$event)"
-                      [checked]="calculate('sunarthseis_pollwn_metavlhtwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/sunarthseis_pollwn_metavlhtwn.html']">ΣΥΝΑΡΤΗΣΕΙΣ ΠΟΛΛΩΝ ΜΕΤΑΒΛΗΤΩΝ</a> </li>
-      <li>
-      <mat-checkbox (change)="changed('filosofia_texnologias',$event)"
-                    [checked]="calculate('filosofia_texnologias')">
-      </mat-checkbox>
-      <a [routerLink]="['/mathima/filosofia_texnologias.html']">ΦΙΛΟΣΟΦΙΑ ΤΗΣ ΤΕΧΝΟΛΟΓΙΑΣ</a> </li>
-    </ul>
-    <br/>
-  </div>
-  <div class="trito">
-    <h2>3ο Εξάμηνο</h2>
-    <ul style="list_style_type:square;">
-      <li>
-        <mat-checkbox (change)="changed('antoxh_ulikwn',$event)"
-                      [checked]="calculate('antoxh_ulikwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/antoxh_ulikwn.html']">ΑΝΤΟΧΗ ΤΩΝ ΥΛΙΚΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('arithmhtikh_analush',$event)"
-                      [checked]="calculate('arithmhtikh_analush')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/arithmhtikh_analush.html']">ΑΡΙΘΜΗΤΙΚΗ ΑΝΑΛΥΣΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('viomhxanikh_ugieinh_asfaleia',$event)"
-                      [checked]="calculate('viomhxanikh_ugieinh_asfaleia')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/viomhxanikh_ugieinh_asfaleia.html']">ΒΙΟΜΗΧΑΝΙΚΗ ΥΓΙΕΙΝΗ ΚΑΙ ΑΣΦΑΛΕΙΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('eidika_themata_fusikhs',$event)"
-                      [checked]="calculate('eidika_themata_fusikhs')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/eidika_themata_fusikhs.html']">ΕΙΔΙΚΑ ΘΕΜΑΤΑ ΦΥΣΙΚΗΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('ulektronika_sust',$event)"
-                      [checked]="calculate('ulektronika_sust')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/ulektronika_sust.html']">ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('thewria_pithan_statistikhs',$event)"
-                      [checked]="calculate('thewria_pithan_statistikhs')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/thewria_pithan_statistikhs.html']">ΘΕΩΡΙΑ ΠΙΘΑΝΟΤΗΤΩΝ ΚΑΙ ΣΤΑΤΙΣΤΙΚΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('koinwnia_plhrof_4h_viomhx_epan',$event)"
-                      [checked]="calculate('koinwnia_plhrof_4h_viomhx_epan')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/koinwnia_plhrof_4h_viomhx_epan.html']">ΚΟΙΝΩΝΙΑ ΠΛΗΡΟΦΟΡΙΑΣ ΚΑΙ 4Η ΒΙΟΜΗΧΑΝΙΚΗ ΕΠΑΝΑΣΤΑΣΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('mhxanourgikh_texn',$event)"
-                      [checked]="calculate('mhxanourgikh_texn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/mhxanourgikh_texn.html']">ΜΗΧΑΝΟΥΡΓΙΚΗ ΤΕΧΝΟΛΟΓΙΑ</a> </li>
-    </ul>
-  </div>
-  <br/>
-  <div class="tetarto">
-    <h2>4ο Εξάμηνο</h2>
-    <ul>
-      <li>
-        <mat-checkbox (change)="changed('antikeimenostrefhs_programmatismos',$event)"
-                      [checked]="calculate('antikeimenostrefhs_programmatismos')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/antikeimenostrefhs_programmatismos.html']">ΑΝΤΙΚΕΙΜΕΝΟΣΤΡΕΦΗΣ ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('aksiopistia_sunthrhsh',$event)"
-                      [checked]="calculate('aksiopistia_sunthrhsh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/aksiopistia_sunthrhsh.html']">ΑΞΙΟΠΙΣΤΙΑ ΚΑΙ ΣΥΝΤΗΡΗΣΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('diax_aksiopistias_diadiktuo_twn_pragm',$event)"
-                      [checked]="calculate('diax_aksiopistias_diadiktuo_twn_pragm')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/diax_aksiopistias_diadiktuo_twn_pragm.html']">ΔΙΑΧΕΙΡΗΣΗ ΑΞΙΠΙΣΤΙΑΣ ΣΤΟ ΔΙΑΔΙΚΤΥΟ ΤΩΝ ΠΡΑΓΜΑΤΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('thewria_metasxhmatismwn',$event)"
-                      [checked]="calculate('thewria_metasxhmatismwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/thewria_metasxhmatismwn.html']">ΘΕΩΡΙΑ ΜΕΤΑΣΧΗΜΑΤΙΣΜΩΝ & ΣΥΣΤΗΜΑΤΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('metrologia',$event)"
-                      [checked]="calculate('metrologia')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/metrologia.html']">ΜΕΤΡΟΛΟΓΙΑ ΕΛΕΓΧΟΣ ΠΟΙΟΤΗΤΑΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('mikrohlektromhxanologika_sust',$event)"
-                      [checked]="calculate('mikrohlektromhxanologika_sust')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/mikrohlektromhxanologika_sust.html']">ΜΙΚΡΟΗΛΕΚΤΡΟΜΗΧΑΝΟΛΟΓΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('prohgmena_pshfiaka_sust',$event)"
-                      [checked]="calculate('prohgmena_pshfiaka_sust')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/prohgmena_pshfiaka_sust.html']">ΠΡΟΗΓΜΕΝΑ ΨΗΦΙΑΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('reustomhxanikh',$event)"
-                      [checked]="calculate('reustomhxanikh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/reustomhxanikh.html']">ΡΕΥΣΤΟΜΗΧΑΝΙΚΗ</a></li>
-      <li>
-        <mat-checkbox (change)="changed('stoixeia_mhxanwn_1',$event)"
-                      [checked]="calculate('stoixeia_mhxanwn_1')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/stoixeia_mhxanwn_1.html']">ΣΤΟΙΧΕΙΑ ΜΗΧΑΝΩΝ Ι</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('sust_paragwghs',$event)"
-                      [checked]="calculate('sust_paragwghs')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/sust_paragwghs.html']">ΣΥΣΤΗΜΑΤΑ ΠΑΡΑΓΩΓΗΣ</a> </li>
-    </ul>
-  </div>
-  <br/>
-  <div class="pempto">
-    <h2>5ο Εξάμηνο</h2>
-    <ul style="list_style_type:square;">
-      <li>
-        <mat-checkbox (change)="changed('aerodunamikh',$event)"
-                      [checked]="calculate('aerodunamikh')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/aerodunamikh.html']">ΑΕΡΟΔΥΝΑΜΙΚΗ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('vaseis_domes_dedomenwn',$event)"
-                      [checked]="calculate('vaseis_domes_dedomenwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/vaseis_domes_dedomenwn.html']">ΒΑΣΕΙΣ ΚΑΙ ΔΟΜΕΣ ΔΕΔΟΜΕΝΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('genikeumenh_thewr_susthmatwn',$event)"
-                      [checked]="calculate('genikeumenh_thewr_susthmatwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/genikeumenh_thewr_susthmatwn.html']">ΓΕΝΙΚΕΥΜΕΝΗ ΘΕΩΡΙΑ ΣΥΣΤΗΜΑΤΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('diaxeirish_sust_asfaleias_ploiwn',$event)"
-                      [checked]="calculate('diaxeirish_sust_asfaleias_ploiwn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/diaxeirish_sust_asfaleias_ploiwn.html']">ΔΙΑΧΕΙΡΙΣΗ ΣΥΣΤΗΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΠΛΟΙΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('enswmatwmena_sust',$event)"
-                      [checked]="calculate('enswmatwmena_sust')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/enswmatwmena_sust.html']">ΕΝΣΩΜΑΤΩΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('hlektr_mhxanes1',$event)"
-                      [checked]="calculate('hlektr_mhxanes1')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/hlektr_mhxanes1.html']">ΗΛΕΚΤΡΙΚΕΣ ΜΗΧΑΝΕΣ & ΣΥΣΤΗΜΑΤΑ ΟΔΗΓΗΣΗΣ ΚΙΝΗΤΗΡΩΝ Ι</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('logismika_gia_mhxan',$event)"
-                      [checked]="calculate('logismika_gia_mhxan')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/logismika_gia_mhxan.html']">ΛΟΓΙΣΜΙΚΑ ΓΙΑ ΜΗΧΑΝΙΚΟΥΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('mh_katastrof_elegxoi',$event)"
-                      [checked]="calculate('mh_katastrof_elegxoi')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/mh_katastrof_elegxoi.html']">ΜΗ ΚΑΤΑΣΤΡΟΦΙΚΟΙ ΕΛΕΓΧΟΙ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('mhxan_diamorfwseis',$event)"
-                      [checked]="calculate('mhxan_diamorfwseis')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/mhxan_diamorfwseis.html']">ΜΗΧΑΝΙΚΕΣ ΔΙΑΜΟΡΦΩΣΕΙΣ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('stoixeia_mhxanwn2',$event)"
-                      [checked]="calculate('stoixeia_mhxanwn2')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/stoixeia_mhxanwn2.html']">ΣΤΟΙΧΕΙΑ ΜΗΧΑΝΩΝ ΙΙ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('sae1',$event)"
-                      [checked]="calculate('sae1')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/sae1.html']">ΣΥΣΤΥΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ Ι</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('sust_uposthrikshs_apofasewn',$event)"
-                      [checked]="calculate('sust_uposthrikshs_apofasewn')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/sust_uposthrikshs_apofasewn.html']">ΣΥΣΤΗΜΑΤΑ ΥΠΟΣΤΗΡΙΞΗΣ ΑΠΟΦΑΣΕΩΝ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('udraulika',$event)"
-                      [checked]="calculate('udraulika')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/udraulika.html']">ΥΔΡΑΥΛΙΚΑ ΠΝΕΥΜΑΤΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li>
-        <mat-checkbox (change)="changed('ypolog_reustomhxan',$event)"
-                      [checked]="calculate('ypolog_reustomhxan')">
-        </mat-checkbox>
-        <a [routerLink]="['/mathima/ypolog_reustomhxan.html']">ΥΠΟΛΟΓΙΣΤΙΚΗ ΡΕΥΣΤΟΜΗΧΑΝΙΚΗ</a> </li>
-    </ul>
-  </div>
-  <br/>
-  <div class="ekto">
-    <h2>6ο Εξάμηνο</h2>
-    <ul style="list_style_type:square;;">
-      <li><a [routerLink]="['/mathima/viomhxanika_diktua_dedomenwn.html']">ΒΙΟΜΗΧΑΝΙΚΑ ΔΙΚΤΥΑ ΔΕΔΟΜΕΝΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/viomhxanikh_plhroforikh.html']">ΒΙΟΜΗΧΑΝΙΚΗ ΠΛΗΡΟΦΟΡΙΚΗ</a> </li>
-      <li><a [routerLink]="['/mathima/epixeirhsiakh_ereuna.html']">ΕΠΙΧΕΙΡΗΣΙΑΚΗ ΕΡΕΥΝΑ</a> </li>
-      <li><a [routerLink]="['/mathima/hlektrikes_mhxanes2.html']">ΗΛΕΚΤΡΙΚΕΣ ΜΗΧΑΝΕΣ & ΣΥΣΤΗΜΑΤΑ ΟΔΗΓΗΣΗΣ ΚΙΝΗΤΗΡΩΝ ΙΙ</a> </li>
-      <li><a [routerLink]="['/mathima/hlektrika_sust_oxhmatwn.html']">ΗΛΕΚΤΡΙΚΑ ΣΥΣΤΥΜΑΤΑ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/cad_cam_cae.html']"> ΜΕΘΟΔΟΣ ΤΕΧΝΟΛΟΓΙΚΟΥ ΣΧΕΔΙΑΣΜΟΥ ΚΑΙ CAD_CAM_CAE</a></li>
-      <li><a [routerLink]="['/mathima/metadosh_thermothtas.html']">ΜΕΤΑΔΟΣΗ ΘΕΡΜΟΤΗΤΑΣ</a> </li>
-      <li><a [routerLink]="['/mathima/programmat_elegktes_kai_epoptika.html']">ΠΡΟΓΡΑΜΜΑΤΙΖΟΜΕΝΟΙ ΕΛΕΓΚΤΕΣ ΚΑΙ ΕΠΟΠΤΙΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li><a [routerLink]="['/mathima/shmata_plhroforia_epikoinwnia.html']">ΣΗΜΑΤΑ ΠΛΗΡΟΦΟΡΙΑ ΚΑΙ ΕΠΙΚΟΙΝΩΝΙΑ</a> </li>
-      <li><a [routerLink]="['/mathima/sae2.html']">ΣΥΣΤΗΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ ΙΙ</a> </li>
-      <li><a [routerLink]="['/mathima/texn_neurwnika_diktua.html']">ΤΕΧΝΗΤΑ ΝΕΥΡΩΝΙΚΑ ΔΙΚΤΥΑ ΚΑΙ ΕΦΑΡΜΟΓΕΣ</a></li>
-      <li><a [routerLink]="['/mathima/texn_sugkollhsewn.html']">ΤΕΧΝΟΛΟΓΙΑ ΣΥΓΚΟΛΛΗΣΕΩΝ</a> </li>
-      <li><a [routerLink]="['/mathima/trivologia.html']">ΤΡΙΒΟΛΟΓΙΑ</a> </li>
-    </ul>
-  </div>
-  <br/>
-  <div class="evdomo">
-    <h2>7ο Εξάμηνο</h2>
-    <ul style="list_style_type:square;">
-      <li> <a [routerLink]="['/mathima/mikro_makro_oikonomia.html']">ΑΡΧΕΣ ΟΙΚΟΝΟΜΙΚΗΣ ΘΕΩΡΙΑΣ: ΜΙΚΡΟ_ΜΑΚΡΟ ΟΙΚΟΝΟΜΙΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/diax_efodiastikhs_alusidas.html']">ΔΙΑΧΕΙΡΙΣΗ ΕΦΟΔΙΑΣΤΙΚΗΣ ΑΛΥΣΙΔΑΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/energeiaka_hlektr_sust_eksoikonomhsh_energeias.html']">ΕΝΕΡΓΕΙΑΚΑ ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΗΜΑΤΑ & ΕΞΟΙΚΟΝΟΜΗΣΗ ΕΝΕΡΓΕΙΑΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/hlektronika_sust_oxhmatwn.html']">ΗΛΕΚΤΡΟΝΙΚΑ ΣΥΣΤΥΜΑΤΑ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/thermikes_mhxanes.html']">ΘΕΡΜΙΚΕΣ ΜΗΧΑΝΕΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/nanaotexnologia.html']">ΝΑΝΟΤΕΧΝΟΛΟΓΙΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/plhroforiaka_susthmata.htm']">ΠΛΗΡΟΦΟΡΙΑΚΑ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/prohgmenos_elegxos_hlektr_mhxanwn.html']">ΠΡΟΗΓΜΕΝΟΣ ΕΛΕΓΧΟΣ ΗΛΕΚΤΡΙΚΩΝ ΜΗΧΑΝΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/sae3.html']">ΣΥΣΤΗΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ ΙΙΙ</a> </li>
-      <li> <a [routerLink]="['/mathima/texnikes_veltistopoihshs.html']">ΤΕΧΝΙΚΕΣ ΒΕΛΤΙΣΤΟΠΟΙΗΣΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/texn_oxhmatwn.html']">ΤΕΧΝΟΛΟΓΙΑ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/fusikoxhmikes_diergasies.html']">ΦΥΣΙΚΟΧΗΜΙΚΕΣ ΔΙΕΡΓΑΣΙΕΣ</a> </li>
-    </ul>
-  </div>
-  <br/>
-  <div class="ogdoo">
-    <h2>8ο Εξάμηνο</h2>
-    <ul style="list_style_type:square;">
-      <li> <a [routerLink]="['/mathima/ananewsimes_phges_energeias.html']">ΑΝΑΝΕΩΣΙΜΕΣ ΠΗΓΕΣ ΕΝΕΡΓΕΙΑΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/asurmata_sust_diktua.html']">ΑΣΥΡΜΑΤΑ ΣΥΣΤΗΜΑΤΑ ΚΑΙ ΔΙΚΤΥΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/autodhgoumena_sust.html']">ΑΥΤΟΔΗΓΟΥΜΕΝΑ ΣΥΣΤΥΜΑΤΑ</a></li>
-      <li> <a [routerLink]="['/mathima/dunamikh_oxhmatwn.html']">ΔΥΝΑΜΙΚΗ ΟΧΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/elegxos_diergasiwn.html']">ΕΛΕΓΧΟΣ ΔΙΕΡΓΑΣΙΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/epixeirhmatikothta.html']">ΕΠΙΧΕΙΡΗΜΑΤΙΚΟΤΗΤΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/cnc.html']">ΕΡΓΑΛΕΙΟΜΗΧΑΝΕΣ CNC</a> </li>
-      <li> <a [routerLink]="['/mathima/hlektr_egkatastaseis.html']">ΗΛΕΚΤΡΙΚΕΣ ΕΓΚΑΤΑΣΤΑΣΕΙΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/methodos_peperasmenwn_stoixeiwn.html']">ΜΕΘΟΔΟΣ ΠΕΠΕΡΑΣΜΕΝΩΝ ΣΤΟΙΧΕΙΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/mhxanotronikh.html']">ΜΗΧΑΤΡΟΝΙΚΗ</a> </li>
-      <li> <a [routerLink]="['/mathima/mikroupologistes.html']">ΜΙΚΡΟΫΠΟΛΟΓΙΣΤΕΣ ΣΤΗΝ ΠΑΡΑΓΩΓΗ</a> </li>
-      <li> <a [routerLink]="['/mathima/montelopoihsh.html']">ΜΟΝΤΕΛΟΠΟΗΣΗ ΚΑΙ ΠΡΟΣΟΜΟΙΩΣΗ ΣΥΣΤΗΜΑΤΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/oxhmata_ektos_dromou.html']">ΟΧΗΜΑΤΑ ΕΚΤΟΣ ΔΡΟΜΟΥ</a> </li>
-      <li> <a [routerLink]="['/mathima/susthmata_epixeir_porwn.html']">ΣΥΣΤΥΜΑΤΑ ΕΠΙΧΕΙΡΗΣΙΑΚΩΝ ΠΟΡΩΝ (ERP)</a> </li>
-      <li> <a [routerLink]="['/mathima/sust_diaxeirhshs_gnwshs.html']">ΣΥΣΤΥΜΑΤΑ ΔΙΑΧΕΙΡΙΣΗΣ ΓΝΩΣΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/sust_metadoshs_kinhshs.html']">ΣΥΣΤΥΜΑΤΑ ΜΕΤΑΔΟΣΗΣ ΚΙΝΗΣΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/psae.html']">ΨΗΦΙΑΚΑ ΣΥΣΤΗΜΑΤΑ ΑΥΤΟΜΑΤΟΥ ΕΛΕΓΧΟΥ</a> </li>
-      <li> <a [routerLink]="['/mathima/logistics_kai_metafores.html']">LOGISTICS ΚΑΙ ΜΕΤΑΦΟΡΕΣ</a> </li>
-    </ul>
-  </div>
-  <br/>
-  <div class="enato">
-    <h2>9ο Εξάμηνο</h2>
-    <ul style="list_style_type:square;">
-      <li> <a [routerLink]="['/mathima/allhlepidrash_anthrwpou_me_sust_mhxanotronikhs.html']">ΑΛΛΗΛΕΠΙΔΡΑΣΗ ΑΝΘΡΩΠΟΥ ΜΕ ΣΥΣΤΗΜΑΤΑ ΜΗΧΑΝΟΤΡΟΝΙΚΗΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/diergasies_enallaghs_aerivn_thermikwn_mhxanwn.html']">ΔΙΕΡΓΑΣΙΕΣ ΕΝΑΛΛΑΓΉΣ ΑΕΡΙΩΝ ΘΕΡΜΙΚΩΝ ΜΗΧΑΝΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/dioikhsh_ergwn.html']">ΔΙΟΙΚΗΣΗ ΕΡΓΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/eidika_kefalaia_hlektrikwn_mhxanwn.html']">ΕΙΔΙΚΑ ΚΕΦΑΛΑΙΑ ΗΛΕΚΤΡΙΚΩΝ ΜΗΧΑΝΩΝ </a></li>
-      <li> <a [routerLink]="['/mathima/eufuh_susthmata.html']">ΕΥΦΥΗ ΣΥΣΤΗΜΑΤΑ</a> </li>
-      <li> <a [routerLink]="['/mathima/hlektrokinhsh.html']">ΗΛΕΚΤΡΟΚΙΝΗΣΗ</a></li>
-      <li> <a [routerLink]="['/mathima/klasikoi_viomhxanikoi_automatismoi.html']">ΚΛΑΣΙΚΟΙ ΒΙΟΜΗΧΑΝΙΚΟΙ ΑΥΤΟΜΑΤΙΣΜΟΙ</a> </li>
-      <li> <a [routerLink]="['/mathima/mhxanhmata_ergwn.html']">ΜΗΧΑΝΗΜΑΤΑ ΕΡΓΩΝ</a> </li>
-      <li> <a [routerLink]="['/mathima/mikroelegktes.html']">ΜΙΚΡΟΕΛΕΓΚΤΕΣ</a> </li>
-      <li> <a [routerLink]="['/mathima/perivallontikh_mhxanikh.html']">ΠΕΡΙΒΑΛΛΟΝΤΙΚΗ ΜΗΧΑΝΙΚΗ </a></li>
-      <li> <a [routerLink]="['/mathima/rompotikh.html']">ΡΟΜΠΟΤΙΚΉ</a> </li>
-      <li> <a [routerLink]="['/mathima/stoxastikes_diadikasies.html']">ΣΤΟΧΑΣΤΙΚΕΣ ΔΙΑΔΙΚΑΣΙΕΣ</a> </li>
-      <li> <a [routerLink]="['/mathimaa/cim.html']">CIM </a> </li>
-    </ul>
-  </div>
+    </mat-tab>
+
+    <mat-tab label="2o Εξάμηνο">
+      <mat-card-content class="mat-card-container">
+
+      </mat-card-content>
+
+    </mat-tab>
+
+    <mat-tab label="3ο εξάμηνο">
+
+    </mat-tab>
+
+    <mat-tab label="4ο εξάμηνο">
+
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
-</div>
+

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
+const md5 = require("md5");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -36,6 +37,42 @@ router.post('/getmathimabyid', async function (req, res, next) {
           res.send({status: 0, data: err});
         } else {
           res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
+router.post('/delete', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let {id, name, url, examino, description, upoxrewtiko} =req.body;
+    const sql = `DELETE  FROM mathima WHERE name=?`
+    con.query(
+      sql, [name],
+      function (err, result) {
+        if (err) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data:req.body}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
+router.post('/create', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let {id, name, url, examino, description, upoxrewtiko} =req.body;
+    const sql = `INSERT INTO users (\`id\`, \`name\`, \`url\`, \`examino\`, \`description\`, \`upoxrewtiko\`) VALUES (?,?,?,?,?);`
+    con.query(
+      sql, [id, name, url, examino, description, upoxrewtiko],
+      function (err, result) {
+        if (result.length === 0) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data:result}); //stelnoume pisw ta anavathmismena stoixeia
         }
       })
   } catch (error) { //

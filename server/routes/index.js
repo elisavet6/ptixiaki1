@@ -14,6 +14,7 @@ router.use('/enrollements', enrollements);
 const anakoinwseis = require('./anakoinwseis'); //dhmiourgia url
 router.use('/anakoinwseis', anakoinwseis);
 
-
+const video = require('./video'); //dhmiourgia url
+router.use('/video', video);
 
 module.exports = router; //fix
