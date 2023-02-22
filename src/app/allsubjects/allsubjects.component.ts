@@ -9,6 +9,8 @@ import {User} from "../myprofile/domain/user";
 import {SnackbarService} from "../services/snackbar.service";
 import {Mathima} from "../mathima/domain/mathima";
 import {MatTableDataSource} from "@angular/material/table";
+import {FileuploadComponent} from "../fileupload/fileupload.component";
+import {CreatesubjectComponent} from "../createsubject/createsubject.component";
 
 @Component({
   selector: 'app-allsubjects',
@@ -19,18 +21,23 @@ export class AllsubjectsComponent implements OnInit {
 
   isLoaded: boolean;
   mathimata: any;
-
-  private users: any;
-  displayedColumns: string[] = ['name', 'upoxrewtiko'];
-  private user_id: string;
-  private username: string;
-  private enrolledMathimata: any;
+  title = 'ΌΛΑ ΤΑ ΜΑΘΗΜΑΤΑ';
+  displayedColumns: string[] = ['assign','mathimaName', 'upoxrewtiko','delete'];
   filtered: Mathima[];
   first: Mathima[];
   second: Mathima[];
-  prwto= new MatTableDataSource<Mathima>();
-  deutero= new MatTableDataSource<Mathima>();
-
+  third: Mathima[];
+  fourth: Mathima[];
+  prwto = new MatTableDataSource<Mathima>();
+  deutero = new MatTableDataSource<Mathima>();
+  trito = new MatTableDataSource<Mathima>();
+  tetarto = new MatTableDataSource<Mathima>();
+  private users: any;
+  private user_id: string;
+  private username: string;
+  private enrolledMathimata: any;
+  user:any;
+  studentTeacher: boolean=false;
 
   constructor(private api: ApiService,
               private auth: AuthService,
@@ -54,11 +61,9 @@ export class AllsubjectsComponent implements OnInit {
               if (res.status === 1) {
                 this.enrolledMathimata = res.data;
                 this.isLoaded = true; // molis ginei true mporei na treksei o html kwdikas wste na exoun fortwsei ta dedomena
-                console.log(this.enrolledMathimata);
               } else {
-                console.log('Something went wrong with getall');
+                console.log('Something went wrong with command postTypeRequest(\'enrollements/getmathimataofuser\' of ngOnInit method ');
               }
-
             }
           );
 
@@ -73,28 +78,46 @@ export class AllsubjectsComponent implements OnInit {
 
     this.api.postTypeRequest('mathima/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
 
-      if (res.status === 1) {
-        this.mathimata = res.data;
-        this.filtered = res.data;
+        if (res.status === 1) {
+          this.mathimata = res.data;
+          this.filtered = res.data;
 
-        for (const mathima of this.mathimata) {
-          if (mathima.eksamhno === '1') {
-            this.first = this.filtered.filter(
-              (mathima) => mathima.eksamhno === '1');
-            this.prwto = new MatTableDataSource<Mathima>(this.first);
-          } else if (mathima.eksamhno === '2') {
-            this.second = this.filtered.filter(mathima => mathima.eksamhno === '2');
-            this.deutero = new MatTableDataSource(res.data);
-          }
 
+              this.first = this.filtered.filter(
+                (mathima) => mathima.examino === 1);
+              this.prwto = new MatTableDataSource<Mathima>(this.first);
+
+              this.second = this.filtered.filter(mathima => mathima.examino === 2);
+              this.deutero = new MatTableDataSource<Mathima>(this.second);
+
+          this.third = this.filtered.filter(mathima => mathima.examino === 3);
+          this.trito = new MatTableDataSource<Mathima>(this.third);
+
+          this.fourth = this.filtered.filter(mathima => mathima.examino === 4);
+          this.tetarto = new MatTableDataSource<Mathima>(this.fourth);
+
+
+
+        } else {
+          console.log('Something went wrong with getall');
         }
-      } else {
-        console.log('Something went wrong with getall');
-      }
 
       }
     );
+    //παρακάτω παίρνουμε τα δεδομένα του χρήστη που είναι συνδεδεμένος ώστε να βρούμε το ρόλο
+    this.user = new User();
+    let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth
+// @ts-ignore
+    let user_string = temp_user_string.substring(1, temp_user_string.length - 1); //aferoume tis aggiles, dhladh ton prwto kai ton teleutaio xarakthra
+    let jsnon_user_string = JSON.parse(user_string); //to metatrepoume se JSON wste na exoume ta stoixeia se morfh pinaka
 
+    this.user.role = jsnon_user_string['role'];
+
+if (this.user.role==='secretary'){
+  this.studentTeacher=false;
+} else {
+  this.studentTeacher=true;
+}
 
   }
 
@@ -202,34 +225,59 @@ export class AllsubjectsComponent implements OnInit {
     return false;
   }
 
-  delete(element: User) {
+  deleteSub(element:Mathima){
     const dialogResult = this.dialog.open(DialogComponent,
-      {data: {message: 'Are you sure you want to delete this user?', button: 'Confirm'}}
+      {data: {message: 'Are you sure you want to delete this subject?', button: 'Confirm'}}
     );
     dialogResult.afterClosed().subscribe((confirm) => {
 
         if (!confirm) {
           return;
         } else
-
-          this.api.postTypeRequest('user/delete', element).subscribe((res: any) => {
+          this.api.postTypeRequest('mathima/delete', element).subscribe((res: any) => {
             if (res.status === 1) {
-              this.snackbar.success('User ' + res.data.username + ' successfully deleted')
-              this.api.postTypeRequest('user/getstudents', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-                  if (res.status === 1) {
-                    this.mathimata = res.data;
-                  } else {
-                    console.log('Something went wrong with getall');
+              if (this.mathimata){
+                this.snackbar.success('Subject successfully deleted')
+                this.api.postTypeRequest('mathima/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+                    if (res.status === 1) {
+                      this.mathimata = res.data;
+                      this.filtered = res.data;
+
+
+                      this.first = this.filtered.filter(
+                        (mathima) => mathima.examino === 1);
+                      this.prwto = new MatTableDataSource<Mathima>(this.first);
+
+                      this.second = this.filtered.filter(mathima => mathima.examino === 2);
+                      this.deutero = new MatTableDataSource<Mathima>(this.second);
+
+                      this.third = this.filtered.filter(mathima => mathima.examino === 3);
+                      this.trito = new MatTableDataSource<Mathima>(this.third);
+
+                      this.fourth = this.filtered.filter(mathima => mathima.examino === 4);
+                      this.tetarto = new MatTableDataSource<Mathima>(this.fourth);
+
+                    } else {
+                      console.log('Something went wrong with delete sub');
+                    }
+
                   }
-                }
-              );
+                );
+              }
+
             } else {
-              this.snackbar.failure('Cannot be deleted');
+              this.snackbar.failure('Subject cannot be deleted');
             }
           })
       }
     )
   }
-
+ createSub(){
+   const dialogRef = this.dialog.open(CreatesubjectComponent,{
+     height: '600px',
+     width: '400px',
+     data: {user_id: this.user_id}
+   });
+ }
 
 }

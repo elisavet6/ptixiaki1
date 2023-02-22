@@ -39,6 +39,8 @@ import {YouTubePlayerModule} from "@angular/youtube-player";
 import {NgbRating} from "@ng-bootstrap/ng-bootstrap";
 import {MatChipsModule} from '@angular/material/chips';
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import { FileuploadComponent } from './fileupload/fileupload.component';
+import { CreatesubjectComponent } from './createsubject/createsubject.component';
 
 
 const routes: Routes = [
@@ -115,7 +117,9 @@ const routes: Routes = [
     DialogComponent,
     MysubjectsComponent,
     AnakoinwseisComponent,
-    VideostreamingComponent
+    VideostreamingComponent,
+    FileuploadComponent,
+    CreatesubjectComponent
   ],
   imports: [
     BrowserModule,

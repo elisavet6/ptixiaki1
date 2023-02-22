@@ -58,7 +58,7 @@ export class AccountComponent implements OnInit {
 
           this.students.paginator = this.paginator;
         } else {
-          console.log('Something went wrong with getall');
+          console.log('Something went wrong with getstudents');
         }
 
       }

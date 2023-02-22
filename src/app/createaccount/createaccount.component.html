@@ -28,12 +28,13 @@
         <input [(ngModel)]="confirmPassword" id="confirmPassword" name="confirmPassword"
                placeholder="Confirm Password" required type="text">
       </div>
-
+      <div>
         <select [(ngModel)]="user.role" id="role" name="role" required>
           <option value="student">student</option>
           <option value="teacher">teacher</option>
           <option value="sectretariat">secretary</option>
         </select>
+      </div>
 
       <div>
         <button id="submit" type="submit" [disabled]="isDisabled()" >Create</button>

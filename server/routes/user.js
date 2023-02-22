@@ -97,9 +97,9 @@ router.post('/create', async function (req, res, next) {
         if (result.length === 0) {
           res.send({status: 0, data: err});
         } else {
-          res.send({status: 1, data:result}); //stelnoume pisw ta anavathmismena stoixeia
+          res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
         }
-      })
+        })
   } catch (error) { //
     res.send({status: 0, error: error});
   }

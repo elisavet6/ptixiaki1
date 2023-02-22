@@ -77,4 +77,8 @@ createAnakoinwseisComponent(): AnakoinwseisComponent{
   const factory=this.factoryResolver.resolveComponentFactory(AnakoinwseisComponent);
   return this.placeholder.createComponent(factory).instance;
 }
+createanakoinwsh(){
+
+}
+
 }

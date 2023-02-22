@@ -1,5 +1,5 @@
 <div class="row" style="padding-bottom: 160px;">
-  <img src="../../assets/newphoto.jpg" width="100%" height="90%">
+  <img height="90%" src="../../assets/newphoto.jpg" width="100%">
   <div class="text">
     <h1>Τμήμα Μηχανικών Παραγωγής και Διοίκησης</h1>
     <p>Καλώς ήρθατε στην ιστοσελίδα ασύγχρονης εκμάθησης του τμήματος </p>
@@ -7,7 +7,7 @@
   <div>
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Video Streaming Channel</mat-card-title>
+        <mat-card-title style="font-weight: bold; text-align: center">Video Streaming Channel</mat-card-title>
       </mat-card-header>
       <mat-card class="search-box">
         <mat-card-content class="mat-card-container">
@@ -16,7 +16,7 @@
               <div class="col-md-2 col-sm-12">
                 <mat-form-field>
                   <input [(ngModel)]="searchUsername" matInput
-                          placeholder="Username">
+                         placeholder="Username">
                 </mat-form-field>
               </div>
               <div class="col-md-2 col-sm-12">
@@ -26,76 +26,78 @@
                 </mat-form-field>
               </div>
 
-            <div class="col-md-2 col-sm-12">
-              <mat-form-field>
-                <mat-select [(ngModel)]="selectedMathimata" [formControl]="mathimaCtrl" placeholder="Μαθήματα" [multiple]="true">
-                 <mat-option>
-                   <ngx-mat-select-search [formControl]="subMathimataList"
-                   placeholderLabel="Search.."
-                   noEntriesFoundLabel= "Δε βρέθηκε μάθημα">
-                   </ngx-mat-select-search>
-                 </mat-option>
-                  <mat-option *ngFor="let mathima of mathimata | async" [value]="mathima.name">
-                    {{mathima.name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+              <div class="col-md-2 col-sm-12">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="selectedMathimata" [formControl]="mathimaCtrl" [multiple]="true"
+                              placeholder="Μαθήματα">
+                    <mat-option>
+                      <ngx-mat-select-search [formControl]="subMathimataList"
+                                             noEntriesFoundLabel="Δε βρέθηκε μάθημα"
+                                             placeholderLabel="Search..">
+                      </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option  *ngFor="let mathima of mathimata | async" [value]="mathima.name" >
+                      {{mathima.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
 
-                                          <div class="col-md-2 col-sm-12">
-                                            <mat-chip-listbox aria-label="Video filters">
-                                              <mat-chip-option (click)="youtube_only">Youtube Videos</mat-chip-option>
-                                              <mat-chip-option (click)="uploaded">Uploaded</mat-chip-option>
-                                              <mat-chip-option (click)="top_rated">Καλύτερες Αξιολογήσεις</mat-chip-option>
 
-                                            </mat-chip-listbox>
-                                          </div>
             </div>
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button (click)="onChange()"  color="primary" mat-raised-button type="submit">
+          <button (click)="onChange()" color="primary" mat-raised-button type="submit">
             <mat-icon>search</mat-icon>
             Search
           </button>
-          <!--                    <button (click)="toggleDate()" color="primary" mat-raised-button style="margin-left: 10px">-->
-          <!--                        <mat-icon>access_time</mat-icon>-->
-          <!--                        Sorted by uploaded time ({{sortedTime}})-->
-          <!--                    </button>-->
-          <!--                    <button (click)="uploadVideo()" color="primary" mat-raised-button style="margin-left: 10px">-->
-          <!--                        <mat-icon>cloud_upload</mat-icon>-->
-          <!--                        Upload video-->
-          <!--                    </button>-->
+          <button (click)="toggleDate()" color="primary" mat-raised-button style="margin-left: 10px">
+            <mat-icon>access_time</mat-icon>
+            Sorted by uploaded time ({{sortedTime}})
+          </button>
+          <button (click)="youtubeOnly()" color="primary" mat-raised-button style="margin-left: 10px">Youtube Videos</button>
+          <button mat-raised-button color="primary" (click)="topRated()" style="margin-left: 10px">Top Rated</button>
+          <button (click)="uploaded()" color="primary" mat-raised-button style="margin-left: 10px" >Uploaded</button>
+          <button *ngIf="isTeacher" (click)="uploadVideo()" color="warn" mat-raised-button style="margin-left: 10px">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload video
+          </button>
+
         </mat-card-actions>
       </mat-card>
 
+<!--Videos-->
       <mat-card-content>
-        <mat-grid-list cols="2" rowHeight="520px" style="margin-top: 10px">
+        <mat-grid-list cols="2" rowHeight="550px" style="margin-top: 10px;">
           <mat-grid-tile *ngFor="let video of filtered">
-            <mat-card class="my-card">
+            <mat-card class="my-card" style="bottom: 5px;">
               <mat-card-title *ngIf="video.decodedname!=null">
                 {{video.originalname.substring(0, video.originalname.lastIndexOf("."))}}
                 <p style="font-size:small; word-break: break-all;">Μάθημα: {{video.mathima.name}} </p>
               </mat-card-title>
-              <mat-card-title *ngIf="video.decodedname===null">
+              <mat-card-title *ngIf="video.decodedname===null" >
                 {{video.originalname}}
                 <p style="font-size:small; word-break: break-all;">Μάθημα: {{video.mathima.name}} </p>
               </mat-card-title>
               <mat-card-content>
-                <div>
+                <div style="display: block">
                   <div style="float:left">
-                    <video *ngIf="video.decodedname!=null" id="videoPlayer" width="400" controls
-                           muted="muted">
+                    <video *ngIf="video.decodedname!=null" controls controlsList="nodownload" id="videoPlayer"
+                           muted="muted" width="400" height="222">
                       <source src="http://localhost:4000/video/playvideo?decodedname={{video.decodedname}}"
                               type="video/mp4"/>
                     </video>
-                    <youtube-player [width]="400" [height]="222" *ngIf="video.decodedname===null" videoId="{{video.youtube_url}}"> </youtube-player>
+                    <youtube-player *ngIf="video.decodedname===null" [height]="222" [width]="400"
+                                    videoId="{{video.youtube_url}}"></youtube-player>
                   </div>
-                  <div style="float:bottom; padding-left: 5px;">
+                  <br>
+                  <div style="float:bottom; padding-left: 7px; padding-top: 3px; display: block">
 
-                                                            <span><ngb-rating [max]="5" [(rate)]="video.sum_rate"
+
+                                                            <span><ngb-rating (rateChange)="changeRate($event, video)" [(rate)]="video.sum_rate"
+                                                                              [max]="5"
                                                                               [readonly]="video.has_been_rated"
-                                                                              (rateChange)="changeRate($event, video)"
 
                                                             ></ngb-rating>
                                                                 ({{video.number_of_reviews}})
@@ -104,9 +106,16 @@
                     <p style="font-size: medium;">
                       Author: {{video.user.username}}
                     </p>
-                    <p style="font-size: medium;">
-                      Uploaded: {{video.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
-                    </p>
+                    <div>
+                      <p style="font-size: medium; float: left">
+                        Uploaded: {{video.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
+                      </p>
+
+                      <button *ngIf="video.isAllowed" style="color: #cc2828; float: right; font-size: 50px " (click)="deleteVideo()" mat-button>
+                        <mat-icon style="font-size: 25px">delete</mat-icon>
+                      </button>
+                    </div>
+
 
                   </div>
                 </div>
@@ -115,11 +124,11 @@
           </mat-grid-tile>
         </mat-grid-list>
       </mat-card-content>
-      <!--            <mat-paginator  [length]="length"-->
-      <!--                            [pageSize]="pageSize"-->
-      <!--                            [pageSizeOptions]="pageSizeOptions"-->
-      <!--                            (page)="OnPageChange($event)">-->
-      <!--            </mat-paginator>-->
+                  <mat-paginator  [length]="length"
+                                  [pageSize]="pageSize"
+                                  [pageSizeOptions]="pageSizeOptions">
+<!--                                  (page)="OnPageChange($event)">-->
+                  </mat-paginator>
     </mat-card>
 
   </div>

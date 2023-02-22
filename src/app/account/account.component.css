@@ -2,7 +2,7 @@
 
 
 mat-card {
-  background-color: whitesmoke;
+  background-color: white;
   overflow: auto;
 }
 
@@ -24,12 +24,10 @@ mat-raised-button a{
 mat-paginator{
   background-color: whitesmoke;
 }
-snack-bar-container{
-  background: whitesmoke;
-}
+
 mat-icon{
 size: 25px;
-color: #8db4ce;
+color: #cc2828;
 }
 mat-header-cell{
   font-weight: bold;

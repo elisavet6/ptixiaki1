@@ -20,7 +20,7 @@ img{
   position: relative;
   box-shadow: 3px 3px 10px black;
 }
-mat-chip-list{
-  display: flex;
-  justify-content: space-around;
+mat-card-actions{
+  width: -moz-available;
 }
+

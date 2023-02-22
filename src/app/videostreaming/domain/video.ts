@@ -17,4 +17,5 @@ export class Video {
   has_been_rated: boolean;
   number_of_reviews: number;
   rates: VideoRating[];
+  isAllowed: boolean;
 }

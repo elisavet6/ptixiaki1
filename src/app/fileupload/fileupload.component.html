@@ -1,0 +1,73 @@
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Video Upload Dialog</mat-card-title>
+    </mat-card-header>
+
+    <mat-card style="margin-bottom: 24px;">
+      <mat-card-content>
+        <div>
+          <div>
+            <mat-checkbox [(ngModel)]="isYouTubeURL"
+                          color="primary"
+                          name="isYouTubeURL">
+              YouTube URL
+            </mat-checkbox>
+          </div>
+          <div style="float:left">
+
+            <mat-form-field>
+              <mat-label>YouTube URL</mat-label>
+              <input  [(ngModel)]="youTubeURL" [disabled]="!isYouTubeURL"  matInput maxlength="255"
+                      name="youtubeURL"/>
+            </mat-form-field>
+          </div>
+
+          <div style="float:right">
+
+            <div>
+
+              <input (change)="fileSelected($event)" [disabled]="isYouTubeURL" class="file-input"
+                     type="file">
+            </div>
+          </div>
+        </div>
+        <br>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-dialog-actions align="center">
+      <div style="width: 100%; text-align:center;">
+
+        <mat-form-field>
+          <input [(ngModel)]="video_name" matInput
+                 placeholder="Video Name">
+        </mat-form-field>
+      </div>
+      <div style="width: 100%; text-align:center;">
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedMathimata" [formControl]="mathimaCtrl" placeholder="Μαθήματα" [multiple]="false">
+            <mat-option>
+              <ngx-mat-select-search [formControl]="subMathimataList"
+                                     placeholderLabel="Αναζήτηση.."
+                                     noEntriesFoundLabel="Δεν βρέθηκε κάτι">
+              </ngx-mat-select-search>
+            </mat-option>
+            <mat-option  *ngFor="let mathima of mathimata | async" [value]="mathima.id">
+              {{ mathima.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="width: 100%; text-align:center;">
+        <button (click)="uploadThisFile()"  color="primary" mat-raised-button
+                 style="margin-left: 20px;" [disabled]="(video_name==='' || video_name=== undefined) ||(selectedMathimata==='' || selectedMathimata=== undefined)
+                 || (isYouTubeURL && (youTubeURL==='' || youTubeURL=== undefined)) || (!isYouTubeURL && (fileName==='' || fileName=== undefined)) ">
+          <mat-icon>cloud_upload</mat-icon>
+          Upload
+        </button>
+      </div>
+    </mat-dialog-actions>
+  </mat-card>
+</div>

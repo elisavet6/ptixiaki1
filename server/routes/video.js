@@ -104,4 +104,66 @@ router.post('/ratevideo', async function (req, res, next) {
   }
 });
 
+router.post('/delete', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let {id,originalname,decodedname,to_mathima,created_by,youtube_url,creation_timestamp} =req.body;
+    const sql = `DELETE  FROM video WHERE originalname=?`
+    con.query(
+      sql, [originalname],
+      function (err, result) {
+        if (err) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data:req.body}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
+router.post('/uploadyoutubevideo', async function (req, res, next) {
+  try {
+    console.log(req.body);
+    let {video_name,to_mathima,user_id, youtube_url} = req.body;
+
+    const sql = `INSERT INTO video (\`originalname\`, \`to_mathima\`, \`created_by\`,\`youtube_url\`) VALUES (?,?,?,?);`
+
+    con.query(
+      sql, [video_name, to_mathima, user_id, youtube_url],
+      function (err, result) {
+        if (err) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data: result});
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+const multer= require('multer'); //βιβλιοθήκη που μας επιτρέπει να αλληλεπιδράμε με τοπικό σύστημα
+const saveFunction = multer({dest:'./videofiles/'})
+
+router.post('/uploadvideo', saveFunction.single('file'), async function (req, res, next) {
+  try {
+    console.log(req.body);
+    let {to_mathima,video_name,user_id} = req.body;
+    let decodedname = req.file.filename;
+    const sql = `INSERT INTO video (\`originalname\`, \`decodedname\`, \`to_mathima\`, \`created_by\`) VALUES (?,?,?,?);`
+
+    con.query(
+      sql, [video_name,decodedname, to_mathima, user_id],
+      function (err, result) {
+        if (err) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data: result});
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
 module.exports = router

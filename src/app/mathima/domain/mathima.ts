@@ -2,6 +2,6 @@ export class Mathima {
   id: number;
   name: string;
   url: string;
-  eksamhno: string;
+  examino: number;
   upoxrewtiko: string;
 }

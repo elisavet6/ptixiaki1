@@ -1,30 +1,53 @@
-<div class="allsubs">
+<div *ngIf="isLoaded" class="allsubs">
 
+  <mat-card>
+    <mat-card-header style="text-align: center">
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
 
-<h1>ΜΑΘΗΜΑΤΑ</h1>
+    <mat-card-actions align="end">
+      <button (click)="createSub()" mat-raised-button>+ Προσθήκη Μαθήματος</button>
+    </mat-card-actions>
+
   <mat-tab-group>
     <mat-tab label="1ο Εξάμηνο">
       <mat-card-content  class="mat-card-container">
         <div  class="mat-elevation-z1">
           <table [dataSource]="prwto" mat-table>
 
-            <ng-container matColumnDef="username">
-              <th *matHeaderCellDef mat-header-cell> Username</th>
+            <ng-container matColumnDef="assign">
+              <th *matHeaderCellDef mat-header-cell> Eγγεγραμμένος</th>
+              <td *matCellDef="let element" mat-cell>
+                <mat-checkbox *ngIf="studentTeacher" (change)="changed(element.url, $event)"
+                              [checked]="calculate(element.url)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mathimaName">
+              <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
                 <a> {{ element.name }} </a>
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="fullName">
-              <th *matHeaderCellDef mat-header-cell>Full Name</th>
+            <ng-container matColumnDef="upoxrewtiko">
+              <th *matHeaderCellDef mat-header-cell>Υποχρεωτικό/Επιλογής</th>
               <td *matCellDef="let element" mat-cell>
                 {{ element.upoxrewtiko }}
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="delete">
+              <th *matHeaderCellDef mat-header-cell>Διαγραφή Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <button style="color: #cc2828" (click)="deleteSub(element)" mat-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
             <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-            //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+<!--            //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei-->
             <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
           </table>
         </div>
@@ -34,19 +57,160 @@
 
     <mat-tab label="2o Εξάμηνο">
       <mat-card-content class="mat-card-container">
+        <div  class="mat-elevation-z1">
+          <table [dataSource]="deutero" mat-table>
 
+            <ng-container matColumnDef="assign">
+              <th *matHeaderCellDef mat-header-cell> Eγγεγραμμένος</th>
+              <td *matCellDef="let element" mat-cell>
+                <mat-checkbox *ngIf="studentTeacher" (change)="changed(element.url, $event)"
+                              [checked]="calculate(element.url)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mathimaName">
+              <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <a> {{ element.name }} </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="upoxrewtiko">
+              <th *matHeaderCellDef mat-header-cell>Υποχρεωτικό/Επιλογής</th>
+              <td *matCellDef="let element" mat-cell>
+                {{ element.upoxrewtiko }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th *matHeaderCellDef mat-header-cell>Διαγραφή Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <button style="color: #cc2828" (click)="deleteSub(element)" mat-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <!--            //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei-->
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-tab>
+
+
+    <mat-tab label="3ο εξάμηνο">
+      <mat-card-content  class="mat-card-container">
+        <div  class="mat-elevation-z1">
+          <table [dataSource]="trito" mat-table>
+
+            <ng-container matColumnDef="assign">
+              <th *matHeaderCellDef mat-header-cell> Eγγεγραμμένος</th>
+              <td *matCellDef="let element" mat-cell>
+                <mat-checkbox *ngIf="studentTeacher" (change)="changed(element.url, $event)"
+                              [checked]="calculate(element.url)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mathimaName">
+              <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <a> {{ element.name }} </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="upoxrewtiko">
+              <th *matHeaderCellDef mat-header-cell>Υποχρεωτικό/Επιλογής</th>
+              <td *matCellDef="let element" mat-cell>
+                {{ element.upoxrewtiko }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th *matHeaderCellDef mat-header-cell>Διαγραφή Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <button style="color: #cc2828" (click)="deleteSub(element)" mat-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <!--            //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei-->
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+          </table>
+        </div>
       </mat-card-content>
 
     </mat-tab>
 
-    <mat-tab label="3ο εξάμηνο">
+
+    <mat-tab label="4ο εξάμηνο">
+      <mat-card-content  class="mat-card-container">
+        <div  class="mat-elevation-z1">
+          <table [dataSource]="tetarto" mat-table>
+
+            <ng-container matColumnDef="assign">
+              <th *matHeaderCellDef mat-header-cell> Eγγεγραμμένος</th>
+              <td *matCellDef="let element" mat-cell>
+                <mat-checkbox *ngIf="studentTeacher" (change)="changed(element.url, $event)"
+                              [checked]="calculate(element.url)"></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mathimaName">
+              <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <a> {{ element.name }} </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="upoxrewtiko">
+              <th *matHeaderCellDef mat-header-cell>Υποχρεωτικό/Επιλογής</th>
+              <td *matCellDef="let element" mat-cell>
+                {{ element.upoxrewtiko }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th *matHeaderCellDef mat-header-cell>Διαγραφή Μαθήματος</th>
+              <td *matCellDef="let element" mat-cell>
+                <button style="color: #cc2828" (click)="deleteSub(element)" mat-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <!--            //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei-->
+            <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+          </table>
+        </div>
+      </mat-card-content>
 
     </mat-tab>
 
-    <mat-tab label="4ο εξάμηνο">
+    <mat-tab label="5ο Εξάμηνο">
+
+    </mat-tab>
+
+    <mat-tab label="6ο Εξάμηνο">
+
+    </mat-tab>
+
+    <mat-tab label="7ο Εξάμηνο">
+
+    </mat-tab>
+
+    <mat-tab label="8ο Εξάμηνο">
+
+    </mat-tab>
+
+    <mat-tab label="9ο Εξάμηνο">
 
     </mat-tab>
   </mat-tab-group>
-
+</mat-card>
 </div>
 
