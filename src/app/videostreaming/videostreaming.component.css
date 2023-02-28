@@ -24,3 +24,7 @@ mat-card-actions{
   width: -moz-available;
 }
 
+.teacher{
+  border: none;
+  background-color: white;
+}

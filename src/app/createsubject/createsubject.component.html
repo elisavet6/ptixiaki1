@@ -1,37 +1,60 @@
-<div>
+<div class="subject">
   <mat-card>
+
     <mat-card-header>
-      <mat-card-title>Video Upload Dialog</mat-card-title>
+      <mat-card-title>Δημιουργία νέου Μαθήματος</mat-card-title>
     </mat-card-header>
 
+      <mat-dialog-actions align="center">
+        <div style="width: 100%; text-align:center;">
+          <mat-form-field matInput>
 
-    <mat-dialog-actions align="center">
-      <div style="width: 100%; text-align:center;" class="col-md-2 col-sm-12">
+            <input [(ngModel)]="mathima.name" matInput  id="name" name="name" placeholder="Subject Name" required
+                   type="text">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field>
-          <input [(ngModel)]="mathima.name" matInput
-                 placeholder="Video Name">
-        </mat-form-field>
-      </div>
-      <div style="width: 100%; text-align:center;">
-        <mat-form-field>
-          <mat-select [(ngModel)]="mathima.upoxrewtiko" placeholder="Μαθήματα" [multiple]="false">
-            <mat-option>
+        <div style="width: 100%; text-align:center;">
+          <mat-form-field>
+            <input [(ngModel)]="mathima.url" matInput  id="url" name="url" placeholder="Subject URL" required
+                   type="text">
+          </mat-form-field>
+        </div>
 
-            </mat-option>
-            <mat-option  *ngFor="let mathima of mathimata | async" [value]="mathima.id">
-              {{ mathima.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div style="width: 100%; text-align:center;">
-        <button (click)="create()"  color="primary" mat-raised-button
-                style="margin-left: 20px;">
-          <mat-icon>cloud_upload</mat-icon>
-          Upload
-        </button>
-      </div>
-    </mat-dialog-actions>
+        <div style="width: 100%; text-align:center;">
+          <mat-form-field>
+            <mat-select [(ngModel)]="mathima.examino" id="examino" name="examino" placeholder="Εξάμηνο" required>
+              <mat-option  *ngFor="let mathima of mathimata | async" [value]="mathima.id">
+                {{ mathima.examino }}
+              </mat-option>
+<!--              <mat-option value="1">1</mat-option>-->
+<!--              <mat-option value="2">2</mat-option>-->
+<!--              <mat-option value="3">3</mat-option>-->
+<!--              <mat-option value="4">4</mat-option>-->
+<!--              <mat-option value="5">5</mat-option>-->
+<!--              <mat-option value="6">6</mat-option>-->
+<!--              <mat-option value="7">7</mat-option>-->
+<!--              <mat-option value="8">8</mat-option>-->
+<!--              <mat-option value="9">9</mat-option>-->
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="width: 100%; text-align:center;">
+          <mat-form-field>
+            <mat-select [(ngModel)]="mathima.upoxrewtiko" id="upoxrewtiko" name="upoxrewtiko" required>
+              <mat-option value="upoxrewtiko">Υποχρεωτικό</mat-option>
+              <mat-option value="epiloghs">Επιλογής</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="width: 100%; text-align:center;">
+          <button (click)="create()"  color="primary" mat-raised-button
+                  style="margin-left: 20px;">
+            Upload
+          </button>
+        </div>
+
+      </mat-dialog-actions>
   </mat-card>
 </div>

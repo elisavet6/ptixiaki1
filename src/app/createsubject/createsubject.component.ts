@@ -5,7 +5,10 @@ import {ApiService} from "../services/api.service";
 import {SnackbarService} from "../services/snackbar.service";
 import {Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
-
+import {MathimaComponent} from "../mathima/mathima.component";
+import {ReplaySubject, Subject, takeUntil} from "rxjs";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-createsubject',
   templateUrl: './createsubject.component.html',

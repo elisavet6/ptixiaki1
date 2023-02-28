@@ -19,9 +19,10 @@
       <mat-list-item *ngFor="let mathima of enrolledmathimata">
         <div class="padding-left-1">
           <button (click)="select(mathima.id)" mat-button>
-            {{ mathima.name }} ({{ mathima.examino }} Εξάμηνο)
+            {{ mathima.name }} ({{ mathima.examino }}ο Εξάμηνο, {{ mathima.video_sum }} 6 βίντεο)
+
           </button>
-          <button mat-button>
+          <button (click)="goToMathima(mathima)" mat-button>
             <mat-icon>input</mat-icon>
           </button>
 

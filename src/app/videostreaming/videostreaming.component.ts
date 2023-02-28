@@ -11,7 +11,8 @@ import {User} from "../myprofile/domain/user";
 import {DialogComponent} from "../dialog/dialog.component";
 import {SnackbarService} from "../services/snackbar.service";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-videostreaming',
   templateUrl: './videostreaming.component.html',
@@ -21,7 +22,6 @@ export class VideostreamingComponent implements OnInit {
 
   video_list: Video[];
   filtered: Video[];
-  private users: any;
   user_id: string;
   isYouTubeURL: boolean;
   youTubeURL: string;
@@ -45,13 +45,14 @@ export class VideostreamingComponent implements OnInit {
   length = 50;
   pageSize = 10;
   pageSizeOptions = [10, 20, 30];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  private users: any;
 
   constructor(private api: ApiService,
               private auth: AuthService,
               private dialog: MatDialog,
-              private snackbar: SnackbarService) {
+              private snackbar: SnackbarService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -87,7 +88,7 @@ export class VideostreamingComponent implements OnInit {
             aVideo.has_been_rated = this.hasUserRated(aVideo);
             aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
             aVideo.number_of_reviews = this.number_of_reviews(aVideo);
-
+//ελέγχουμε αν ο χρήστης είναι καθηγητής & αν είναι εγγεγραμμένος στο μάθημα ώστε να μπορεί να διαγράψει το βίντεο
             if (this.user_id === aVideo.created_by) {
               aVideo.isAllowed = true;
 
@@ -100,7 +101,7 @@ export class VideostreamingComponent implements OnInit {
           this.video_list.sort((a, b) => {
             return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
           });
-          this.sortedTime = 'newer first';
+          this.sortedTime = 'Πιο πρόσφατα';
           this.filtered = this.video_list;
         } else {
           console.log('Something went wrong with video get all');
@@ -142,7 +143,7 @@ export class VideostreamingComponent implements OnInit {
       this.isTeacher = false;
     }
 
-    //ελέγχουμε αν ο χρήστης είναι καθηγητής & αν είναι εγγεγραμμένος στο μάθημα ώστε να μπορεί να διαγράψει το βίντεο
+
 
 
   }
@@ -252,7 +253,7 @@ export class VideostreamingComponent implements OnInit {
     }
     if (this.selectedMathimata.length > 0) {
       let mathimata_list_temp: any[] = [];
-      for(const mathima_name of this.selectedMathimata){
+      for (const mathima_name of this.selectedMathimata) {
 
         mathimata_list_temp = mathimata_list_temp.concat(searchedFiltered.filter(
           (video) =>
@@ -262,51 +263,53 @@ export class VideostreamingComponent implements OnInit {
       }
       searchedFiltered = mathimata_list_temp;
     }
-   this.filtered=searchedFiltered;
+    this.filtered = searchedFiltered;
 
   }
-  youtubeOnly(){
-    this.video_list.sort((a,b)=> {
-      return a.creation_timestamp<b.creation_timestamp? 1: -1
+
+  youtubeOnly() {
+    this.video_list.sort((a, b) => {
+      return a.creation_timestamp < b.creation_timestamp ? 1 : -1
     });
-    let searchedFiltered= this.video_list;
+    let searchedFiltered = this.video_list;
 
-      searchedFiltered = searchedFiltered.filter(
-        (video) =>
-          video.youtube_url!=null);
-      this.filtered = searchedFiltered;
+    searchedFiltered = searchedFiltered.filter(
+      (video) =>
+        video.youtube_url != null);
+    this.filtered = searchedFiltered;
 
 
-}
-  uploaded(){
-    this.video_list.sort((a,b)=> {
-      return a.creation_timestamp<b.creation_timestamp? 1: -1
+  }
+
+  uploaded() {
+    this.video_list.sort((a, b) => {
+      return a.creation_timestamp < b.creation_timestamp ? 1 : -1
     });
-  let searchedFiltered= this.video_list;
+    let searchedFiltered = this.video_list;
 
-  searchedFiltered = searchedFiltered.filter(
-    (video) =>
-      video.decodedname!=null);
-  this.filtered = searchedFiltered;
-}
+    searchedFiltered = searchedFiltered.filter(
+      (video) =>
+        video.decodedname != null);
+    this.filtered = searchedFiltered;
+  }
 
-topRated(){
-    this.sortedTime= '-';
-  this.video_list.sort((a,b)=> {
-    return a.sum_rate<b.sum_rate? 1: -1;
+  topRated() {
+    this.sortedTime = '-';
+    this.video_list.sort((a, b) => {
+      return a.sum_rate < b.sum_rate ? 1 : -1;
 
-  });
-  this.filtered=this.video_list;
-}
+    });
+    this.filtered = this.video_list;
+  }
 
-  toggleDate(){
-    if (this.sortedTime === 'Παλαιότερα Βίντεο' || this.sortedTime=== '-'){
-      this.video_list.sort((a,b)=> {
-        return a.creation_timestamp<b.creation_timestamp? 1: -1;
+  toggleDate() {
+    if (this.sortedTime === 'Παλαιότερα' || this.sortedTime === '-') {
+      this.video_list.sort((a, b) => {
+        return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
       });
-      this.sortedTime= 'Πιο Πρόσφατα';
-      this.filtered=this.video_list;
-    } else if (this.sortedTime === 'Πιο Πρόσφατα') {
+      this.sortedTime = 'Πιο πρόσφατα';
+      this.filtered = this.video_list;
+    } else if (this.sortedTime === 'Πιο πρόσφατα') {
       this.video_list.sort((a, b) => {
         return a.creation_timestamp > b.creation_timestamp ? 1 : -1;
       });
@@ -316,8 +319,22 @@ topRated(){
 
   }
 
+  mySubs() {
+    this.video_list.sort((a, b) => {
+      return a.creation_timestamp < b.creation_timestamp ? 1 : -1
+    });
+    let searchedFiltered = this.video_list;
+
+      searchedFiltered = searchedFiltered.filter(
+        (video) => video.mathima.id === this.enrolledmathimata.mathima.id);
+
+    this.filtered = searchedFiltered;
+       console.log(this.filtered);
+
+  }
+
   uploadVideo() {
-    const dialogRef = this.dialog.open(FileuploadComponent,{
+    const dialogRef = this.dialog.open(FileuploadComponent, {
       height: '400px',
       width: '800px',
       data: {user_id: this.user_id}
@@ -341,9 +358,9 @@ topRated(){
             }
 
             this.video_list.sort((a, b) => {
-              return  a.creation_timestamp < b.creation_timestamp? 1: -1;
+              return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
             });
-            this.sortedTime = 'newerfirst';
+            this.sortedTime = 'Πιο πρόσφατα';
             this.filtered = this.video_list;
             this.selectedMathimata = [''];
             this.onChange();
@@ -359,73 +376,65 @@ topRated(){
 
   }
 
+  goToKathigitis(element: User) {
+    this.auth.setDataInLocalStorage('tempTeacher', JSON.stringify(element))
+    this.router.navigate(['kathigitis']);
+  }
 
 
-  deleteVideo(){
+  deleteVideo(video: Video) {
     const dialogResult = this.dialog.open(DialogComponent,
-      {data: {message: 'Are you sure you want to delete this video?', button: 'Confirm'}}
+      { data: { message: 'Are you sure you want to delete this video?', button: 'Confirm' } }
     );
     dialogResult.afterClosed().subscribe((confirm) => {
-
       if (!confirm) {
         return;
-      } else
-      if (this.video.youtube_url) {
-        //στέλνουμε στη βάση ως url τον κωδικό του λινκ μετά το '='
-        const youtube_url = this.youTubeURL.substring(this.youTubeURL.lastIndexOf('=') + 1, this.youTubeURL.length);
-
-        const payload_string = '{"user_id":"' + this.user_id + '", ' +
-          ' "to_mathima":"' + this.selectedMathimata + '",  ' +
-          '  "youtube_url":"' + this.video.youtube_url + '", ' +
-          '  "video_name":"' + this.video.originalname + '" }';  //pedio json pou stelnoume pisw sto backend
-
-
-        const payload_json = JSON.parse(payload_string);
-
-        this.api.postTypeRequest('video/delete', payload_json).subscribe((res: any) => {
+      } else {
+        // Delete the video ratings first
+        this.api.postTypeRequest('video/deletevideorating', video.rates).subscribe((res: any) => {
           if (res.status === 1) {
-            if (this.filtered) {
-              this.snackbar.success('Video successfully deleted')
-              this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-                  if (res.status === 1) {
-                    this.video_list = res.data;
-                    for (const aVideo of this.video_list) {
-                      aVideo.has_been_rated = this.hasUserRated(aVideo);
-                      aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
-                      aVideo.number_of_reviews = this.number_of_reviews(aVideo);
-                      if (this.user_id === aVideo.created_by) {
-                        aVideo.isAllowed = true;
-
-                      } else {
-                        aVideo.isAllowed = false;
+            // If video ratings were deleted successfully, delete the video itself
+            this.api.postTypeRequest('video/deletevideo', video).subscribe((res: any) => {
+              if (res.status === 1) {
+                if (this.filtered) {
+                  this.snackbar.success('Video successfully deleted');
+                  // Reload the video list after deleting the video
+                  this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => {
+                    if (res.status === 1) {
+                      this.video_list = res.data;
+                      for (const aVideo of this.video_list) {
+                        aVideo.has_been_rated = this.hasUserRated(aVideo);
+                        aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
+                        aVideo.number_of_reviews = this.number_of_reviews(aVideo);
+                        if (this.user_id === aVideo.created_by) {
+                          aVideo.isAllowed = true;
+                        } else {
+                          aVideo.isAllowed = false;
+                        }
                       }
+                      this.video_list.sort((a, b) => {
+                        return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
+                      });
+                      this.sortedTime = 'Πιο πρόσφατα';
+                      this.filtered = this.video_list;
+                      this.selectedMathimata = [''];
+                      this.onChange();
+                    } else {
+                      console.log('Something went wrong with delete video');
                     }
-
-                    this.video_list.sort((a, b) => {
-                      return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
-                    });
-                    this.sortedTime = 'newerfirst';
-                    this.filtered = this.video_list;
-                    this.selectedMathimata = [''];
-                    this.onChange();
-                  } else {
-                    console.log('Something went wrong with delete video');
-                  }
-
+                  });
                 }
-              );
-            }
-
+              } else {
+                this.snackbar.failure('Video cannot be deleted');
+              }
+            });
           } else {
             this.snackbar.failure('Video cannot be deleted');
           }
-        })
+        });
       }
-
-
-
-      }
-    )
+    });
   }
 
-  }
+
+}

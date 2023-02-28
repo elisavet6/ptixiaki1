@@ -2,6 +2,9 @@ import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef
 import {ApiService} from "../services/api.service";
 import {AuthService} from "../services/auth.service";
 import {AnakoinwseisComponent} from "../anakoinwseis/anakoinwseis.component";
+import {Video} from "../videostreaming/domain/video";
+import {Mathima} from "../mathima/domain/mathima";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-mysubjects',
@@ -15,13 +18,16 @@ export class MysubjectsComponent implements OnInit{
   private placeholder: ViewContainerRef;
 
   anakoinwseisComponent: AnakoinwseisComponent;
-
+ mathima: Mathima;
   enrolledmathimata: any;
   private users: any;
   private user_id: string;
+  video_list: Video[];
+  video: Video;
 constructor(private api: ApiService,
             private auth: AuthService,
-            private factoryResolver: ComponentFactoryResolver) {
+            private factoryResolver: ComponentFactoryResolver,
+            private router: Router) {
 }
 
 ngOnInit() {
@@ -30,12 +36,28 @@ ngOnInit() {
         this.users = res.data;
         this.user_id = this.get_user_id(); //pairnei to user id tou xrhsth
 
+        this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+            if (res.status === 1) {
+              this.video_list = res.data;
+
+            } else {
+              console.log('Something went wrong with video get all');
+            }
+
+          }
+        );
+
+
         //parakatw theloume na pairnoume  ta enrolled mathimata kathe fora pou anoigei h selida
         const payload_string = '{"user_id":"' + this.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
         const payload_json = JSON.parse(payload_string);
         this.api.postTypeRequest('enrollements/getmathimataofuser', payload_json).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
             if (res.status === 1) {
               this.enrolledmathimata = res.data;
+// παρακάτω βρίσκουμε τον αριθμό των βίντεο που περιέχει το κάθε μάθημα
+              for (const aMathima of this.enrolledmathimata){
+                aMathima.video_sum= this.videosum(aMathima);
+              }
             } else {
               console.log('Something went wrong with getall');
             }
@@ -50,6 +72,9 @@ ngOnInit() {
 
     }
   );
+
+
+
 }
   get_user_id(){
     let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth
@@ -70,6 +95,8 @@ ngOnInit() {
   select(input: any) :void{
   if (input==='all'){
     this.anakoinwseisComponent=this.createAnakoinwseisComponent()
+  } else if (input === this.mathima.id){
+
   }
   }
 createAnakoinwseisComponent(): AnakoinwseisComponent{
@@ -80,5 +107,20 @@ createAnakoinwseisComponent(): AnakoinwseisComponent{
 createanakoinwsh(){
 
 }
+
+ videosum(mathima: Mathima): number {
+    let sum = 0;
+    for (const video of mathima.videos) {
+        sum += 1;
+
+    }
+   return sum;
+  }
+
+  goToMathima(element: Mathima){
+
+    this.auth.setDataInLocalStorage('tempMathima', JSON.stringify(element))
+    this.router.navigate(['mathima/:element.url']);
+  }
 
 }

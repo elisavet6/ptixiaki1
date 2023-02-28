@@ -41,6 +41,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { CreatesubjectComponent } from './createsubject/createsubject.component';
+import { KathigitisComponent } from './kathigitis/kathigitis.component';
 
 
 const routes: Routes = [
@@ -96,6 +97,12 @@ const routes: Routes = [
     component: VideostreamingComponent,
     pathMatch: 'full',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'kathigitis',
+    component: KathigitisComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
   }
 
 ];
@@ -119,7 +126,8 @@ const routes: Routes = [
     AnakoinwseisComponent,
     VideostreamingComponent,
     FileuploadComponent,
-    CreatesubjectComponent
+    CreatesubjectComponent,
+    KathigitisComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ app.use(cors())
 app.use(express.json());
 //tou leme poio einai to arxiko URL
 app.use('/', indexRouter);
-//tou leme se poia 8ira na akouei gia requests
+//tou leme se poia thira na akouei gia requests
 app.listen(4000, () => {
   //print sto console
   console.log('listening on port 4000');

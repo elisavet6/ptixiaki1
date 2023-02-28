@@ -114,14 +114,14 @@
 
 
         <ng-container matColumnDef="username">
-          <th *matHeaderCellDef mat-header-cell> Username</th>
+          <th *matHeaderCellDef mat-header-cell style="font-weight: bold"> Username</th>
           <td *matCellDef="let element" mat-cell>
             <a (click)="viewDetails(element)"> {{ element.username }} </a>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="fullName">
-          <th *matHeaderCellDef mat-header-cell>Full Name</th>
+          <th *matHeaderCellDef mat-header-cell style="font-weight: bold">Full Name</th>
           <td *matCellDef="let element" mat-cell>
             {{ element.fullName }}
           </td>
@@ -129,14 +129,14 @@
 
 
         <ng-container matColumnDef="role">
-          <th *matHeaderCellDef mat-header-cell>Role</th>
+          <th *matHeaderCellDef mat-header-cell style="font-weight: bold">Role</th>
           <td *matCellDef="let element" mat-cell>
             {{ element.role }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="delete">
-          <th *matHeaderCellDef mat-header-cell>Delete Account</th>
+          <th *matHeaderCellDef mat-header-cell style="font-weight: bold">Delete Account</th>
           <td *matCellDef="let element" mat-cell>
             <button (click)="delete(element)" mat-button>
               <mat-icon>delete</mat-icon>

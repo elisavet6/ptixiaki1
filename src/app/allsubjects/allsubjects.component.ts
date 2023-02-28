@@ -9,9 +9,12 @@ import {User} from "../myprofile/domain/user";
 import {SnackbarService} from "../services/snackbar.service";
 import {Mathima} from "../mathima/domain/mathima";
 import {MatTableDataSource} from "@angular/material/table";
-import {FileuploadComponent} from "../fileupload/fileupload.component";
 import {CreatesubjectComponent} from "../createsubject/createsubject.component";
-
+import {MathimaComponent} from "../mathima/mathima.component";
+import {FormControl} from "@angular/forms";
+import {ReplaySubject, Subject, takeUntil} from "rxjs";
+import {FileuploadComponent} from "../fileupload/fileupload.component";
+import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-allsubjects',
   templateUrl: './allsubjects.component.html',
@@ -53,7 +56,6 @@ export class AllsubjectsComponent implements OnInit {
         if (res.status === 1) {
           this.users = res.data;
           this.user_id = this.get_user_id(); //pairnei to user id tou xrhsth
-
           //parakatw theloume na pairnoume  ta enrolled mathimata kathe fora pou anoigei h selida
           const payload_string = '{"user_id":"' + this.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
           const payload_json = JSON.parse(payload_string);
@@ -196,6 +198,7 @@ if (this.user.role==='secretary'){
     for (const mathima of this.mathimata) {
       if (url === mathima.url) {
         return mathima.id;
+        ;
       }
     }
   }
@@ -278,6 +281,12 @@ if (this.user.role==='secretary'){
      width: '400px',
      data: {user_id: this.user_id}
    });
+ }
+
+  goToMathima(element: Mathima){
+
+    this.auth.setDataInLocalStorage('tempMathima', JSON.stringify(element))
+    this.router.navigate(['mathima/:element.url']);
  }
 
 }

@@ -59,6 +59,37 @@ router.post('/getallvideofull', async function (req, res, next) {
   }
 });
 
+router.post('/getallvideosofmathima', async function (req, res, next) {
+  try {
+    const db = makeDb();
+    let {to_mathima} = req.body;
+    try {
+      video_list = await db.query(con, `SELECT * FROM video WHERE to_mathima= ?`);
+      for (let index = 0; index < video_list.length; index++) {
+        let temp_video;
+        let mathima = await db.query(con, `SELECT  * FROM mathima WHERE id = ` + video_list[index].to_mathima)
+        temp_video = video_list[index];
+        temp_video.mathima = mathima[0];
+        Object.assign(video_list[index], temp_video);
+        let user = await db.query(con, `SELECT  * FROM users WHERE id = ` + video_list[index].created_by)
+        temp_video = video_list[index];
+        temp_video.user = user[0];
+        Object.assign(video_list[index], temp_video);
+        let rates = await db.query(con, `SELECT  * FROM videorating WHERE video_id = ` + video_list[index].id)
+        temp_video = video_list[index];
+        temp_video.rates = rates;
+        Object.assign(video_list[index], temp_video);
+      }
+      res.send({status: 1, data: video_list});
+    } catch (e) {
+      res.send({status: 0, error: error});
+    }
+
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
 router.get('/playvideo', async function (req, res, next) {
 
   const decodedname = req.query.decodedname;
@@ -104,12 +135,29 @@ router.post('/ratevideo', async function (req, res, next) {
   }
 });
 
-router.post('/delete', async function (req, res, next) {
+router.post('/deletevideorating', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let {user_id,video_id,rank} =req.body;
+    const sql = `DELETE  FROM videorating WHERE video_id=?`
+    con.query(
+      sql, [video_id],
+      function (err, result) {
+        if (err) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data:req.body}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+router.post('/deletevideo', async function (req, res, next) {
   try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
     let {id,originalname,decodedname,to_mathima,created_by,youtube_url,creation_timestamp} =req.body;
-    const sql = `DELETE  FROM video WHERE originalname=?`
+    const sql = `DELETE  FROM video WHERE id=?`
     con.query(
-      sql, [originalname],
+      sql, [id],
       function (err, result) {
         if (err) {
           res.send({status: 0, data: err});

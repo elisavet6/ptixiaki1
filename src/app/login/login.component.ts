@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         if (res.status === 1) {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data))
           this.auth.setDataInLocalStorage('token', res.token)
-          this.router.navigate(['allsubjects']);
+          this.router.navigate(['videostreaming']);
 
         } else {
           this.showError =true;

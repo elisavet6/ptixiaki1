@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 const { makeDb } = require('mysql-async-simple');
+const md5 = require("md5");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -48,6 +49,24 @@ router.post('/getallanakoinoseisfull', async function (req, res, next) {
       res.send({status: 0, error: error});
     }
 
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
+router.post('/createanakoinwsi', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let {id,content,to_mathima,created_by} =req.body;
+    const sql = `INSERT INTO users (\`id\`, \`content\`, \`to_mathima\`, \`created_by\`) VALUES (?,?,?,?);`
+    con.query(
+      sql, [id,content,to_mathima,created_by],
+      function (err, result) {
+        if (result.length === 0) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
   } catch (error) { //
     res.send({status: 0, error: error});
   }

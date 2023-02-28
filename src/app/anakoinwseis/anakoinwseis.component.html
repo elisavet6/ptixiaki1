@@ -2,14 +2,14 @@
   <table [dataSource]="anakoinwseis" mat-table matSort>
 
     <ng-container matColumnDef="to_mathima">
-      <th *matHeaderCellDef mat-header-cell> Μάθημα</th>
+      <th *matHeaderCellDef mat-header-cell style="font-weight: bold"> Μάθημα</th>
       <td *matCellDef="let element" mat-cell>
         {{ element.mathima.name }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="content">
-      <th *matHeaderCellDef mat-header-cell>Ανακοίνωση</th>
+      <th *matHeaderCellDef mat-header-cell style="font-weight: bold">Ανακοίνωση</th>
       <td *matCellDef="let element" mat-cell>
         {{ element.content }}
       </td>
@@ -17,14 +17,14 @@
 
 
     <ng-container matColumnDef="created_by">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Δημιουργός</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header style="font-weight: bold">Δημιουργός</th>
       <td *matCellDef="let element" mat-cell>
         {{ element.user.fullName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="creation_timestamp">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header>Ημερομηνία Δημιουργίας</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header style="font-weight: bold">Ημερομηνία Δημιουργίας</th>
       <td *matCellDef="let element" mat-cell>
         {{ element.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
       </td>

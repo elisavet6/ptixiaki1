@@ -59,6 +59,7 @@
           <button (click)="youtubeOnly()" color="primary" mat-raised-button style="margin-left: 10px">Youtube Videos</button>
           <button mat-raised-button color="primary" (click)="topRated()" style="margin-left: 10px">Top Rated</button>
           <button (click)="uploaded()" color="primary" mat-raised-button style="margin-left: 10px" >Uploaded</button>
+          <button (click)="mySubs()" color="primary" mat-raised-button style="margin-left: 10px" >Τα Μαθήματά μου</button>
           <button *ngIf="isTeacher" (click)="uploadVideo()" color="warn" mat-raised-button style="margin-left: 10px">
             <mat-icon>cloud_upload</mat-icon>
             Upload video
@@ -103,15 +104,16 @@
                                                                 ({{video.number_of_reviews}})
                                                             </span>
 
+
                     <p style="font-size: medium;">
-                      Author: {{video.user.username}}
+                      Author:<button class="teacher" (click)="goToKathigitis(video.user)">{{video.user.username}}</button>
                     </p>
                     <div>
                       <p style="font-size: medium; float: left">
-                        Uploaded: {{video.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
+                        Uploaded: {{video.creation_timestamp | date: 'dd/MM/yyyy HH:mm'}}
                       </p>
 
-                      <button *ngIf="video.isAllowed" style="color: #cc2828; float: right; font-size: 50px " (click)="deleteVideo()" mat-button>
+                      <button *ngIf="video.isAllowed" style="color: #cc2828; float: right; font-size: 50px " (click)="deleteVideo(video)" mat-button>
                         <mat-icon style="font-size: 25px">delete</mat-icon>
                       </button>
                     </div>

@@ -1,0 +1,9 @@
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+mat-card-actions{
+  width: -moz-available;
+}
+.teacher{
+  border: none;
+  background-color: white;
+}

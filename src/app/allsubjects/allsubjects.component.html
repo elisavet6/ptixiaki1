@@ -26,7 +26,10 @@
             <ng-container matColumnDef="mathimaName">
               <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
-                <a> {{ element.name }} </a>
+                <button (click)="goToMathima(element)" style="border: none; background-color: white">
+                  <a> {{ element.name }} </a>
+                </button>
+
               </td>
             </ng-container>
 
@@ -71,7 +74,9 @@
             <ng-container matColumnDef="mathimaName">
               <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
-                <a> {{ element.name }} </a>
+                <button (click)="goToMathima(element)" style="border: none; background-color: white">
+                  <a> {{ element.name }} </a>
+                </button>
               </td>
             </ng-container>
 
@@ -116,7 +121,9 @@
             <ng-container matColumnDef="mathimaName">
               <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
-                <a> {{ element.name }} </a>
+                <button (click)="goToMathima(element)" style="border: none; background-color: white">
+                  <a> {{ element.name }} </a>
+                </button>
               </td>
             </ng-container>
 
@@ -162,7 +169,9 @@
             <ng-container matColumnDef="mathimaName">
               <th *matHeaderCellDef mat-header-cell> Όνομα Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
-                <a> {{ element.name }} </a>
+                <button (click)="goToMathima(element)" style="border: none; background-color: white">
+                  <a> {{ element.name }} </a>
+                </button>
               </td>
             </ng-container>
 

@@ -7,7 +7,7 @@ export class Video {
   id: number;
   originalname: string;
   decodedname: string;
-  to_mathima: string;
+  to_mathima: number;
   created_by: string;
   youtube_url: string;
   creation_timestamp: string;
