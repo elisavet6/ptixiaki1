@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ApiService} from "../services/api.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {Mathima} from "./domain/mathima";
@@ -12,6 +12,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
 import {SnackbarService} from "../services/snackbar.service";
 import {Router} from "@angular/router";
+import {AnakoinwseisComponent} from "../anakoinwseis/anakoinwseis.component";
+import {Anakoinwsh} from "../anakoinwseis/domain/anakoinwsh";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-mathima',
@@ -20,11 +23,16 @@ import {Router} from "@angular/router";
 })
 export class MathimaComponent implements OnInit{
 
+  @ViewChild(MatSort) sort:MatSort;
+  private placeholder: ViewContainerRef;
+
+
   mathima_list: Mathima[];
   filtered: Video[];
   mathima: Mathima;
   video_list: Video[];
   private users: any;
+  anakoinwseisComponent: AnakoinwseisComponent;
   user_id: string;
   isYouTubeURL: boolean;
   youTubeURL: string;
@@ -49,12 +57,17 @@ export class MathimaComponent implements OnInit{
   pageSizeOptions = [10, 20, 30];
   list: Video[];
   test: Video[];
+  displayedColumns: string[] = ['content', 'created_by','creation_timestamp'];
+  anakoinwseis = new MatTableDataSource<Anakoinwsh>(); //dhlwsh listas me anakoinwseis
+  anakoin_list: Anakoinwsh[];
+ tempanak: Anakoinwsh[];
 
   constructor(private auth: AuthService,
               private api: ApiService,
               private dialog: MatDialog,
               private snackbar: SnackbarService,
-              private router: Router) {
+              private router: Router,
+              private factoryResolver: ComponentFactoryResolver,) {
   }
 
   ngOnInit() {
@@ -91,7 +104,6 @@ export class MathimaComponent implements OnInit{
     this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
         if (res.status === 1) {
           this.video_list = res.data;
-          console.log(this.video_list);
           this.video_list = this.video_list.filter(video => video.to_mathima === this.mathima.id );
 
 
@@ -142,11 +154,28 @@ export class MathimaComponent implements OnInit{
       this.isTeacher = true;
     } else {
       this.isTeacher = false;
-
-
   }
 
-   console.log(this.isTeacher);
+
+    this.api.postTypeRequest('anakoinwseis/getallanakoinoseisfull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+        if (res.status === 1) {
+          this.anakoin_list = res.data;
+
+          this.tempanak = this.anakoin_list.filter(
+            (anakoinwsi) => anakoinwsi.mathima.id === this.mathima.id);
+          this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(this.tempanak);
+         console.log(this.tempanak);
+
+          // this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(res.data);
+          this.sort.sort({id:'creation_timestamp', start:'desc',disableClear: false});
+          this.anakoinwseis.sort=this.sort;
+        } else {
+          console.log('Something went wrong with getall');
+        }
+
+      }
+    );
+
 
   }
 
@@ -164,6 +193,20 @@ export class MathimaComponent implements OnInit{
     }
   }
 
+  select(input: any) :void{
+    if (input==='all'){
+      this.anakoinwseisComponent=this.createAnakoinwseisComponent()
+    }
+  }
+  createAnakoinwseisComponent(): AnakoinwseisComponent{
+    this.placeholder.clear();
+    const factory=this.factoryResolver.resolveComponentFactory(AnakoinwseisComponent);
+    return this.placeholder.createComponent(factory).instance;
+  }
+
+  createanakoinwsh(){
+
+  }
 
   onChange() {
     let searchedFiltered = this.video_list;

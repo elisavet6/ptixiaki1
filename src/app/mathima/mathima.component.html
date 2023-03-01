@@ -4,17 +4,62 @@
 </mat-card-header>
 
 <mat-card>
-  <mat-card-header style="text-align: center;">
+  <mat-card-header style="text-align: center; margin-top: 30px">
     <mat-card-title>Ανακοινώσεις Μαθήματος</mat-card-title>
   </mat-card-header>
 
+  <mat-card>
+    <div class="mat-elevation-z1">
+      <mat-card-actions>
+        <button (click)="createanakoinwsh()" mat-raised-button style="margin: 8px; left:80%">+ Προσθήκη Ανακοίνωσης</button>
+      </mat-card-actions>
+      <table [dataSource]="anakoinwseis" mat-table matSort>
+
+
+        <ng-container matColumnDef="content">
+          <th *matHeaderCellDef mat-header-cell style="font-weight: bold">Ανακοίνωση</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.content }}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="created_by">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header style="font-weight: bold">Δημιουργός</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.user.fullName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="creation_timestamp">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header style="font-weight: bold">Ημερομηνία Δημιουργίας</th>
+          <td *matCellDef="let element" mat-cell>
+            {{ element.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
+          </td>
+        </ng-container>
+
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr> //metavlhth pou periexei poies metavlhtes tha fainontai sto xrhsth pou mporei na tis epeksergastei
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+    </div>
+
+  </mat-card>
 </mat-card>
 
+<!--telos anakoinwsewn-->
+
 <mat-card>
-  <mat-card-header style="text-align: center;">
+  <mat-card-header style="text-align: center; margin-top: 30px">
     <mat-card-title>Βίντεο Μαθήματος</mat-card-title>
   </mat-card-header>
 <mat-card>
+  <mat-card-actions>
+    <button *ngIf="isTeacher" (click)="uploadVideo()"  mat-raised-button style="margin: 8px; left:80%">
+      Upload video
+    </button>
+  </mat-card-actions>
+
   <mat-card-content class="mat-card-container">
     <div class="container-fluid" style="padding: 0;">
       <div class="row">
@@ -48,10 +93,7 @@
     <button (click)="youtubeOnly()" color="primary" mat-raised-button style="margin-left: 10px">Youtube Videos</button>
     <button mat-raised-button color="primary" (click)="topRated()" style="margin-left: 10px">Top Rated</button>
     <button (click)="uploaded()" color="primary" mat-raised-button style="margin-left: 10px" >Uploaded</button>
-    <button *ngIf="isTeacher" (click)="uploadVideo()" color="warn" mat-raised-button style="margin-left: 10px">
-      <mat-icon>cloud_upload</mat-icon>
-      Upload video
-    </button>
+
   </mat-card-actions>
 </mat-card>
 

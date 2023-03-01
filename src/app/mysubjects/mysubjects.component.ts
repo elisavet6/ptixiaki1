@@ -5,6 +5,7 @@ import {AnakoinwseisComponent} from "../anakoinwseis/anakoinwseis.component";
 import {Video} from "../videostreaming/domain/video";
 import {Mathima} from "../mathima/domain/mathima";
 import {Router} from "@angular/router";
+import {User} from "../myprofile/domain/user";
 
 @Component({
   selector: 'app-mysubjects',
@@ -24,6 +25,9 @@ export class MysubjectsComponent implements OnInit{
   private user_id: string;
   video_list: Video[];
   video: Video;
+
+  user: User;
+
 constructor(private api: ApiService,
             private auth: AuthService,
             private factoryResolver: ComponentFactoryResolver,
@@ -76,6 +80,7 @@ ngOnInit() {
 
 
 }
+
   get_user_id(){
     let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth
 // @ts-ignore
@@ -95,8 +100,6 @@ ngOnInit() {
   select(input: any) :void{
   if (input==='all'){
     this.anakoinwseisComponent=this.createAnakoinwseisComponent()
-  } else if (input === this.mathima.id){
-
   }
   }
 createAnakoinwseisComponent(): AnakoinwseisComponent{

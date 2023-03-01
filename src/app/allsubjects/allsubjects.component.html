@@ -6,7 +6,7 @@
     </mat-card-header>
 
     <mat-card-actions align="end">
-      <button (click)="createSub()" mat-raised-button>+ Προσθήκη Μαθήματος</button>
+      <button *ngIf="isSecretary" (click)="createSub()" mat-raised-button>+ Προσθήκη Μαθήματος</button>
     </mat-card-actions>
 
   <mat-tab-group>
@@ -40,10 +40,11 @@
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="delete">
-              <th *matHeaderCellDef mat-header-cell>Διαγραφή Μαθήματος</th>
+
+            <ng-container matColumnDef="delete" >
+              <th *matHeaderCellDef mat-header-cell >Διαγραφή Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
-                <button style="color: #cc2828" (click)="deleteSub(element)" mat-button>
+                <button *ngIf="isSecretary" style="color: #cc2828" (click)="deleteSub(element)" mat-button>
                   <mat-icon>delete</mat-icon>
                 </button>
               </td>

@@ -41,6 +41,7 @@ export class AllsubjectsComponent implements OnInit {
   private enrolledMathimata: any;
   user:any;
   studentTeacher: boolean=false;
+  isSecretary: boolean = false;
 
   constructor(private api: ApiService,
               private auth: AuthService,
@@ -120,6 +121,14 @@ if (this.user.role==='secretary'){
 } else {
   this.studentTeacher=true;
 }
+
+
+//ελέγχουμε αν είναι γραμματεία
+    if (this.user.role === 'secretary') {
+      this.isSecretary = true;
+    } else {
+      this.isSecretary = false;
+    }
 
   }
 
