@@ -69,15 +69,15 @@ router.post('/getall', async function (req, res, next) {
 
 router.post('/delete', async function (req, res, next) {
   try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
-    let {id,username,password,fullName,role} =req.body;
+    let {username} =req.body;
     const sql = `DELETE  FROM users WHERE username=?`
     con.query(
       sql, [username],
-      function (err, result) {
+      function (err) {
         if (err) {
           res.send({status: 0, data: err});
         } else {
-          res.send({status: 1, data:req.body}); //stelnoume pisw ta anavathmismena stoixeia
+          res.send({status: 1, data:req.body});
         }
       })
   } catch (error) { //

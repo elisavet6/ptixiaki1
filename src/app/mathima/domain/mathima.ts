@@ -8,4 +8,5 @@ export class Mathima {
   upoxrewtiko: string;
   videos: Video[];
   video_sum: number;
+  description: string;
 }

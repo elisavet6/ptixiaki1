@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 import {AnakoinwseisComponent} from "../anakoinwseis/anakoinwseis.component";
 import {Anakoinwsh} from "../anakoinwseis/domain/anakoinwsh";
 import {MatSort} from "@angular/material/sort";
+import {UploadanakonwsiComponent} from "../uploadanakonwsi/uploadanakonwsi.component";
 
 @Component({
   selector: 'app-mathima',
@@ -61,6 +62,7 @@ export class MathimaComponent implements OnInit{
   anakoinwseis = new MatTableDataSource<Anakoinwsh>(); //dhlwsh listas me anakoinwseis
   anakoin_list: Anakoinwsh[];
  tempanak: Anakoinwsh[];
+ isEnrolled: boolean = false;
 
   constructor(private auth: AuthService,
               private api: ApiService,
@@ -75,6 +77,31 @@ export class MathimaComponent implements OnInit{
       if (res.status === 1) {
         this.users = res.data;
         this.user_id = this.get_user_id();
+
+        //παρακάτω παίρνουμε τα μαθήματα που είναι εγγεγραμμένος ο χρήστης
+        const payload_string = '{"user_id":"' + this.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
+        const payload_json = JSON.parse(payload_string);
+        this.api.postTypeRequest('enrollements/getmathimataofuser', payload_json).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+            if (res.status === 1) {
+              this.enrolledmathimata = res.data;
+              console.log(this.enrolledmathimata);
+
+              for (const aMathima of this.enrolledmathimata){
+                console.log(this.isEnrolled);
+                if (this.mathima.id === aMathima.id){
+                  this.isEnrolled = true;
+                  break;
+                } else {
+                  this.isEnrolled = false;
+                }
+
+              }
+            } else {
+              console.log('Something went wrong with enrolled subs');
+            }
+
+          }
+        );
 
       }
     });
@@ -140,6 +167,8 @@ export class MathimaComponent implements OnInit{
       this.apiLoaded = true;
     }
 
+
+
     //παρακάτω παίρνουμε τα δεδομένα του χρήστη που είναι συνδεδεμένος ώστε να βρούμε το ρόλο
     this.user = new User();
     let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth
@@ -155,6 +184,9 @@ export class MathimaComponent implements OnInit{
     } else {
       this.isTeacher = false;
   }
+
+
+
 
 
     this.api.postTypeRequest('anakoinwseis/getallanakoinoseisfull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
@@ -205,7 +237,11 @@ export class MathimaComponent implements OnInit{
   }
 
   createanakoinwsh(){
-
+    const dialogRef = this.dialog.open(UploadanakonwsiComponent, {
+      height: '400px',
+      width: '800px',
+      data: {user_id: this.user_id}
+    });
   }
 
   onChange() {

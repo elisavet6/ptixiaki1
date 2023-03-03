@@ -44,7 +44,7 @@
             <ng-container matColumnDef="delete" >
               <th *matHeaderCellDef mat-header-cell >Διαγραφή Μαθήματος</th>
               <td *matCellDef="let element" mat-cell>
-                <button *ngIf="isSecretary" style="color: #cc2828" (click)="deleteSub(element)" mat-button>
+                <button  style="color: #cc2828" (click)="deleteSub(element)" mat-button>
                   <mat-icon>delete</mat-icon>
                 </button>
               </td>

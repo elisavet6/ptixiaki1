@@ -42,6 +42,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { CreatesubjectComponent } from './createsubject/createsubject.component';
 import { KathigitisComponent } from './kathigitis/kathigitis.component';
+import { UploadanakonwsiComponent } from './uploadanakonwsi/uploadanakonwsi.component';
 
 
 const routes: Routes = [
@@ -127,7 +128,8 @@ const routes: Routes = [
     VideostreamingComponent,
     FileuploadComponent,
     CreatesubjectComponent,
-    KathigitisComponent
+    KathigitisComponent,
+    UploadanakonwsiComponent
   ],
   imports: [
     BrowserModule,

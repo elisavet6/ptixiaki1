@@ -116,19 +116,21 @@ export class AllsubjectsComponent implements OnInit {
 
     this.user.role = jsnon_user_string['role'];
 
-if (this.user.role==='secretary'){
-  this.studentTeacher=false;
-} else {
-  this.studentTeacher=true;
-}
 
 
 //ελέγχουμε αν είναι γραμματεία
     if (this.user.role === 'secretary') {
+     this.displayedColumns= ['mathimaName', 'upoxrewtiko','delete'];
+      this.studentTeacher=false;
       this.isSecretary = true;
     } else {
+      this.studentTeacher=true;
+      this.displayedColumns= ['assign','mathimaName', 'upoxrewtiko'];
       this.isSecretary = false;
     }
+
+
+
 
   }
 

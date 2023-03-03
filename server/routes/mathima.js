@@ -64,12 +64,12 @@ router.post('/delete', async function (req, res, next) {
 
 router.post('/create', async function (req, res, next) {
   try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
-    let {id, name, url, examino, description, upoxrewtiko} =req.body;
-    const sql = `INSERT INTO users (\`id\`, \`name\`, \`url\`, \`examino\`, \`description\`, \`upoxrewtiko\`) VALUES (?,?,?,?,?);`
+    let {name, url, examino, description, upoxrewtiko} =req.body;
+    const sql = `INSERT INTO mathima (\`name\`, \`url\`, \`examino\`, \`description\`, \`upoxrewtiko\`) VALUES (?,?,?,?,?);`
     con.query(
-      sql, [id, name, url, examino, description, upoxrewtiko],
+      sql, [name, url, examino, description, upoxrewtiko],
       function (err, result) {
-        if (result.length === 0) {
+        if (err) {
           res.send({status: 0, data: err});
         } else {
           res.send({status: 1, data:result}); //stelnoume pisw ta anavathmismena stoixeia

@@ -55,7 +55,7 @@
   </mat-card-header>
 <mat-card>
   <mat-card-actions>
-    <button *ngIf="isTeacher" (click)="uploadVideo()"  mat-raised-button style="margin: 8px; left:80%">
+    <button *ngIf="isTeacher && isEnrolled" (click)="uploadVideo()"  mat-raised-button style="margin: 8px; left:80%">
       Upload video
     </button>
   </mat-card-actions>

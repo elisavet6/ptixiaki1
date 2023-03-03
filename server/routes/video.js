@@ -137,7 +137,7 @@ router.post('/ratevideo', async function (req, res, next) {
 
 router.post('/deletevideorating', async function (req, res, next) {
   try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
-    let {user_id,video_id,rank} =req.body;
+    let {video_id} =req.body;
     const sql = `DELETE  FROM videorating WHERE video_id=?`
     con.query(
       sql, [video_id],
@@ -154,10 +154,10 @@ router.post('/deletevideorating', async function (req, res, next) {
 });
 router.post('/deletevideo', async function (req, res, next) {
   try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
-    let {id,originalname,decodedname,to_mathima,created_by,youtube_url,creation_timestamp} =req.body;
-    const sql = `DELETE  FROM video WHERE id=?`
+    let {video_id} =req.body; // το πεδίου json που στέλνει το Frontend
+    const sql = `DELETE  FROM video WHERE id=?` //το πεδίο στο sql
     con.query(
-      sql, [id],
+      sql, [video_id],
       function (err, result) {
         if (err) {
           res.send({status: 0, data: err});

@@ -56,10 +56,25 @@ export class VideostreamingComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.api.postTypeRequest('user/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
       if (res.status === 1) {
         this.users = res.data;
         this.user_id = this.get_user_id();
+
+        //παρακάτω παίρνουμε τα μαθήματα που είναι εγγεγραμμένος ο χρήστης
+        const payload_string = '{"user_id":"' + this.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
+        const payload_json = JSON.parse(payload_string);
+        this.api.postTypeRequest('enrollements/getmathimataofuser', payload_json).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+            if (res.status === 1) {
+              this.enrolledmathimata = res.data;
+              console.log(this.enrolledmathimata);
+            } else {
+              console.log('Something went wrong with enrolled subs');
+            }
+
+          }
+        );
 
       }
     });
@@ -320,13 +335,28 @@ export class VideostreamingComponent implements OnInit {
   }
 
   mySubs() {
+
     this.video_list.sort((a, b) => {
       return a.creation_timestamp < b.creation_timestamp ? 1 : -1
+
     });
     let searchedFiltered = this.video_list;
+    if (this.enrolledmathimata.length > 0) {
+      let list_temp: any[] = [];
+      for (const aMathima of this.enrolledmathimata) {
 
-      searchedFiltered = searchedFiltered.filter(
-        (video) => video.mathima.id === this.enrolledmathimata.mathima.id);
+        list_temp = list_temp.concat(
+          searchedFiltered.filter(
+          (video) =>
+            video.mathima.id === aMathima.id
+        ));
+
+      }
+      searchedFiltered = list_temp;
+    } else {
+      searchedFiltered= [];
+    }
+
 
     this.filtered = searchedFiltered;
        console.log(this.filtered);
@@ -383,6 +413,8 @@ export class VideostreamingComponent implements OnInit {
 
 
   deleteVideo(video: Video) {
+    const payload_string = '{"video_id":"' + (video.id).toString() + '"}';  //pedio json pou stelnoume pisw sto backend
+    const payload_json = JSON.parse(payload_string);
     const dialogResult = this.dialog.open(DialogComponent,
       { data: { message: 'Are you sure you want to delete this video?', button: 'Confirm' } }
     );
@@ -391,10 +423,10 @@ export class VideostreamingComponent implements OnInit {
         return;
       } else {
         // Delete the video ratings first
-        this.api.postTypeRequest('video/deletevideorating', video.rates).subscribe((res: any) => {
+        this.api.postTypeRequest('video/deletevideorating', payload_json).subscribe((res: any) => {
           if (res.status === 1) {
             // If video ratings were deleted successfully, delete the video itself
-            this.api.postTypeRequest('video/deletevideo', video).subscribe((res: any) => {
+            this.api.postTypeRequest('video/deletevideo', payload_json).subscribe((res: any) => {
               if (res.status === 1) {
                 if (this.filtered) {
                   this.snackbar.success('Video successfully deleted');
