@@ -11,9 +11,13 @@
   <mat-card>
     <div class="mat-elevation-z1">
       <mat-card-actions>
-        <button (click)="createanakoinwsh()" mat-raised-button style="margin: 8px; left:80%">+ Προσθήκη Ανακοίνωσης</button>
+        <button *ngIf="isTeacher && isEnrolled" (click)="createanakoinwsh()" mat-raised-button style="margin: 8px; left:80%">+ Προσθήκη Ανακοίνωσης</button>
       </mat-card-actions>
-      <table [dataSource]="anakoinwseis" mat-table matSort>
+
+      <mat-card-content *ngIf="emtyAnakoinoseisList">
+        <p> Δεν υπάρχουν ανακοινώσεις</p>
+      </mat-card-content>
+      <table [dataSource]="anakoinwseis" mat-table matSort *ngIf="!emtyAnakoinoseisList">
 
 
         <ng-container matColumnDef="content">
@@ -35,6 +39,15 @@
           <th *matHeaderCellDef mat-header-cell mat-sort-header style="font-weight: bold">Ημερομηνία Δημιουργίας</th>
           <td *matCellDef="let element" mat-cell>
             {{ element.creation_timestamp | date: 'dd/MM/yyyy HH:mm:ss'}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete" >
+          <th *matHeaderCellDef mat-header-cell >Διαγραφή Ανακοίνωσης</th>
+          <td *matCellDef="let element" mat-cell>
+            <button  style="color: #cc2828" (click)="deleteAnakoinwsi(element)" mat-button>
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </ng-container>
 
@@ -60,7 +73,7 @@
     </button>
   </mat-card-actions>
 
-  <mat-card-content class="mat-card-container">
+  <mat-card-content *ngIf="!emtyVideoList" class="mat-card-container">
     <div class="container-fluid" style="padding: 0;">
       <div class="row">
         <div class="col-md-2 col-sm-12">
@@ -80,8 +93,8 @@
 
       </div>
     </div>
-  </mat-card-content>
-  <mat-card-actions>
+  </mat-card-content >
+  <mat-card-actions *ngIf="!emtyVideoList">
     <button (click)="onChange()" color="primary" mat-raised-button type="submit">
       <mat-icon>search</mat-icon>
       Search
@@ -98,8 +111,11 @@
 </mat-card>
 
 <!--Videos-->
+  <mat-card-content *ngIf="emtyVideoList">
+    <p> Δεν υπάρχουν βίντεο</p>
+  </mat-card-content>
 
-  <mat-card-content>
+  <mat-card-content *ngIf="!emtyVideoList">
 
     <mat-grid-list cols="2" rowHeight="550px" style="margin-top: 10px;">
       <mat-grid-tile *ngFor="let video of filtered">

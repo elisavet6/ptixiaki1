@@ -41,12 +41,12 @@
       <div style="width: 100%; text-align:center;">
 
         <mat-form-field>
-          <input [(ngModel)]="video_name" matInput
+          <input maxlength="35" [(ngModel)]="video_name" matInput
                  placeholder="Video Name">
         </mat-form-field>
       </div>
       <div style="width: 100%; text-align:center;">
-        <mat-form-field>
+        <mat-form-field *ngIf="data.mathima_id === undefined || data.mathima_id === null || data.mathima_id === ''">
           <mat-select [(ngModel)]="selectedMathimata" [formControl]="mathimaCtrl" placeholder="Μαθήματα" [multiple]="false">
             <mat-option>
               <ngx-mat-select-search [formControl]="subMathimataList"

@@ -34,52 +34,70 @@ constructor(private api: ApiService,
             private router: Router) {
 }
 
-ngOnInit() {
-  this.api.postTypeRequest('user/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-      if (res.status === 1) {
-        this.users = res.data;
-        this.user_id = this.get_user_id(); //pairnei to user id tou xrhsth
+  ngOnInit() {
+    this.api.postTypeRequest('user/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+        if (res.status === 1) {
+          this.users = res.data;
+          this.user_id = this.get_user_id(); //pairnei to user id tou xrhsth
 
-        this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-            if (res.status === 1) {
-              this.video_list = res.data;
+          //parakatw theloume na pairnoume  ta enrolled mathimata kathe fora pou anoigei h selida
+          const payload_string = '{"user_id":"' + this.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
+          const payload_json = JSON.parse(payload_string);
+          this.api.postTypeRequest('enrollements/getmathimataofuser', payload_json).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+              if (res.status === 1) {
+                this.enrolledmathimata = res.data;
 
-            } else {
-              console.log('Something went wrong with video get all');
-            }
+                this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+                    if (res.status === 1) {
+                      this.video_list = res.data;
 
-          }
-        );
+                      for(const aVideo of this.video_list) {
+                        for (const aMathima of this.enrolledmathimata) {
+                          if (aVideo.to_mathima === aMathima.id) {
+                            if (aMathima.videos) {
+                              aMathima.videos.push(aVideo);
+                            } else {
+                              aMathima.videos = [];
+                              aMathima.videos.push(aVideo);
+                            }
+                          }
+                        }
+                      }
 
 
-        //parakatw theloume na pairnoume  ta enrolled mathimata kathe fora pou anoigei h selida
-        const payload_string = '{"user_id":"' + this.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
-        const payload_json = JSON.parse(payload_string);
-        this.api.postTypeRequest('enrollements/getmathimataofuser', payload_json).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-            if (res.status === 1) {
-              this.enrolledmathimata = res.data;
-// παρακάτω βρίσκουμε τον αριθμό των βίντεο που περιέχει το κάθε μάθημα
-              for (const aMathima of this.enrolledmathimata){
-                aMathima.video_sum= this.videosum(aMathima);
+                      for (const aMathima of this.enrolledmathimata){
+                        aMathima.video_sum= this.videosum(aMathima);
+                      }
+
+
+                    } else {
+                      console.log('Something went wrong with video get all');
+                    }
+
+                  }
+                );
+
+
+
+
+              } else {
+                console.log('Something went wrong with getall');
               }
-            } else {
-              console.log('Something went wrong with getall');
+
             }
-
-          }
-        );
+          );
 
 
-      } else {
-        console.log('Something went wrong with getall');
+        } else {
+          console.log('Something went wrong with getall');
+        }
+
       }
-
-    }
-  );
+    );
 
 
 
-}
+  }
 
   get_user_id(){
     let temp_user_string = this.auth.getUserDetails(); //gia na paroume ta stoixeia tou xrhsth

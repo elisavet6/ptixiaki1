@@ -1,12 +1,15 @@
 <div class="mathimataMou">
 
+<div >
   <mat-card-header style="margin: 20px">
-    <mat-card-title style="font-weight: bold; margin: 15px; ">ΤΑ ΜΑΘΗΜΑΤΑ ΜΟΥ- ΑΝΑΚΟΙΝΩΣΕΙΣ</mat-card-title>
+    <mat-card-title style="font-weight: bold; margin: 10px; ">ΤΑ ΜΑΘΗΜΑΤΑ ΜΟΥ- ΑΝΑΚΟΙΝΩΣΕΙΣ</mat-card-title>
   </mat-card-header>
 
-<mat-card-actions>
-  <button (click)="createanakoinwsh()" mat-raised-button style="margin: 8px; left:80%">+ Προσθήκη Ανακοίνωσης</button>
-</mat-card-actions>
+</div>
+
+
+
+
 
 
 <mat-sidenav-container autosize="true" class="sidenav-container" style="margin-top: 80px">
@@ -15,7 +18,7 @@
     <mat-list>
       <mat-list-item >
         <div class="padding-left-1">
-          <button (click)="select('all')" mat-button>Προβολή όλων των ανακοινώσεων</button>
+          <button (click)="select('all')" mat-raised-button color="primary">Προβολή όλων των ανακοινώσεων</button>
         </div>
       </mat-list-item>
       <mat-list-item *ngFor="let mathima of enrolledmathimata">
@@ -39,6 +42,7 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
 
 
 </div>

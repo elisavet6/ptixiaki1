@@ -2,12 +2,12 @@
   <img height="90%" src="../../assets/newphoto.jpg" width="100%">
   <div class="text">
     <h1>Τμήμα Μηχανικών Παραγωγής και Διοίκησης</h1>
-    <p>Καλώς ήρθατε στην ιστοσελίδα ασύγχρονης εκμάθησης του τμήματος </p>
+    <p>Καλώς ήρθατε στην ιστοσελίδα οπτικοακουστικού υλικού του τμήματος </p>
   </div>
   <div>
     <mat-card>
       <mat-card-header>
-        <mat-card-title style="font-weight: bold; text-align: center">Video Streaming Channel</mat-card-title>
+        <mat-card-title style="font-weight: bold; text-align: center">Αρχική</mat-card-title>
       </mat-card-header>
       <mat-card class="search-box">
         <mat-card-content class="mat-card-container">
@@ -57,8 +57,8 @@
             Sorted by uploaded time ({{sortedTime}})
           </button>
           <button (click)="youtubeOnly()" color="primary" mat-raised-button style="margin-left: 10px">Youtube Videos</button>
-          <button mat-raised-button color="primary" (click)="topRated()" style="margin-left: 10px">Top Rated</button>
           <button (click)="uploaded()" color="primary" mat-raised-button style="margin-left: 10px" >Uploaded</button>
+          <button mat-raised-button color="primary" (click)="topRated()" style="margin-left: 10px">Top Rated</button>
           <button (click)="mySubs()" color="primary" mat-raised-button style="margin-left: 10px" >Τα Μαθήματά μου</button>
           <button *ngIf="isTeacher" (click)="uploadVideo()" color="warn" mat-raised-button style="margin-left: 10px">
             <mat-icon>cloud_upload</mat-icon>
@@ -71,7 +71,7 @@
 <!--Videos-->
       <mat-card-content>
         <mat-grid-list cols="2" rowHeight="550px" style="margin-top: 10px;">
-          <mat-grid-tile *ngFor="let video of filtered">
+          <mat-grid-tile *ngFor="let video of pagedList">
             <mat-card class="my-card" style="bottom: 5px;">
               <mat-card-title *ngIf="video.decodedname!=null">
                 {{video.originalname.substring(0, video.originalname.lastIndexOf("."))}}
@@ -128,8 +128,8 @@
       </mat-card-content>
                   <mat-paginator  [length]="length"
                                   [pageSize]="pageSize"
-                                  [pageSizeOptions]="pageSizeOptions">
-<!--                                  (page)="OnPageChange($event)">-->
+                                  [pageSizeOptions]="pageSizeOptions"
+                                  (page)="OnPageChange($event)">
                   </mat-paginator>
     </mat-card>
 

@@ -10,7 +10,7 @@ import {FileuploadComponent} from "../fileupload/fileupload.component";
 import {User} from "../myprofile/domain/user";
 import {DialogComponent} from "../dialog/dialog.component";
 import {SnackbarService} from "../services/snackbar.service";
-import {MatPaginator} from "@angular/material/paginator";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {Router} from "@angular/router";
 
 @Component({
@@ -42,9 +42,11 @@ export class VideostreamingComponent implements OnInit {
   enrolledmathimata: any;
   video: Video;
   isAllowed: boolean = false;
-  length = 50;
+  length : number;
   pageSize = 10;
   pageSizeOptions = [10, 20, 30];
+  pagedList: Video[];
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   private users: any;
 
@@ -118,6 +120,8 @@ export class VideostreamingComponent implements OnInit {
           });
           this.sortedTime = 'Πιο πρόσφατα';
           this.filtered = this.video_list;
+          this.pagedList = this.filtered.slice(0,10);
+          this.length = this.filtered.length;
         } else {
           console.log('Something went wrong with video get all');
         }
@@ -253,32 +257,39 @@ export class VideostreamingComponent implements OnInit {
 
   onChange() {
     let searchedFiltered = this.video_list;
+
     if (this.searchUsername != null) {
       searchedFiltered = searchedFiltered.filter(
         (video) =>
           video.user.username.toLowerCase().includes(this.searchUsername.toLowerCase())
       );
       this.filtered = searchedFiltered;
-    } else if (this.searchVideoName != null) {
+    }
+    if (this.searchVideoName != null) {
       searchedFiltered = searchedFiltered.filter(
         (video) =>
           video.originalname.toLowerCase().includes(this.searchVideoName.toLowerCase())
       );
       this.filtered = searchedFiltered
     }
-    if (this.selectedMathimata.length > 0) {
-      let mathimata_list_temp: any[] = [];
-      for (const mathima_name of this.selectedMathimata) {
+    if (this.selectedMathimata){
+      if (this.selectedMathimata.length > 0) {
+        let mathimata_list_temp: any[] = [];
+        for (const mathima_name of this.selectedMathimata) {
 
-        mathimata_list_temp = mathimata_list_temp.concat(searchedFiltered.filter(
-          (video) =>
-            video.mathima.name.includes(mathima_name)
-        ));
+          mathimata_list_temp = mathimata_list_temp.concat(searchedFiltered.filter(
+            (video) =>
+              video.mathima.name.includes(mathima_name)
+          ));
 
+        }
+        searchedFiltered = mathimata_list_temp;
       }
-      searchedFiltered = mathimata_list_temp;
     }
+
     this.filtered = searchedFiltered;
+    this.pagedList = this.filtered.slice(0,10);
+    this.length = this.filtered.length;
 
   }
 
@@ -292,6 +303,8 @@ export class VideostreamingComponent implements OnInit {
       (video) =>
         video.youtube_url != null);
     this.filtered = searchedFiltered;
+    this.pagedList = this.filtered.slice(0,10);
+    this.length = this.filtered.length;
 
 
   }
@@ -306,6 +319,9 @@ export class VideostreamingComponent implements OnInit {
       (video) =>
         video.decodedname != null);
     this.filtered = searchedFiltered;
+    this.pagedList = this.filtered.slice(0,10);
+    this.length = this.filtered.length;
+
   }
 
   topRated() {
@@ -315,6 +331,9 @@ export class VideostreamingComponent implements OnInit {
 
     });
     this.filtered = this.video_list;
+    this.pagedList = this.filtered.slice(0,10);
+    this.length = this.filtered.length;
+
   }
 
   toggleDate() {
@@ -324,12 +343,18 @@ export class VideostreamingComponent implements OnInit {
       });
       this.sortedTime = 'Πιο πρόσφατα';
       this.filtered = this.video_list;
+      this.pagedList = this.filtered.slice(0,10);
+      this.length = this.filtered.length;
+
     } else if (this.sortedTime === 'Πιο πρόσφατα') {
       this.video_list.sort((a, b) => {
         return a.creation_timestamp > b.creation_timestamp ? 1 : -1;
       });
       this.sortedTime = 'Παλαιότερα';
       this.filtered = this.video_list;
+      this.pagedList = this.filtered.slice(0,10);
+      this.length = this.filtered.length;
+
     }
 
   }
@@ -359,7 +384,10 @@ export class VideostreamingComponent implements OnInit {
 
 
     this.filtered = searchedFiltered;
-       console.log(this.filtered);
+    this.pagedList = this.filtered.slice(0,10);
+    this.length = this.filtered.length;
+
+    console.log(this.filtered);
 
   }
 
@@ -381,12 +409,10 @@ export class VideostreamingComponent implements OnInit {
               aVideo.number_of_reviews = this.number_of_reviews(aVideo);
               if (this.user_id === aVideo.created_by) {
                 aVideo.isAllowed = true;
-
               } else {
                 aVideo.isAllowed = false;
               }
             }
-
             this.video_list.sort((a, b) => {
               return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
             });
@@ -468,5 +494,15 @@ export class VideostreamingComponent implements OnInit {
     });
   }
 
+
+  OnPageChange(event: PageEvent){
+    //βρισκουμε την αρχη  και το τελος της καθε σελιδας
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    this.pagedList = this.filtered.slice(startIndex,endIndex);
+    if (endIndex > this.length){
+      endIndex= this.length;
+    }
+  }
 
 }

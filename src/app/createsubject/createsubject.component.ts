@@ -51,7 +51,7 @@ export class CreatesubjectComponent implements OnInit{
   create() {
     let mathima = new Mathima();
     mathima.name = this.mathima_name;
-    mathima.url = this.mathima_url;
+    mathima.url = this.mathima_name.replace(/\s/g, "").toLowerCase();
     mathima.examino = this.mathima_examino;
     mathima.description = this.mathima_description;
     mathima.upoxrewtiko = this.mathima_upoxrewtiko;

@@ -56,12 +56,12 @@ router.post('/getallanakoinoseisfull', async function (req, res, next) {
 
 router.post('/createanakoinwsi', async function (req, res, next) {
   try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
-    let {id,content,to_mathima,created_by} =req.body;
-    const sql = `INSERT INTO users (\`id\`, \`content\`, \`to_mathima\`, \`created_by\`) VALUES (?,?,?,?);`
+    let {content,to_mathima,created_by} =req.body;
+    const sql = `INSERT INTO anakoinoseis (\`content\`, \`to_mathima\`, \`created_by\`) VALUES (?,?,?);`
     con.query(
-      sql, [id,content,to_mathima,created_by],
+      sql, [content,to_mathima,created_by],
       function (err, result) {
-        if (result.length === 0) {
+        if (err) {
           res.send({status: 0, data: err});
         } else {
           res.send({status: 1, data: result}); //stelnoume pisw ta anavathmismena stoixeia
@@ -71,5 +71,24 @@ router.post('/createanakoinwsi', async function (req, res, next) {
     res.send({status: 0, error: error});
   }
 });
+
+router.post('/delete', async function (req, res, next) {
+  try { //prospathise na ektleseis to parakatw kwdika  an uparxei lathos na mhn kleisei to programma alla na steilei ena error
+    let {id} =req.body;
+    const sql = `DELETE  FROM anakoinoseis WHERE id=?`
+    con.query(
+      sql, [id],
+      function (err, result) {
+        if (err) {
+          res.send({status: 0, data: err});
+        } else {
+          res.send({status: 1, data:req.body}); //stelnoume pisw ta anavathmismena stoixeia
+        }
+      })
+  } catch (error) { //
+    res.send({status: 0, error: error});
+  }
+});
+
 
 module.exports = router

@@ -1,18 +1,24 @@
 
-  <mat-card-header>
-    <mat-card-title>Δημιουργία Ανακοίνωσης</mat-card-title>
+  <mat-card-header style="text-align: center;">
+    <mat-card-title >Δημιουργία Ανακοίνωσης</mat-card-title>
   </mat-card-header>
 
   <mat-card>
     <mat-dialog-actions style="align-content: center; width: 100%;">
-     <div style="text-align: center;">
-    <form style="text-align: center;">
-    <mat-form-field class="example-full-width">
+     <div style="width: 100%; text-align:center;">
+    <mat-form-field >
       <mat-label>Γράψτε μια Ανακοίνωση</mat-label>
-      <textarea matInput ></textarea>
+      <textarea matInput [(ngModel)]="anak_content">
+      </textarea>
     </mat-form-field>
-    </form>
      </div>
+
+      <div style="width: 100%; text-align:center;">
+        <button (click)="create()" [disabled]="!this.anak_content" color="primary" mat-raised-button
+                style="margin-left: 20px;">
+          Upload
+        </button>
+      </div>
     </mat-dialog-actions>
   </mat-card>
 

@@ -292,6 +292,38 @@ export class AllsubjectsComponent implements OnInit {
      width: '400px',
      data: {user_id: this.user_id}
    });
+
+   dialogRef.afterClosed().subscribe(next => {
+     this.api.postTypeRequest('mathima/getall', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+
+         if (res.status === 1) {
+           this.mathimata = res.data;
+           this.filtered = res.data;
+
+
+           this.first = this.filtered.filter(
+             (mathima) => mathima.examino === 1);
+           this.prwto = new MatTableDataSource<Mathima>(this.first);
+
+           this.second = this.filtered.filter(mathima => mathima.examino === 2);
+           this.deutero = new MatTableDataSource<Mathima>(this.second);
+
+           this.third = this.filtered.filter(mathima => mathima.examino === 3);
+           this.trito = new MatTableDataSource<Mathima>(this.third);
+
+           this.fourth = this.filtered.filter(mathima => mathima.examino === 4);
+           this.tetarto = new MatTableDataSource<Mathima>(this.fourth);
+
+
+
+         } else {
+           console.log('Something went wrong with getall');
+         }
+
+       }
+     );
+
+   });
  }
 
   goToMathima(element: Mathima){

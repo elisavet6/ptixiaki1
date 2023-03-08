@@ -37,6 +37,9 @@ export class FileuploadComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.data.mathima_id){
+      this.selectedMathimata= this.data.mathima_id
+    }
     this.uploadForm = this.formBuilder.group({profile:['']});
     const payload_string = '{"user_id":"' + this.data.user_id + '"}';  //pedio json pou stelnoume pisw sto backend
     const payload_json = JSON.parse(payload_string);
@@ -74,7 +77,7 @@ export class FileuploadComponent implements OnInit {
   fileSelected(event: any) {
     this.file = event.target.files[0];
     this.fileName = this.file.name;
-    this.fileExtension = this.fileName.substring(this.fileName.lastIndexOf(','), this.fileName.length);
+    this.fileExtension = this.fileName.substring(this.fileName.lastIndexOf('.'), this.fileName.length);
     // @ts-ignore
     this.uploadForm.get('profile').setValue(this.file);
   }
@@ -83,6 +86,9 @@ export class FileuploadComponent implements OnInit {
     if (this.isYouTubeURL) {
       //στέλνουμε στη βάση ως url τον κωδικό του λινκ μετά το '='
       const youtube_url = this.youTubeURL.substring(this.youTubeURL.lastIndexOf('=') + 1, this.youTubeURL.length);
+
+
+
 
       const payload_string = '{"user_id":"' + this.data.user_id + '", ' +
         ' "to_mathima":"' + this.selectedMathimata + '",  ' +
@@ -108,7 +114,7 @@ export class FileuploadComponent implements OnInit {
 
     } else {
       const formData = new FormData();
-      this.dialog.close();
+
       formData.append("user_id", this.data.user_id);
       formData.append("to_mathima", this.selectedMathimata);
       formData.append("video_name", this.video_name + this.fileExtension);
@@ -116,7 +122,7 @@ export class FileuploadComponent implements OnInit {
       formData.append("file", this.uploadForm.get('profile').value);
       this.api.postTypeRequest('video/uploadvideo', formData).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
           if (res.status === 1) {
-
+            this.dialog.close();
 
           } else {
             console.log('Something went wrong with getall');

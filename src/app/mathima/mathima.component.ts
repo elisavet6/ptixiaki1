@@ -16,6 +16,7 @@ import {AnakoinwseisComponent} from "../anakoinwseis/anakoinwseis.component";
 import {Anakoinwsh} from "../anakoinwseis/domain/anakoinwsh";
 import {MatSort} from "@angular/material/sort";
 import {UploadanakonwsiComponent} from "../uploadanakonwsi/uploadanakonwsi.component";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-mathima',
@@ -53,16 +54,19 @@ export class MathimaComponent implements OnInit{
   enrolledmathimata: any;
   video: Video;
   isAllowed: boolean = false;
-  length = 50;
-  pageSize = 10;
-  pageSizeOptions = [10, 20, 30];
   list: Video[];
   test: Video[];
-  displayedColumns: string[] = ['content', 'created_by','creation_timestamp'];
+  displayedColumns: string[] = ['content', 'created_by','creation_timestamp','delete'];
   anakoinwseis = new MatTableDataSource<Anakoinwsh>(); //dhlwsh listas me anakoinwseis
   anakoin_list: Anakoinwsh[];
  tempanak: Anakoinwsh[];
  isEnrolled: boolean = false;
+  emtyVideoList: boolean;
+  emtyAnakoinoseisList: boolean;
+  length : number;
+  pageSize = 10;
+  pageSizeOptions = [10, 20, 30];
+  pagedList: Video[];
 
   constructor(private auth: AuthService,
               private api: ApiService,
@@ -133,6 +137,9 @@ export class MathimaComponent implements OnInit{
           this.video_list = res.data;
           this.video_list = this.video_list.filter(video => video.to_mathima === this.mathima.id );
 
+          if (this.video_list.length === 0){
+            this.emtyVideoList = true;
+          }
 
           for (const aVideo of this.video_list) { //elegxoume gia ola ta video an exoun ginei rate
             aVideo.has_been_rated = this.hasUserRated(aVideo);
@@ -193,12 +200,15 @@ export class MathimaComponent implements OnInit{
         if (res.status === 1) {
           this.anakoin_list = res.data;
 
+
           this.tempanak = this.anakoin_list.filter(
             (anakoinwsi) => anakoinwsi.mathima.id === this.mathima.id);
           this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(this.tempanak);
-         console.log(this.tempanak);
 
-          // this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(res.data);
+          if (this.tempanak.length === 0){
+            this.emtyAnakoinoseisList = true;
+          }
+
           this.sort.sort({id:'creation_timestamp', start:'desc',disableClear: false});
           this.anakoinwseis.sort=this.sort;
         } else {
@@ -240,8 +250,79 @@ export class MathimaComponent implements OnInit{
     const dialogRef = this.dialog.open(UploadanakonwsiComponent, {
       height: '400px',
       width: '800px',
-      data: {user_id: this.user_id}
-    });
+      data: {user_id: this.user_id, mathima_id: this.mathima.id}
+      });
+      dialogRef.afterClosed().subscribe(next => {
+
+        this.api.postTypeRequest('anakoinwseis/getallanakoinoseisfull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+            if (res.status === 1) {
+              this.anakoin_list = res.data;
+
+
+              this.tempanak = this.anakoin_list.filter(
+                (anakoinwsi) => anakoinwsi.mathima.id === this.mathima.id);
+              this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(this.tempanak);
+
+              if (this.tempanak.length === 0){
+                this.emtyAnakoinoseisList = true;
+              }
+
+              // this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(res.data);
+              // this.sort.sort({id:'creation_timestamp', start:'desc',disableClear: false});
+              // this.anakoinwseis.sort=this.sort;
+            } else {
+              console.log('Something went wrong with getall');
+            }
+
+          }
+        );
+
+
+      });
+  }
+
+
+  deleteAnakoinwsi(element: Anakoinwsh) {
+    const dialogResult = this.dialog.open(DialogComponent,
+      {data: {message: 'Are you sure you want to delete this subject?', button: 'Confirm'}}
+    );
+    dialogResult.afterClosed().subscribe((confirm) => {
+
+        if (!confirm) {
+          return;
+        } else {
+          this.api.postTypeRequest('anakoinwseis/delete', element).subscribe((res: any) => {
+              if (res.status === 1) {
+
+                this.api.postTypeRequest('anakoinwseis/getallanakoinoseisfull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
+                    if (res.status === 1) {
+                      this.anakoin_list = res.data;
+
+
+                      this.tempanak = this.anakoin_list.filter(
+                        (anakoinwsi) => anakoinwsi.mathima.id === this.mathima.id);
+                      this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(this.tempanak);
+
+                      if (this.tempanak.length === 0){
+                        this.emtyAnakoinoseisList = true;
+                      }
+
+                      // this.anakoinwseis = new MatTableDataSource<Anakoinwsh>(res.data);
+                      this.sort.sort({id:'creation_timestamp', start:'desc',disableClear: false});
+                      this.anakoinwseis.sort=this.sort;
+                    } else {
+                      console.log('Something went wrong with getall');
+                    }
+
+                  }
+                );
+              }
+            }
+          )
+
+        }
+      }
+    )
   }
 
   onChange() {
@@ -252,16 +333,17 @@ export class MathimaComponent implements OnInit{
           video.user.username.toLowerCase().includes(this.searchUsername.toLowerCase())
       );
       this.filtered = searchedFiltered;
-    } else if (this.searchVideoName != null) {
+    }
+    if (this.searchVideoName != null) {
       searchedFiltered = searchedFiltered.filter(
         (video) =>
           video.originalname.toLowerCase().includes(this.searchVideoName.toLowerCase())
       );
       this.filtered = searchedFiltered
-    }
+    }if (this.selectedMathimata){
     if (this.selectedMathimata.length > 0) {
       let mathimata_list_temp: any[] = [];
-      for(const mathima_name of this.selectedMathimata){
+      for (const mathima_name of this.selectedMathimata) {
 
         mathimata_list_temp = mathimata_list_temp.concat(searchedFiltered.filter(
           (video) =>
@@ -270,6 +352,7 @@ export class MathimaComponent implements OnInit{
 
       }
       searchedFiltered = mathimata_list_temp;
+    }
     }
     this.filtered=searchedFiltered;
 
@@ -388,39 +471,41 @@ export class MathimaComponent implements OnInit{
     const dialogRef = this.dialog.open(FileuploadComponent, {
       height: '400px',
       width: '800px',
-      data: {user_id: this.user_id}
+      data: {user_id: this.user_id, mathima_id: this.mathima.id}
     });
 
     dialogRef.afterClosed().subscribe(next => {
-      this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-          if (res.status === 1) {
-            console.log('eee');
-            this.video_list = res.data;
-            for (const aVideo of this.video_list) {
-              aVideo.has_been_rated = this.hasUserRated(aVideo);
-              aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
-              aVideo.number_of_reviews = this.number_of_reviews(aVideo);
-              if (this.user_id === aVideo.created_by) {
-                aVideo.isAllowed = true;
+      this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => {
+        if (res.status === 1) {
+          this.video_list = res.data;
 
-              } else {
-                aVideo.isAllowed = false;
-              }
-            }
+          this.video_list = this.video_list.filter(video => video.to_mathima === this.mathima.id );
 
-            this.video_list.sort((a, b) => {
-              return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
-            });
-            this.sortedTime = 'Πιο πρόσφατα';
-            this.filtered = this.video_list;
-            this.selectedMathimata = [''];
-            this.onChange();
-          } else {
-            console.log('Something went wrong with getall');
+          if (this.video_list.length === 0){
+            this.emtyVideoList = true;
           }
-
+          for (const aVideo of this.video_list) {
+            aVideo.has_been_rated = this.hasUserRated(aVideo);
+            aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
+            aVideo.number_of_reviews = this.number_of_reviews(aVideo);
+            if (this.user_id === aVideo.created_by) {
+              aVideo.isAllowed = true;
+            } else {
+              aVideo.isAllowed = false;
+            }
+          }
+          this.video_list.sort((a, b) => {
+            return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
+          });
+          this.sortedTime = 'Πιο πρόσφατα';
+          this.filtered = this.video_list;
+          this.selectedMathimata = [''];
+          this.onChange();
+        } else {
+          console.log('Something went wrong with delete video');
         }
-      );
+      });
+
 
     });
 
@@ -432,64 +517,77 @@ export class MathimaComponent implements OnInit{
   }
 
   deleteVideo(video: Video) {
+    const payload_string = '{"video_id":"' + (video.id).toString() + '"}';  //pedio json pou stelnoume pisw sto backend
+    const payload_json = JSON.parse(payload_string);
     const dialogResult = this.dialog.open(DialogComponent,
-      {data: {message: 'Are you sure you want to delete this video?', button: 'Confirm'}}
+      { data: { message: 'Are you sure you want to delete this video?', button: 'Confirm' } }
     );
     dialogResult.afterClosed().subscribe((confirm) => {
+      if (!confirm) {
+        return;
+      } else {
+        // Delete the video ratings first
+        this.api.postTypeRequest('video/deletevideorating', payload_json).subscribe((res: any) => {
+          if (res.status === 1) {
+            // If video ratings were deleted successfully, delete the video itself
+            this.api.postTypeRequest('video/deletevideo', payload_json).subscribe((res: any) => {
+              if (res.status === 1) {
+                if (this.filtered) {
+                  this.snackbar.success('Video successfully deleted');
+                  // Reload the video list after deleting the video
+                  this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => {
+                    if (res.status === 1) {
+                      this.video_list = res.data;
 
-        if (!confirm) {
-          return;
-        } else {
+                      this.video_list = this.video_list.filter(video => video.to_mathima === this.mathima.id );
 
-          this.api.postTypeRequest('video/deletevideorating', video).subscribe((res: any) => {
-            if (res.status === 1) {
-
-
-              this.api.postTypeRequest('video/deletevideo', video).subscribe((res: any) => {
-                if (res.status === 1) {
-                  if (this.filtered) {
-                    this.snackbar.success('Video successfully deleted')
-                    this.api.postTypeRequest('video/getallvideofull', {}).subscribe((res: any) => { //to subscribe to xrhsimopoioume epeidh perimenoume response apo backend
-                        if (res.status === 1) {
-                          this.video_list = res.data;
-                          for (const aVideo of this.video_list) {
-                            aVideo.has_been_rated = this.hasUserRated(aVideo);
-                            aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
-                            aVideo.number_of_reviews = this.number_of_reviews(aVideo);
-                            if (this.user_id === aVideo.created_by) {
-                              aVideo.isAllowed = true;
-
-                            } else {
-                              aVideo.isAllowed = false;
-                            }
-                          }
-
-                          this.video_list.sort((a, b) => {
-                            return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
-                          });
-                          this.sortedTime = 'Πιο πρόσφατα';
-                          this.filtered = this.video_list;
-                          this.selectedMathimata = [''];
-                          this.onChange();
-                        } else {
-                          console.log('Something went wrong with delete video');
-                        }
-
+                      if (this.video_list.length === 0){
+                        this.emtyVideoList = true;
                       }
-                    );
-                  }
-
-                } else {
-                  this.snackbar.failure('Video cannot be deleted');
+                      for (const aVideo of this.video_list) {
+                        aVideo.has_been_rated = this.hasUserRated(aVideo);
+                        aVideo.sum_rate = this.calculate_sum_rate_of_video(aVideo);
+                        aVideo.number_of_reviews = this.number_of_reviews(aVideo);
+                        if (this.user_id === aVideo.created_by) {
+                          aVideo.isAllowed = true;
+                        } else {
+                          aVideo.isAllowed = false;
+                        }
+                      }
+                      this.video_list.sort((a, b) => {
+                        return a.creation_timestamp < b.creation_timestamp ? 1 : -1;
+                      });
+                      this.sortedTime = 'Πιο πρόσφατα';
+                      this.filtered = this.video_list;
+                      this.selectedMathimata = [''];
+                      this.onChange();
+                    } else {
+                      console.log('Something went wrong with delete video');
+                    }
+                  });
                 }
-              })
-            }
-          })
-
-        }
+              } else {
+                this.snackbar.failure('Video cannot be deleted');
+              }
+            });
+          } else {
+            this.snackbar.failure('Video cannot be deleted');
+          }
+        });
       }
-    )
+    });
   }
+
+  OnPageChange(event: PageEvent){
+    //βρισκουμε την αρχη  και το τελος της καθε σελιδας
+    let startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    this.pagedList = this.filtered.slice(startIndex,endIndex);
+    if (endIndex > this.length){
+      endIndex= this.length;
+    }
+  }
+
 
 
 }
